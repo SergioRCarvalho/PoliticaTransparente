@@ -9,9 +9,12 @@
       "build:watch": "tsc -w",
       "start": "next start",
       "lint": "next lint",
-      "create": "node ./dist/create.js",
-      "createRela": "node ./dist/createRelation.js",
-      "query": "node ./dist/query.js",
+      "createVoto": "node ./dist/createVoto.js",
+      "queryVoto": "node ./dist/queryVoto.js",
+      "queryVotos": "node ./dist/queryVotos.js",
+      "createRelation": "node ./dist/createRelation.js",
+      "queryRelation": "node ./dist/queryRelation.js",
+      "queryRelations": "node ./dist/queryRelations.js",
       "listener": "node ./dist/listener.js"
     },
     "repository": {
