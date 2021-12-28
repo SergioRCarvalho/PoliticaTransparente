@@ -10,6 +10,7 @@
       "start": "next start",
       "lint": "next lint",
       "create": "node ./dist/create.js",
+      "createRela": "node ./dist/createRelation.js",
       "query": "node ./dist/query.js",
       "listener": "node ./dist/listener.js"
     },
