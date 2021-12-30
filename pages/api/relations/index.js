@@ -1,4 +1,9 @@
 'use strict';
+import { ncOpts } from '@/api-lib/nc';
+import nc from 'next-connect';
+
+const handler = nc(ncOpts);
+
 var __createBinding =
   (this && this.__createBinding) ||
   (Object.create
@@ -50,11 +55,7 @@ async function main() {
     console.log(`Wallet path: ${walletPath}`);
     // Create a new gateway for connecting to our peer node.
     const gateway = new fabric_network_1.Gateway();
-    const connectionProfilePath = path.resolve(
-      __dirname,
-      '..',
-      'CidadaoConnection.json'
-    );
+    const connectionProfilePath = path.resolve('CidadaoConnection.json');
     const connectionProfile = JSON.parse(
       fs.readFileSync(connectionProfilePath, 'utf8')
     ); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
@@ -80,4 +81,5 @@ async function main() {
     process.exit(1);
   }
 }
-void main();
+
+export default main;

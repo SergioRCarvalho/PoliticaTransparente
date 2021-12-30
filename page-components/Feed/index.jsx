@@ -2,6 +2,7 @@ import { Spacer } from '@/components/Layout';
 import styles from './Feed.module.css';
 import Poster from './Poster';
 import PostList from './PostList';
+import RelationsList from './RelationsList';
 
 export const Feed = () => {
   return (
@@ -9,6 +10,7 @@ export const Feed = () => {
       <Spacer size={1} axis="vertical" />
       <Poster />
       <PostList />
+      <RelationsList />
     </div>
   );
 };
