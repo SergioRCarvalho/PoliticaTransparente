@@ -3,6 +3,7 @@ import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
+var resu="";
 
 var __createBinding =
   (this && this.__createBinding) ||
@@ -74,6 +75,7 @@ async function main() {
     console.log(
       `Transaction has been evaluated, result is: ${result.toString()}`
     );
+    resu = result;
     // Disconnect from the gateway.
     gateway.disconnect();
   } catch (error) {
@@ -81,5 +83,9 @@ async function main() {
     process.exit(1);
   }
 }
+handler.get(async (req,res) => {
+  main();
+  return res.json({ resu });
+});
 
-export default main;
+export default handler;
