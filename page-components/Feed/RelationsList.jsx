@@ -18,7 +18,7 @@ const RelaList = () => {
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
-      <Wrapper>{}</Wrapper>
+      <Wrapper>{JSON.stringify(data)}</Wrapper>
     </div>
   );
 };

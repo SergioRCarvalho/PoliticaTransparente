@@ -72,10 +72,8 @@ async function main() {
     const contract = network.getContract('demo-relation');
     // Evaluate the specified transaction.
     const result = await contract.evaluateTransaction('queryAllRelation');
-    console.log(
-      `Transaction has been evaluated, result is: ${result.toString()}`
-    );
-    resu = result;
+    console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+    resu = result.toString();
     // Disconnect from the gateway.
     gateway.disconnect();
   } catch (error) {
