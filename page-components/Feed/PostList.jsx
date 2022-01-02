@@ -16,6 +16,7 @@ const PostList = () => {
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
+      { <Wrapper>{JSON.stringify(data)}</Wrapper> }
       <Wrapper>
         {posts.map((post) => (
           <Link

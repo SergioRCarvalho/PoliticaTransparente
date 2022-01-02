@@ -72,8 +72,7 @@ async function main() {
     const contract = network.getContract('demo-relation');
     // Evaluate the specified transaction.
     const result = await contract.evaluateTransaction('queryAllRelation');
-    console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-    resu = result.toString();
+    resu = JSON.parse(result.toString());
     // Disconnect from the gateway.
     gateway.disconnect();
   } catch (error) {
@@ -81,8 +80,8 @@ async function main() {
     process.exit(1);
   }
 }
-handler.get(async (req,res) => {
-  main();
+handler.get(async (req, res) => {
+  await main();
   return res.json({ resu });
 });
 
