@@ -6,7 +6,7 @@ import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 var resu = '';
-
+handler.use(database);
 var __createBinding =
   (this && this.__createBinding) ||
   (Object.create
@@ -83,7 +83,7 @@ async function main() {
   }
 }
 
-async function mainpost(content) {
+async function mainpost(content, user_id) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -116,7 +116,7 @@ async function mainpost(content) {
       '001',
       '001',
       '001',
-      '001',
+      user_id.toString(),
       '001',
       '002'
     );
@@ -125,7 +125,12 @@ async function mainpost(content) {
     gateway.disconnect();
   } catch (error) {
     console.error('Failed to submit transaction:', error);
-    process.exit(1);
+    //process.exit(1);
+    return status(400).json({
+      error: {
+        message: `"${error.instancePath.substring(1)}" ${error.message}`,
+      },
+    });
   }
 }
 
@@ -135,6 +140,7 @@ handler.get(async (req, res) => {
 });
 
 handler.post(
+  ...auths,
   validateBody({
     type: 'object',
     properties: {
@@ -144,7 +150,10 @@ handler.post(
     additionalProperties: false,
   }),
   async (req, res) => {
-    const post = await mainpost(req.body.content);
+    if (!req.user) {
+      return res.status(401).end();
+    }
+    const post = await mainpost(req.body.content, req.user._id);
 
     return res.json({ post });
   }
