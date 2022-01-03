@@ -7,13 +7,15 @@ import { useMemo } from 'react';
 import styles from './Relation.module.css';
 
 const Relation = ({ relation, className }) => {
+  var contentKeys = Object.keys(relation);
   return (
+    relation.map((e) => (
     <div className={clsx(styles.root, className)}>
       <div className={styles.wrap}>
-        <p className={styles.content}>{relation.desc}</p>
+        <p className={styles.content}>{e.Record.desc}</p>
       </div>
     </div>
-  );
+  )));
 };
 
 export default Relation;
