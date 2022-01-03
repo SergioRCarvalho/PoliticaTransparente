@@ -16,8 +16,6 @@ const PostList = () => {
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
-       { <Wrapper>{JSON.stringify(data)}</Wrapper> }
-      { console.log(`Wallet path: ${data}`)}
       <Wrapper>
         {posts.map((post) => (
           <Link

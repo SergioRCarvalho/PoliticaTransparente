@@ -13,14 +13,9 @@ const RelaList = () => {
   const posts = data
     ? data.reduce((acc, person) => [...acc, person.resu], [])
     : [];
-  /*const posts =people
-  ? people.reduce((acc, person) => [...acc, person], []):[];*/
-
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
-      {<Wrapper>{JSON.stringify(data)}</Wrapper>}
-
       {posts.map((relation) => (
         <Link key={'45'} href={`/user/333/post/3`} passHref>
           <div className={styles.wrap}>
