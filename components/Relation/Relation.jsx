@@ -13,11 +13,6 @@ const Relation = ({ relation, className }) => {
   return relation.map((e) => (
     <div className={cljx(styles.root, className)}>
       <Container>
-        {/* <p className={styles.name}>{e.Record.desc}</p><br/>
-        <label className={styles.content}>Entidade A: </label><text className={styles.content}>{e.Record.entidade} - </text>
-        <label className={styles.content}> Entidade B: </label><text className={styles.content}>{e.Record.entidade2}</text><br/><br/>
-        <label className={styles.name}>Tipo Relação: </label><text className={styles.content}>{e.Record.tipoRel}</text><br/>
-        <p className={styles.wrap}>{e.Record.dataRegisto}</p> */}
         <table className={styles.table}>
           <tr className={styles.tw}>
             <Link key={'45'} href={`/user/333/post/3`} passHref>
