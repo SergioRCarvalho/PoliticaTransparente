@@ -1,5 +1,7 @@
 'use strict';
 import { ncOpts } from '@/api-lib/nc';
+import { ValidateProps } from '@/api-lib/constants';
+import { auths, database, validateBody } from '@/api-lib/middlewares';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
@@ -81,7 +83,7 @@ async function main() {
   }
 }
 
-async function mainpost() {
+async function mainpost(content) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -106,9 +108,10 @@ async function mainpost() {
     // Get the contract from the network.
     const contract = network.getContract('demo-relation');
     // Submit the specified transaction.
+
     await contract.submitTransaction(
       'createRelation',
-      '131',
+      parseInt(content),
       '001',
       '001',
       '001',
@@ -131,11 +134,20 @@ handler.get(async (req, res) => {
   return res.json({ resu });
 });
 
-handler.post(async (req, res) => {
+handler.post(
+  validateBody({
+    type: 'object',
+    properties: {
+      content: ValidateProps.post.content,
+    },
+    required: ['content'],
+    additionalProperties: false,
+  }),
+  async (req, res) => {
+    const post = await mainpost(req.body.content);
 
-  const post = await mainpost();
-
-  return res.json({ post });
-});
+    return res.json({ post });
+  }
+);
 
 export default handler;
