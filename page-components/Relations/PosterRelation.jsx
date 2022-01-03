@@ -5,25 +5,25 @@ import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
 import { fetcher } from '@/lib/fetch';
-import { usePostPages } from '@/lib/post';
+import { useRelaPages } from '@/lib/relations';
 import { useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import styles from './Poster.module.css';
+import styles from './PosterRelation.module.css';
 
 const PosterInner = ({ user }) => {
   const contentRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate } = usePostPages();
+  const { mutate } = useRelaPages();
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher('/api/posts', {
+        await fetcher('/api/relations', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
@@ -59,7 +59,7 @@ const PosterInner = ({ user }) => {
   );
 };
 
-const Poster = () => {
+const PosterRelation = () => {
   const { data, error } = useCurrentUser();
   const loading = !data && !error;
 
@@ -87,4 +87,4 @@ const Poster = () => {
   );
 };
 
-export default Poster;
+export default PosterRelation;
