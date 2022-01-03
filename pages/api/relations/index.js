@@ -55,7 +55,6 @@ async function main() {
     const wallet = await fabric_network_1.Wallets.newFileSystemWallet(
       walletPath
     );
-    console.log(`Wallet path: ${walletPath}`);
     // Create a new gateway for connecting to our peer node.
     const gateway = new fabric_network_1.Gateway();
     const connectionProfilePath = path.resolve('CidadaoConnection.json');
@@ -79,7 +78,10 @@ async function main() {
     gateway.disconnect();
   } catch (error) {
     console.error('Failed to submit transaction:', error);
-    process.exit(1);
+    return status(400).json({
+      error: {
+        message: `"${error.instancePath.substring(1)}" ${error.message}`,
+      },
   }
 }
 
@@ -90,7 +92,6 @@ async function mainpost(content, user_id) {
     const wallet = await fabric_network_1.Wallets.newFileSystemWallet(
       walletPath
     );
-    console.log(`Wallet path: ${walletPath}`);
     // Create a new gateway for connecting to our peer node.
     const gateway = new fabric_network_1.Gateway();
     const connectionProfilePath = path.resolve('CidadaoConnection.json');
@@ -120,12 +121,10 @@ async function mainpost(content, user_id) {
       '001',
       '002'
     );
-    console.log('Transaction has been submitted');
     // Disconnect from the gateway.
     gateway.disconnect();
   } catch (error) {
     console.error('Failed to submit transaction:', error);
-    //process.exit(1);
     return status(400).json({
       error: {
         message: `"${error.instancePath.substring(1)}" ${error.message}`,
