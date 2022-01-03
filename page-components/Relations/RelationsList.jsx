@@ -16,14 +16,20 @@ const RelaList = () => {
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
+      <Wrapper>
       {posts.map((relation) => (
-        <Link key={'45'} href={`/user/333/post/3`} passHref>
           <div className={styles.wrap}>
+            
             <Relation className={styles.post} relation={relation} />
           </div>
-        </Link>
+        
+        
       ))}
+
+      </Wrapper>
     </div>
+    
+
   );
 };
 
