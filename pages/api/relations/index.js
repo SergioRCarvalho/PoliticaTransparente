@@ -1,4 +1,10 @@
 'use strict';
+import { ncOpts } from '@/api-lib/nc';
+import nc from 'next-connect';
+
+const handler = nc(ncOpts);
+var resu="";
+
 var __createBinding =
   (this && this.__createBinding) ||
   (Object.create
@@ -31,7 +37,7 @@ var __importStar =
     var result = {};
     if (mod != null)
       for (var k in mod)
-        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+        if (k !== 'default' && Object.hasOwnProperty.call(mod, k))
           __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
@@ -50,14 +56,10 @@ async function main() {
     console.log(`Wallet path: ${walletPath}`);
     // Create a new gateway for connecting to our peer node.
     const gateway = new fabric_network_1.Gateway();
-    const connectionProfilePath = path.resolve(
-      __dirname,
-      '..',
-      'CidadaoConnection.json'
-    );
+    const connectionProfilePath = path.resolve('CidadaoConnection.json');
     const connectionProfile = JSON.parse(
       fs.readFileSync(connectionProfilePath, 'utf8')
-    ); // eslint￾ disable-line @typescript-eslint/no-unsafe-assignment
+    ); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
     const connectionOptions = {
       wallet,
       identity: 'Cidadao Admin',
@@ -67,10 +69,10 @@ async function main() {
     // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork('mychannel');
     // Get the contract from the network.
-    const contract = network.getContract('voto-contract');
-    // Submit the specified transaction.
-    await contract.submitTransaction('createVoto', '009', '1', '004', '0024');
-    console.log('Transaction has been submitted');
+    const contract = network.getContract('demo-relation');
+    // Evaluate the specified transaction.
+    const result = await contract.evaluateTransaction('queryAllRelation');
+    resu = JSON.parse(result.toString());
     // Disconnect from the gateway.
     gateway.disconnect();
   } catch (error) {
@@ -78,5 +80,9 @@ async function main() {
     process.exit(1);
   }
 }
-void main();
-//# sourceMappingURL=create.js.map
+handler.get(async (req, res) => {
+  await main();
+  return res.json({ resu });
+});
+
+export default handler;

@@ -18,6 +18,12 @@ const Home = () => {
             </Link>
           </Container>
           <Spacer axis="horizontal" size={1} />
+          <Container>
+            <Link passHref href="/relations">
+              <ButtonLink className={styles.button}>Explore Relations</ButtonLink>
+            </Link>
+          </Container>
+          <Spacer axis="horizontal" size={1} />
         </Container>
         <p className={styles.subtitle}>Politica Transparente</p>
       </div>
