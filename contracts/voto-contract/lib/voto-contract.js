@@ -23,12 +23,12 @@ class VotoContract extends Contract {
         //    const checkAttr = identity.assertAttributeValue('registado', 'true');
         //   if (checkAttr) {
             const exists = await this.votoExists(ctx, votoId);
-            // const existsRelation = await this.relationExists(ctx, relacao);
+            const existsRelation = await this.relationExists(ctx, relacao);
 
-            // if(!existsRelation){
-            //     throw new Error(`A relação não existe`);
+             if(!existsRelation){
+                 throw new Error(`A relação não existe`);
                 
-            // }
+            }
 
             if (exists) {
                 throw new Error(`The voto ${votoId} already exists`);
@@ -86,22 +86,61 @@ class VotoContract extends Contract {
         11
         const startKey = '';
         const endKey = '';
-        const allResults = [];
-        for await (const { relationId, value } of ctx.stub.getStateByRange(
-            startKey, endKey)) {
-                12
-            const strValue = Buffer.from(value).toString('utf8');
+        let resultsIterator = await ctx.stub.getStateByRange(startKey, endKey);
+		let results = await this._GetAllResults(resultsIterator, false);
 
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                record = strValue;
-            }
-            allResults.push({ Key: relationId, Record: record });
-        }
-        return JSON.stringify(allResults);
+		return JSON.stringify(results);
     }
+
+
+async queryAllVotoByRelation(ctx, idRelacao) { 
+    let queryString = {};
+		queryString.selector = {};
+		queryString.selector.idRelacao = idRelacao;
+		return await this.GetQueryResultForQueryString(ctx, JSON.stringify(queryString)); 
+}
+
+async GetQueryResultForQueryString(ctx, queryString) {
+
+    let resultsIterator = await ctx.stub.getQueryResult(queryString);
+    let results = await this._GetAllResults(resultsIterator, false);
+
+    return JSON.stringify(results);
+}
+
+async _GetAllResults(iterator, isHistory) {
+    let allResults = [];
+    let res = await iterator.next();
+    while (!res.done) {
+        if (res.value && res.value.value.toString()) {
+            let jsonRes = {};
+            console.log(res.value.value.toString('utf8'));
+            if (isHistory && isHistory === true) {
+                jsonRes.TxId = res.value.txId;
+                jsonRes.Timestamp = res.value.timestamp;
+                try {
+                    jsonRes.Value = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    jsonRes.Value = res.value.value.toString('utf8');
+                }
+            } else {
+                jsonRes.Key = res.value.key;
+                try {
+                    jsonRes.Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    jsonRes.Record = res.value.value.toString('utf8');
+                }
+            }
+            allResults.push(jsonRes);
+        }
+        res = await iterator.next();
+    }
+    iterator.close();
+    return allResults;
+}
+
 
 }
 
