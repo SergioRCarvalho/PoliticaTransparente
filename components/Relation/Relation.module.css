@@ -76,25 +76,37 @@
 }
 
 .tr, .th, .td {
-  padding: 0px 15px 15px 40px;
- 
+  padding-left: 25px;
+
+  }
+
+  .count{
+    text-align: center;
+    max-width: 80px;
+  }
+
+  .tddesc{
+    padding:10px;
+    text-align: start;
+  }
+
+  .tdre{
+    text-align: end;
+    padding:10px;
+  }
+
+  .td2{
+    padding-left: 25px;
+    width: 350px;
+
+
   }
 
   .table{
     width: 100%;
     margin:auto; 
     padding: 10px;
-  }
-  .tw{
-    width:60%;
-     height: 100px;
-     padding: 15px;
-  }
 
-  .w{
-    text-align: center;
-    padding: 15px;
-    width: 40%;
   }
   
   .voto {
