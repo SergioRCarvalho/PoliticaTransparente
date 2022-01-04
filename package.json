@@ -39,6 +39,7 @@
         "colors": "^1.4.0",
         "connect-mongo": "^4.6.0",
         "express-session": "^1.17.2",
+        "fabric-ca-client": "^2.2.11",
         "fabric-network": "^2.2.11",
         "fast-safe-stringify": "^2.1.1",
         "font-awesome": "^4.7.0",
