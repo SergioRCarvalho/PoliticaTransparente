@@ -1,10 +1,7 @@
 'use strict';
-import { Button } from '@/components/Button';
-import { Container, Spacer } from '@/components/Layout';
+import { Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { Relation } from '@/components/Relation';
-import { Text } from '@/components/Text';
-import Link from 'next/link';
 import styles from './RelationsList.module.css';
 import { useRelaPages } from '@/lib/relations';
 
@@ -17,19 +14,13 @@ const RelaList = () => {
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
       <Wrapper>
-      {posts.map((relation) => (
-          <div className={styles.wrap}>
-            
+        {posts.map((relation) => (
+          <div key={relation.Key} className={styles.wrap}>
             <Relation className={styles.post} relation={relation} />
           </div>
-        
-        
-      ))}
-
+        ))}
       </Wrapper>
     </div>
-    
-
   );
 };
 
