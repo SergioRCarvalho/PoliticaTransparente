@@ -15,7 +15,7 @@ const Relation = ({ relation, className }) => {
       <Container>
         <table className={styles.table}>
           <tr className={styles.tw}>
-            <Link key={'45'} href={`/user/333/post/3`} passHref>
+            <Link key={e.Key} href={`/user/333/post/3`} passHref>
               <td className={styles.td}>
                 Descricao da relação: {e.Record.desc}
               </td>
@@ -26,7 +26,7 @@ const Relation = ({ relation, className }) => {
               <i className={cljx("fa fa-sort-desc",styles.voto)}></i>
             </td>
           </tr>
-          <Link key={'45'} href={`/user/333/post/3`} passHref>
+          <Link key={e.Key} href={`/user/333/post/3`} passHref>
             <tr className={styles.tr}>
               <td className={styles.td}>
                 <label className={styles.content}>Transação entre </label>
