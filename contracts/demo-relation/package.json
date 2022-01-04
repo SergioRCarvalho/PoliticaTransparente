@@ -1,6 +1,6 @@
 {
   "name": "demo-relation",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "My Smart Contract",
   "main": "index.js",
   "engines": {
