@@ -30,19 +30,15 @@ const PosterInner = ({ user }) => {
         await fetcher('/api/relations', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ enta: contentEntA.current.value,
+          body: JSON.stringify({
+            enta: contentEntA.current.value,
             entb: contentEntB.current.value,
             titulo: contentTP.current.value,
             tipo: contentTR.current.value,
-            nota: contentNR.current.value
-          },),
+            nota: contentNR.current.value,
+          }),
         });
         toast.success('You have posted successfully');
-        contentEntA.current.value = '';
-        contentEntB.current.value = '';
-        contentTP.current.value = '';
-        contentTR.current.value = '';
-        contentNR.current.value = '';
         // refresh post lists
         mutate();
       } catch (e) {

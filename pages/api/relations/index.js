@@ -86,7 +86,7 @@ async function main() {
   }
 }
 
-async function mainpost(entA,entB,tp,tr,nr, user_id) {
+async function mainpost(entA, entB, tp, tr, nr, user_id) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -113,7 +113,7 @@ async function mainpost(entA,entB,tp,tr,nr, user_id) {
 
     await contract.submitTransaction(
       'createRelation',
-      parseInt("175"),
+      parseInt("176"),
       tr,
       tp,
       nr,
@@ -129,7 +129,7 @@ async function mainpost(entA,entB,tp,tr,nr, user_id) {
     return status(400).json({
       error: {
         message: `"${error.instancePath.substring(1)}" ${error.message}`,
-      }
+      },
     });
   }
 }
@@ -150,18 +150,21 @@ handler.post(
       contentTR: ValidateProps.relation.titulo,
       contentNR: ValidateProps.relation.nota,
     },
-    required: ['enta','entb',
-    'tipo','titulo','nota'],
     additionalProperties: true,
   }),
+
   async (req, res) => {
     if (!req.user) {
       return res.status(401).end();
     }
-    const post = await mainpost(req.body.contentEntA,
-      req.body.contentEntB,req.body.contentTP,
-      req.body.TR ,req.body.NR , req.user._id);
-
+    const post = await mainpost(
+      req.body.enta,
+      req.body.entb,
+      req.body.tipo,
+      req.body.titulo,
+      req.body.nota,
+      req.user._id
+    );
     return res.json({ post });
   }
 );
