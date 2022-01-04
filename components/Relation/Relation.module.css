@@ -6,6 +6,7 @@
   border-radius: 5px;
   box-shadow: var(--shadow-smallest);
   margin-bottom: 20px;
+  padding: 10px;
 
 }
 
@@ -31,7 +32,6 @@
   font-weight: 600;
   color: var(--foreground);
   margin: 0;
-  line-height: 20px;
 }
 
 .username {
@@ -39,7 +39,6 @@
   font-weight: 400;
   color: var(--secondary);
   margin: 0;
-  line-height: 20px;
 }
 
 .wrap {
@@ -76,7 +75,6 @@
 }
 
 .tr, .th, .td {
-  padding-left: 25px;
 
   }
 
@@ -86,27 +84,20 @@
   }
 
   .tddesc{
-    padding:10px;
     text-align: start;
   }
 
   .tdre{
     text-align: end;
-    padding:10px;
   }
 
   .td2{
-    padding-left: 25px;
     width: 350px;
-
-
   }
 
   .table{
     width: 100%;
     margin:auto; 
-    padding: 10px;
-
   }
   
   .voto {

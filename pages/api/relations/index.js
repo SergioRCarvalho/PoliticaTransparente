@@ -86,7 +86,7 @@ async function main() {
   }
 }
 
-async function mainpost(content, user_id) {
+async function mainpost(entA,entB,tp,tr,nr, user_id) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -113,14 +113,14 @@ async function mainpost(content, user_id) {
 
     await contract.submitTransaction(
       'createRelation',
-      parseInt(content),
-      '001',
-      '001',
-      '001',
-      '001',
-      user_id.toString(),
-      '001',
-      '002'
+      parseInt("175"),
+      tr,
+      tp,
+      nr,
+      '21-01-2022',
+      parseInt("015"),
+      entA,
+      entB
     );
     // Disconnect from the gateway.
     gateway.disconnect();
@@ -144,16 +144,23 @@ handler.post(
   validateBody({
     type: 'object',
     properties: {
-      content: ValidateProps.post.content,
+      contentEntA: ValidateProps.relation.enta,
+      contentEntB: ValidateProps.relation.entb,
+      contentTP: ValidateProps.relation.tipo,
+      contentTR: ValidateProps.relation.titulo,
+      contentNR: ValidateProps.relation.nota,
     },
-    required: ['content'],
-    additionalProperties: false,
+    required: ['enta','entb',
+    'tipo','titulo','nota'],
+    additionalProperties: true,
   }),
   async (req, res) => {
     if (!req.user) {
       return res.status(401).end();
     }
-    const post = await mainpost(req.body.content, req.user._id);
+    const post = await mainpost(req.body.contentEntA,
+      req.body.contentEntB,req.body.contentTP,
+      req.body.TR ,req.body.NR , req.user._id);
 
     return res.json({ post });
   }
