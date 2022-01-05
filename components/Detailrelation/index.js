@@ -1,0 +1,1 @@
+export { Detailrelation } from './Detailrelation';

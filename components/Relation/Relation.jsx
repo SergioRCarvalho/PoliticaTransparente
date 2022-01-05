@@ -31,7 +31,7 @@ const Relation = ({ relation, className }) => {
           </Container>
         </a>
         </td>
-        <Link href={`/user/333/post/3`} passHref>
+        <Link href={`/detailrelation`} passHref>
           
           <td className={styles.tddesc} rowSpan="2" >
             {e.Record.desc}
@@ -44,7 +44,7 @@ const Relation = ({ relation, className }) => {
        
                       
          </tr>
-          <Link href={`/user/333/post/3`} passHref>
+          <Link href={`detailrelation`} passHref>
             <tr className={styles.tr}>
               <td className={styles.td2}>
               <p className={styles.content}>

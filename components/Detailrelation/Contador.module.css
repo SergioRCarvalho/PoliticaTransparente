@@ -1,0 +1,111 @@
+.root {
+  position: relative;
+  box-sizing: border-box;
+  background: var(--background);
+  border: 1px solid var(--accents-2);
+  border-radius: 5px;
+  box-shadow: var(--shadow-smallest);
+  margin-bottom: 20px;
+  padding: 10px;
+
+}
+
+.root a {
+  text-decoration: none;
+}
+
+.creator {
+  display: inline-flex;
+}
+
+.meta {
+  margin-left: 8px;
+}
+
+.meta:hover .name,
+.meta:focus .name {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.username {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--secondary);
+  margin: 0;
+}
+
+.wrap {
+  margin-top: 16px;
+}
+
+.content2 {
+  color: var(--accents-6);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+.content {
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.timestamp {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin: 0;
+  color: var(--accents-5);
+}
+
+.tr, .th, .td {
+
+  }
+
+  .count{
+    text-align: center;
+    max-width: 80px;
+  }
+
+  .tddesc{
+    text-align: start;
+  }
+
+  .tdre{
+    text-align: end;
+  }
+
+  .td2{
+    width: 350px;
+  }
+
+  .table{
+    width: 100%;
+    margin:auto; 
+  }
+  
+  .voto {
+font-size: 45px;
+cursor: pointer;
+user-select: none;
+}
+
+.voto:hover {
+color: darkblue;
+}
