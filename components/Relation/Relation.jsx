@@ -1,5 +1,6 @@
 import { Container } from '@/components/Layout';
 import { Avatar } from '@/components/Avatar';
+import { Contador } from '@/components/Contador';
 import { useCurrentUser } from '@/lib/user';
 import cljx from 'clsx';
 import Link from 'next/link';
@@ -36,11 +37,8 @@ const Relation = ({ relation, className }) => {
             {e.Record.desc}
           </td>
         </Link>
-        <td className={styles.count} rowSpan="3">
-              <i className={cljx('fa fa-sort-asc', styles.voto)}></i>
-              <p>Número contador</p>
-              <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
-        </td>
+        <Contador>
+        </Contador>
         </tr>
         <tr className={styles.tr} >   
        
