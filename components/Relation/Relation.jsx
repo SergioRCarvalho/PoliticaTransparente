@@ -16,6 +16,7 @@ const Relation = ({ relation, className }) => {
         
         <tr className={styles.tr} >
         <td className={styles.td2} >
+        <Link href={`/user/${data.user.username}`}>
       <a>
           <Container className={styles.creator}>
             <Avatar  
@@ -30,6 +31,7 @@ const Relation = ({ relation, className }) => {
             </Container>
           </Container>
         </a>
+        </Link>
         </td>
         <Link href={`/detailrelation`} passHref>
           

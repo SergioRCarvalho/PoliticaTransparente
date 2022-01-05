@@ -3,7 +3,7 @@ import cljx from 'clsx';
 import { forwardRef } from 'react';
 import styles from './Contador.module.css';
 
-export const DetailsRelation = forwardRef(function Contador(
+export const Detailrelation = forwardRef(function Contador(
   {
     children,
     type,
