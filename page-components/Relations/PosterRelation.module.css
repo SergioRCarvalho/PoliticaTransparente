@@ -1,9 +1,9 @@
 .root {
   background: var(--background);
-  padding: 32px;
+  padding: 15px;
   box-shadow: var(--shadow-smallest);
   border-radius: 8px;
-  height: 132px;
+  height: fit-content;
   transition: ease 0.2s box-shadow;
 }
 
@@ -16,9 +16,17 @@
   margin-left: 8px;
   margin-right: 8px;
 }
+.input2 {
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 25%;
+}
 
 .poster {
   width: 100%;
+}
+.poster2 {
+  margin-top: 15px;
 }
 
 .heading {

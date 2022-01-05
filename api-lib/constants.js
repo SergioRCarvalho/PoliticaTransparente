@@ -12,4 +12,11 @@ export const ValidateProps = {
   comment: {
     content: { type: 'string', minLength: 1, maxLength: 280 },
   },
+  relation: {
+    enta: { type: 'string', minLength: 1, maxLength: 280 },
+    entb: { type: 'string', minLength: 1, maxLength: 280 },
+    titulo: { type: 'string', minLength: 1, maxLength: 280 },
+    tipo: { type: 'string', minLength: 1, maxLength: 280 },
+    nota: { type: 'string', minLength: 1, maxLength: 280 },
+  },
 };

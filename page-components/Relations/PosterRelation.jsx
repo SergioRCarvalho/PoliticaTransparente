@@ -13,7 +13,11 @@ import toast from 'react-hot-toast';
 import styles from './PosterRelation.module.css';
 
 const PosterInner = ({ user }) => {
-  const contentRef = useRef();
+  const contentEntA = useRef();
+  const contentEntB = useRef();
+  const contentTP = useRef();
+  const contentTR = useRef();
+  const contentNR = useRef();
   const [isLoading, setIsLoading] = useState(false);
 
   const { mutate } = useRelaPages();
@@ -26,10 +30,15 @@ const PosterInner = ({ user }) => {
         await fetcher('/api/relations', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: contentRef.current.value }),
+          body: JSON.stringify({
+            enta: contentEntA.current.value,
+            entb: contentEntB.current.value,
+            titulo: contentTP.current.value,
+            tipo: contentTR.current.value,
+            nota: contentNR.current.value,
+          }),
         });
         toast.success('You have posted successfully');
-        contentRef.current.value = '';
         // refresh post lists
         mutate();
       } catch (e) {
@@ -46,10 +55,37 @@ const PosterInner = ({ user }) => {
       <Container className={styles.poster}>
         <Avatar size={40} username={user.username} url={user.profilePicture} />
         <Input
-          ref={contentRef}
+          ref={contentEntA}
           className={styles.input}
-          placeholder={`What's on your mind, ${user.name}?`}
-          ariaLabel={`What's on your mind, ${user.name}?`}
+          placeholder={` Inserir entidade A`}
+          ariaLabel={` Inserir entidade A`}
+          /> 
+        <Input
+          ref={contentEntB}
+          className={styles.input}
+          placeholder={` Inserir entidade B`}
+          ariaLabel={` Inserir entidade B`}
+        />
+        <Input
+          ref={contentTP}
+          className={styles.input}
+          placeholder={` Tipo de relação`}
+          ariaLabel={` Tipo de relação`}
+        />
+        </Container>
+
+        <Container  className={styles.poster2}>
+        <Input
+          ref={contentTR}
+          className={styles.input2}
+          placeholder={` Inserir titulo da relação`}
+          ariaLabel={` Inserir titulo da relação`}
+        />
+         <Input
+          ref={contentNR}
+          className={styles.input}
+          placeholder={` Inserir nota da relação`}
+          ariaLabel={` Inserir nota da relação`}
         />
         <Button type="success" loading={isLoading}>
           Post
@@ -66,7 +102,7 @@ const PosterRelation = () => {
   return (
     <Wrapper>
       <div className={styles.root}>
-        <h3 className={styles.heading}>Share your thoughts</h3>
+        <h3 className={styles.heading}>Publicar relação</h3>
         {loading ? (
           <LoadingDots>Loading</LoadingDots>
         ) : data?.user ? (
