@@ -74,28 +74,43 @@
   color: var(--accents-5);
 }
 
-.tr, .th, .td {
-
+.tr, .th, .td2 {
+  padding-left: 20px;
+  padding-top: 20px;
   }
 
   .count{
     text-align: center;
-    max-width: 80px;
+    max-width: 50px;
+    width: 35%;
+    border-style: solid;
+
   }
 
   .tddesc{
-    text-align: start;
+    padding-left: 20px;
+    height: 100px;
+    border-style: solid;
+
   }
 
   .tdre{
+    padding:20px;
+    padding-right: 10%;
     text-align: end;
+    border-style: solid;
+  color: var(--accents-6);
+
   }
 
   .td2{
     width: 350px;
+    border-style: solid;
+
   }
 
   .table{
+    border-style: solid;
     width: 100%;
     margin:auto; 
   }
