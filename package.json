@@ -18,6 +18,7 @@
         "createRelation": "node ./dist/createRelation.js",
         "queryRelation": "node ./dist/queryRelation.js",
         "queryRelations": "node ./dist/queryRelations.js",
+        "queryAllVotoByRelation": "node ./dist/queryAllVotoByRelation.js",
         "listener": "node ./dist/listener.js"
     },
     "repository": {

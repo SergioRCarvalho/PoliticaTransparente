@@ -8,7 +8,6 @@ export const DetailsRelation = () => {
       <Spacer size={1} axis="vertical" />
       <Wrapper>
       <div className={styles.wrap}>
-
         <Detailrelation/>
       </div>
       </Wrapper>

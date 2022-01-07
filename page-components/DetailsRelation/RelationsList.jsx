@@ -2,6 +2,8 @@
 import { Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { Relation } from '@/components/Relation';
+import { Contador } from '@/components/Contador';
+
 import styles from './DetailRelation.module.css';
 import { useRelaPages } from '@/lib/detailRelation';
 

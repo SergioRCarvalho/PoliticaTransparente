@@ -13,29 +13,18 @@ class VotoContract extends Contract {
         return (!!buffer && buffer.length > 0);
     }
 
-    async relationExists(ctx, relationId) {
-        const buffer = await ctx.stub.getState(relationId);
-        return (!!buffer && buffer.length > 0);
-    }
-
     async createVoto(ctx, votoId, voto, user, relacao) {
         //    const identity = ctx.clientIdentity;   
         //    const checkAttr = identity.assertAttributeValue('registado', 'true');
         //   if (checkAttr) {
             const exists = await this.votoExists(ctx, votoId);
-            const existsRelation = await this.relationExists(ctx, relacao);
-
-             if(!existsRelation){
-                 throw new Error(`A relação não existe`);
-                
-            }
 
             if (exists) {
                 throw new Error(`The voto ${votoId} already exists`);
             }
 
-                if ((voto !== '1') && (voto != '0')) {
-                    throw new Error(`O voto tem que ter os valores 1(sim) ou 0(nao) `);
+                if ((voto !== '1') && (voto !== '-1') && (voto != '0')) {
+                    throw new Error(`O voto tem que ter os valores 1(sim) -1(nao) ou 0(nulo) `);
                 }
                 const asset = {
                     estadoVoto: voto,

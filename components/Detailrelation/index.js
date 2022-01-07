@@ -1,1 +1,1 @@
-export { Detailrelation } from './Detailrelation';
+export { default as Detailrelation } from './Detailrelation';

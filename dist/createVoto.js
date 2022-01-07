@@ -69,7 +69,7 @@ async function main() {
     // Get the contract from the network.
     const contract = network.getContract('voto-contract');
     // Submit the specified transaction.
-    await contract.submitTransaction('createVoto', '079', '1', '004', '0024');
+    await contract.submitTransaction('createVoto', '172', '0', '171', '171');
     console.log('Transaction has been submitted');
     // Disconnect from the gateway.
     gateway.disconnect();
