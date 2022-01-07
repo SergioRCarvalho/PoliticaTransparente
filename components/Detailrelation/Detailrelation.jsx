@@ -10,7 +10,8 @@ import { withRouter } from 'next/router';
 const Detailrelation = ({ className, router: { query } }) => {
   const { data, error } = useCurrentUser();
 
-  console.log(query);
+  const data2 = JSON.parse(query.dataRelation);
+ console.log(data2.Record.notas);
 
   return (
     <Wrapper>
