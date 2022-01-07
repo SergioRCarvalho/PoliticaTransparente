@@ -1,1 +1,1 @@
-export { Contador, ContadorLink } from './Contador';
+export { default as Contador } from './Contador';

@@ -12,7 +12,6 @@ const PostList = () => {
   const posts = data
     ? data.reduce((acc, val) => [...acc, ...val.posts], [])
     : [];
-
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
