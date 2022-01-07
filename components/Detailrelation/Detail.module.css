@@ -83,30 +83,25 @@
   text-align: center;
   max-width: 50px;
   width: 35%;
-  border-style: solid;
 }
 
 .tddesc {
   padding-left: 20px;
   height: 100px;
-  border-style: solid;
 }
 
 .tdre {
   padding: 20px;
   padding-right: 10%;
   text-align: end;
-  border-style: solid;
   color: var(--accents-6);
 }
 
 .td2 {
   width: 350px;
-  border-style: solid;
 }
 
 .table {
-  border-style: solid;
   width: 100%;
   margin: auto;
 }

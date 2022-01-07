@@ -33,7 +33,7 @@ const Relation = ({ relation, className }) => {
               href={{
                 pathname: '/detailrelation',
                 query: {
-                userData: JSON.stringify(data.user),
+                  userData: JSON.stringify(data.user),
 
                   dataRelation: JSON.stringify(e),
                 },
@@ -44,7 +44,9 @@ const Relation = ({ relation, className }) => {
                 {e.Record.desc}
               </td>
             </Link>
-            <Contador eKey={e.Key} />
+            <td className={styles.count} rowSpan="3">
+              <Contador eKey={e.Key} />
+            </td>
           </tr>
           <tr className={styles.tr}></tr>
           <Link
@@ -56,7 +58,7 @@ const Relation = ({ relation, className }) => {
               },
             }}
             passHref
-          > 
+          >
             <tr className={styles.tr}>
               <td className={styles.td2}>
                 <p className={styles.content}>

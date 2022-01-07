@@ -1,6 +1,4 @@
-import { LoadingDots } from '@/components/LoadingDots';
 import cljx from 'clsx';
-import { forwardRef } from 'react';
 import styles from './Detail.module.css';
 import { Container, Wrapper } from '../Layout';
 import { Avatar } from '@/components/Avatar';
