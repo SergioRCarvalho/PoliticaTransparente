@@ -41,26 +41,31 @@ const Detailrelation = ({ className, router: { query } }) => {
               </td>
             </tr>
             <tr className={styles.tr}>
-              <td className={styles.td2}>Descrição</td>
+              <td className={styles.td2}>Descrição: {data2.Record.desc}</td>
             </tr>
             <tr className={styles.tr}>
-              <td className={styles.tddesc}>Nota</td>
+              <td className={styles.tddesc}>Nota: {data2.Record.notas}</td>
             </tr>
             <tr className={styles.tr}>
               <td className={styles.td2}>
                 <p className={styles.content}>
-                  Tipo Relação:
+                  Tipo Relação: {data2.Record.tipoRel}
                   <label className={styles.content2}> </label>
                 </p>
               </td>
             </tr>
             <tr className={styles.tr}>
               <td className={styles.td2}>
-                <label className={styles.content}>Transação entre </label>
-                <label className={styles.content}>Entidade a - </label>
-                <label className={styles.content}> Entidade b </label>
+                <label className={styles.content}>Transação entre: </label>
+                <label className={styles.content}>
+                  {data2.Record.entidade} -{' '}
+                </label>
+                <label className={styles.content}>
+                  {' '}
+                  {data2.Record.entidade2}{' '}
+                </label>
               </td>
-              <td className={styles.tdre}>Data registo</td>
+              <td className={styles.tdre}>{data2.Record.dataRegisto}</td>
             </tr>
           </table>
         </Container>
