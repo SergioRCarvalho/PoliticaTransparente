@@ -1,4 +1,5 @@
 export const ncOpts = {
+  attachParams: true,
   onError(err, req, res) {
     console.error(err);
     res.statusCode =

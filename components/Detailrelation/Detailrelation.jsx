@@ -11,7 +11,7 @@ const Detailrelation = ({ className, router: { query } }) => {
   const { data, error } = useCurrentUser();
 
   const data2 = JSON.parse(query.dataRelation);
- console.log(data2.Record.notas);
+  console.log(data2.Record.notas);
 
   return (
     <Wrapper>
