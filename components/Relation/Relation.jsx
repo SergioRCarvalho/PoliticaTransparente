@@ -34,7 +34,6 @@ const Relation = ({ relation, className }) => {
                 pathname: '/detailrelation',
                 query: {
                   userData: JSON.stringify(data.user),
-
                   dataRelation: JSON.stringify(e),
                 },
               }}

@@ -2,6 +2,7 @@
 import { ncOpts } from '@/api-lib/nc';
 import { ValidateProps } from '@/api-lib/constants';
 import { auths, database, validateBody } from '@/api-lib/middlewares';
+import { v4 as uuidv4 } from 'uuid';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
@@ -113,12 +114,12 @@ async function mainpost(entA, entB, tp, tr, nr, user_id) {
 
     await contract.submitTransaction(
       'createRelation',
-      parseInt("176"),
+      uuidv4(),
       tr,
       tp,
       nr,
       '21-01-2022',
-      parseInt("015"),
+      user_id,
       entA,
       entB
     );

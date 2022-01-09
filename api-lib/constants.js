@@ -19,4 +19,8 @@ export const ValidateProps = {
     tipo: { type: 'string', minLength: 1, maxLength: 280 },
     nota: { type: 'string', minLength: 1, maxLength: 280 },
   },
+  voto: {
+    voto: { type: 'string', minLength: 1, maxLength: 280 },
+    idRelation: { type: 'string', minLength: 1, maxLength: 280 },
+  },
 };

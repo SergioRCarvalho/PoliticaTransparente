@@ -11,6 +11,12 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './PosterRelation.module.css';
+import dynamic from "next/dynamic";
+import 'suneditor/dist/css/suneditor.min.css';
+
+const SunEditor = dynamic(() => import("suneditor-react"), {
+  ssr: false,
+});
 
 const PosterInner = ({ user }) => {
   const contentEntA = useRef();
@@ -87,6 +93,11 @@ const PosterInner = ({ user }) => {
           placeholder={` Inserir nota da relação`}
           ariaLabel={` Inserir nota da relação`}
         />
+
+<SunEditor />
+
+
+
         <Button type="success" loading={isLoading}>
           Post
         </Button>

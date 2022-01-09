@@ -10,7 +10,6 @@ const RelaList = () => {
   const posts = data
     ? data.reduce((acc, person) => [...acc, person.resu], [])
     : [];
- //   console.log(posts);
 
   return (
     <div className={styles.root}>
