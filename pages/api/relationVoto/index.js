@@ -112,9 +112,16 @@ async function mainpost(voto, idRelacao, user_id) {
     // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork('mychannel');
     // Get the contract from the network.
-    const contract = network.getContract('demo-relation');
+    const contract = network.getContract('voto-contract');
     // Submit the specified transaction.
-    await contract.submitTransaction('createVoto', uuidv4(), voto, idRelacao, user_id);
+    await contract.submitTransaction(
+      'createVoto',
+      uuidv4(),
+      voto,
+      user_id,
+      idRelacao
+    );
+    console.log('Success');
 
     // Disconnect from the gateway.
     gateway.disconnect();
@@ -138,8 +145,8 @@ handler.post(
   validateBody({
     type: 'object',
     properties: {
-      contentEntA: ValidateProps.voto.voto,
-      contentEntB: ValidateProps.voto.idRelation,
+      voto: ValidateProps.voto.voto,
+      idRelation: ValidateProps.voto.idRelation,
     },
     additionalProperties: true,
   }),

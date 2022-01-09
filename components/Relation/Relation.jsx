@@ -34,7 +34,6 @@ const Relation = ({ relation, className }) => {
                 pathname: '/detailrelation',
                 query: {
                   userData: JSON.stringify(data.user),
-
                   dataRelation: JSON.stringify(e),
                 },
               }}
@@ -45,7 +44,6 @@ const Relation = ({ relation, className }) => {
               </td>
             </Link>
             <td className={styles.count} rowSpan="3">
-              {e.Key}
               <Contador eKey={e.Key} />
             </td>
           </tr>

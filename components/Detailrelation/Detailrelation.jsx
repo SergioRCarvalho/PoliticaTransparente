@@ -11,7 +11,7 @@ const Detailrelation = ({ className, router: { query } }) => {
   const { data, error } = useCurrentUser();
 
   const data2 = JSON.parse(query.dataRelation);
-  console.log(data2.Record.notas);
+  //console.log(data2.Record.notas);
 
   return (
     <Wrapper>
@@ -37,7 +37,7 @@ const Detailrelation = ({ className, router: { query } }) => {
                 </Link>
               </td>
               <td className={styles.count} rowSpan="4">
-                <Contador eKey="12" />
+                <Contador eKey={data2.Key} />
               </td>
             </tr>
             <tr className={styles.tr}>
