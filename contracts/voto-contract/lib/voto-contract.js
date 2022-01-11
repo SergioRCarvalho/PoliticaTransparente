@@ -13,11 +13,19 @@ class VotoContract extends Contract {
         return (!!buffer && buffer.length > 0);
     }
 
+
+  
+
     async createVoto(ctx, votoId, voto, user, relacao) {
         //    const identity = ctx.clientIdentity;   
         //    const checkAttr = identity.assertAttributeValue('registado', 'true');
         //   if (checkAttr) {
             const exists = await this.votoExists(ctx, votoId);
+            const existsUser = await this.queryVotoByUserRelation(ctx, user, relacao);
+
+           if (existsUser !== '[]'){
+            throw new Error(`Utilizador já votou nesta relacao`);
+           }
 
             if (exists) {
                 throw new Error(`The voto ${votoId} already exists`);
@@ -81,6 +89,14 @@ class VotoContract extends Contract {
 		return JSON.stringify(results);
     }
 
+
+async queryVotoByUserRelation(ctx, idUser, idRelacao) { 
+    let queryString = {};
+		queryString.selector = {};
+		queryString.selector.idUser = idUser;
+		queryString.selector.idRelacao = idRelacao;
+		return await this.GetQueryResultForQueryString(ctx, JSON.stringify(queryString)); 
+}
 
 async queryAllVotoByRelation(ctx, idRelacao) { 
     let queryString = {};

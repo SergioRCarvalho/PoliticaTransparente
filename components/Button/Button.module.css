@@ -39,7 +39,9 @@
   --themed-bg: var(--background);
   --themed-fg: var(--secondary);
   --themed-border: var(--accents-2);
+  
 }
+
 
 .success {
   --themed-fg: #fff;

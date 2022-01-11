@@ -75,19 +75,24 @@
 .tr,
 .th,
 .td2 {
+  
+  padding: 20px 0px 20px 20px;
+}
+.td3 {
   padding-left: 20px;
   padding-top: 20px;
+  width: 30%;
 }
 
 .count {
   text-align: center;
   max-width: 50px;
-  width: 35%;
+  width: 20%;
 }
 
 .tddesc {
-  padding-left: 20px;
-  height: 100px;
+  text-align: start;
+  padding: 20px;
 }
 
 .tdre {
