@@ -83,14 +83,15 @@ const Contador = ({ eKey }) => {
   // posts[0].filter((item) =>console.log(item.Record.estadoVoto));
   return (
     <>
-      <form onSubmit={onSubmitup}>
-        <Button type="success">
+      <form className={styles.center} onSubmit={onSubmitup}>
+        <Button type="secondary" className={styles.voto}>
           <i className={cljx('fa fa-sort-asc', styles.voto)}></i>
         </Button>
       </form>
       <p>{count}</p>
-      <form onSubmit={onSubmitdown}>
-      <Button type="success">
+      <form className={styles.center} onSubmit={onSubmitdown}>
+  
+      <Button  type="secondary" className={styles.voto}>
       <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
       </Button>
       </form>
