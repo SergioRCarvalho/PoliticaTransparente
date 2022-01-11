@@ -1,6 +1,8 @@
 import { Container, Spacer, Wrapper } from '@/components/Layout';
 import styles from './Feed.module.css';
 import { Detailrelation } from '@/components/Detailrelation';
+import Commenter from './Commenter';
+import CommentList from './CommentList';
 
 export const DetailsRelation = () => {
   return (
@@ -10,6 +12,8 @@ export const DetailsRelation = () => {
       <div className={styles.wrap}>
         <Detailrelation/>
       </div>
+      <Commenter post={'61c2a94970aea0571034056d'} />
+      <CommentList post={'61c2a94970aea0571034056d'} />
       </Wrapper>
     </div>
   );
