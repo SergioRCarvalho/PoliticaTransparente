@@ -12,7 +12,7 @@ export const DetailsRelation = () => {
       <div className={styles.wrap}>
         <Detailrelation/>
       </div>
-      <Commenter post={'61c2a94970aea0571034056d'} />
+      <Commenter />
       <CommentList post={'61c2a94970aea0571034056d'} />
       </Wrapper>
     </div>

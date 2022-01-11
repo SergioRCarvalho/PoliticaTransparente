@@ -12,18 +12,17 @@ import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Commenter.module.css';
 
-const CommenterInner = ({ user, post }) => {
+const CommenterInner = ({ user }) => {
   const contentRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
-
-  const { mutate } = useCommentPages({ postId: post._id });
+  const { mutate } = useCommentPages({ postId: '61c268b6f24b3ec21be49d17' });
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher(`/api/posts/${post._id}/comments`, {
+        await fetcher(`/api/posts/61c268b6f24b3ec21be49d17/comments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
@@ -38,7 +37,7 @@ const CommenterInner = ({ user, post }) => {
         setIsLoading(false);
       }
     },
-    [mutate, post._id]
+    [mutate, '61c268b6f24b3ec21be49d17']
   );
 
   return (

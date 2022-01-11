@@ -5,9 +5,9 @@ import { Text } from '@/components/Text';
 import { useCommentPages } from '@/lib/comment';
 import styles from './CommentList.module.css';
 
-const CommentList = ({ post }) => {
+const CommentList = () => {
   const { data, size, setSize, isLoadingMore, isReachingEnd } = useCommentPages(
-    { postId: post._id }
+    { postId: '61c268b6f24b3ec21be49d17' }
   );
 
   const comments = data
