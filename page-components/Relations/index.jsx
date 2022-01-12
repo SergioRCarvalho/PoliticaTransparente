@@ -20,6 +20,7 @@ export const Relations = () => {
         <Fab theme={customtheme} color="primary" aria-label="add">
           <AddIcon onClick={handleOpen} />
           <Modal
+            keepMounted={true}
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={open}
