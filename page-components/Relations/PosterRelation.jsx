@@ -1,6 +1,5 @@
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
-import { Input } from '@/components/Input';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -11,10 +10,12 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './PosterRelation.module.css';
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 import 'suneditor/dist/css/suneditor.min.css';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
-const SunEditor = dynamic(() => import("suneditor-react"), {
+const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
 });
 
@@ -60,47 +61,97 @@ const PosterInner = ({ user }) => {
     <form onSubmit={onSubmit}>
       <Container className={styles.poster}>
         <Avatar size={40} username={user.username} url={user.profilePicture} />
-        <Input
-          ref={contentEntA}
-          className={styles.input}
-          placeholder={` Inserir entidade A`}
-          ariaLabel={` Inserir entidade A`}
-          /> 
-        <Input
-          ref={contentEntB}
-          className={styles.input}
-          placeholder={` Inserir entidade B`}
-          ariaLabel={` Inserir entidade B`}
-        />
-        <Input
-          ref={contentTP}
-          className={styles.input}
-          placeholder={` Tipo de relação`}
-          ariaLabel={` Tipo de relação`}
-        />
-        </Container>
+      </Container>
+      <Container className={styles.poster}>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div>
+            <TextField
+              className={styles.input}
+              ref={contentEntA}
+              required
+              id="outlined-required"
+              placeholder="Entidade A"
+            />
+            <TextField
+              className={styles.input}
+              ref={contentEntB}
+              required
+              id="outlined-required "
+              placeholder="Entidade B"
+            />
+            <TextField
+              className={styles.input}
+              ref={contentTP}
+              required
+              id="outlined-required "
+              placeholder="Tipo de relação"
+            />
+            <TextField
+              className={styles.input}
+              ref={contentTR}
+              required
+              id="outlined-required "
+              placeholder="Titulo da relação"
+            />
 
-        <Container  className={styles.poster2}>
-        <Input
-          ref={contentTR}
-          className={styles.input2}
-          placeholder={` Inserir titulo da relação`}
-          ariaLabel={` Inserir titulo da relação`}
-        />
+            <p>Inserir nota</p>
+            <SunEditor ref={contentNR} className={styles.seditor} />
+
+            <Button
+              type="success"
+              loading={isLoading}
+              className={styles.input3}
+            >
+              Submeter
+            </Button>
+          </div>
+        </Box>
+        {/* 
+        <Container className={styles.poster2}>
          <Input
-          ref={contentNR}
-          className={styles.input}
-          placeholder={` Inserir nota da relação`}
-          ariaLabel={` Inserir nota da relação`}
-        />
+            ref={contentEntA}
+            className={styles.input}
+            placeholder={` Inserir entidade A`}
+            ariaLabel={` Inserir entidade A`}
+          />
+          <Input
+            ref={contentEntB}
+            className={styles.input}
+            placeholder={` Inserir entidade B`}
+            ariaLabel={` Inserir entidade B`}
+          />
+          <Input
+            ref={contentTP}
+            className={styles.input}
+            placeholder={` Tipo de relação`}
+            ariaLabel={` Tipo de relação`}
+          />
+          <Input
+            ref={contentTR}
+            className={styles.input2}
+            placeholder={` Inserir titulo da relação`}
+            ariaLabel={` Inserir titulo da relação`}
+          />
+          <Input
+            ref={contentNR}
+            className={styles.input}
+            placeholder={` Inserir nota da relação`}
+            ariaLabel={` Inserir nota da relação`}
+          />
 
-<SunEditor />
+          <SunEditor />
 
-
-
-        <Button type="success" loading={isLoading}>
-          Post
-        </Button>
+          <Button type="success" loading={isLoading}>
+            Post
+          </Button>
+        </Container> */}
       </Container>
     </form>
   );

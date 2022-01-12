@@ -3,7 +3,9 @@
   padding: 15px;
   box-shadow: var(--shadow-smallest);
   border-radius: 8px;
-  height: fit-content;
+  border: 2px solid white;
+  min-height: fit-content;
+  height: 500px;
   transition: ease 0.2s box-shadow;
 }
 
@@ -121,10 +123,21 @@
 }
 
 .input {
+  background: white;
+  opacity: 0.9;
   flex: 1 1 0%;
   margin-left: 8px;
   margin-right: 8px;
+  border-radius: 3px;
 }
+
+.input3{
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .input2 {
   margin-left: 8px;
   margin-right: 8px;
@@ -132,6 +145,7 @@
 }
 
 .poster {
+  margin-top: 15px;
   width: 100%;
 }
 .poster2 {
@@ -144,4 +158,9 @@
   margin-top: 0;
   padding-left: 0.2rem;
   color: var(--accents-7);
+}
+
+.seditor{
+  width: auto;
+  height: fit-content;
 }
