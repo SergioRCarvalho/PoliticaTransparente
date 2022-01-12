@@ -80,7 +80,7 @@ const Detailrelation = ({ className, router: { query } }) => {
         </Container>
       </div>
       <Link passHref href="/relations">
-        <Button> Voltar </Button>
+        <Button className={styles.botao}> Voltar </Button>
       </Link>
       <Commenter eKey={data2.Key} />
       <CommentList eKey={data2.Key} />

@@ -60,11 +60,10 @@ const Relation = ({ relation, className }) => {
           >
             <tr className={styles.tr}>
               <td className={styles.td2}>
-                <p className={styles.content}>
-                  Tipo Relação:{' '}
-                  <label className={styles.content2}> {e.Record.tipoRel}</label>
-                </p>
-                <label className={styles.content}>Transação entre </label>
+                Tipo Relação:{' '}
+                <label className={styles.content2}> {e.Record.tipoRel}</label>
+                <br />
+                Transação entre{' '}
                 <label className={styles.content2}>
                   Entidade {e.Record.entidade} -{' '}
                 </label>

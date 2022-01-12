@@ -115,10 +115,10 @@ async function mainpost(entA, entB, tp, tr, nr, user_id) {
     await contract.submitTransaction(
       'createRelation',
       id,
-      tr,
       tp,
       nr,
-      '21-01-2022',
+      'hoje',
+      tr,
       user_id,
       entA,
       entB

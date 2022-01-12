@@ -10,6 +10,10 @@
 
 }
 
+.root:hover{
+  box-shadow: 4px;
+}
+
 .root a {
   text-decoration: none;
 }
@@ -94,7 +98,8 @@
   }
 
   .td2{
-    width: 350px;
+    width: 50%;
+
   }
 
   .table{

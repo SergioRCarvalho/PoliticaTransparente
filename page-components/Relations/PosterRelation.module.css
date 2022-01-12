@@ -5,7 +5,7 @@
   border-radius: 8px;
   border: 2px solid white;
   min-height: fit-content;
-  height: 500px;
+  height: 300px;
   transition: ease 0.2s box-shadow;
 }
 
@@ -163,4 +163,34 @@
 .seditor{
   width: auto;
   height: fit-content;
+}
+
+
+.creator {
+  display: inline-flex;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.meta {
+  margin-left: 8px;
+}
+
+.meta:hover .name,
+.meta:focus .name {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.username {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--secondary);
+  margin: 0;
 }

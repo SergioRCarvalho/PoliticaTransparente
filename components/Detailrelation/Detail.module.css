@@ -80,7 +80,6 @@
 }
 .td3 {
   padding-left: 20px;
-  padding-top: 20px;
   width: 30%;
 }
 
@@ -119,4 +118,8 @@
 
 .voto:hover {
   color: darkblue;
+}
+
+.botao{
+  margin-bottom: 20px;
 }

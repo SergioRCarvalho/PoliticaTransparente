@@ -1,6 +1,7 @@
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { Container, Wrapper } from '@/components/Layout';
+import Box from '@mui/material/Box';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
 import { fetcher } from '@/lib/fetch';
@@ -55,11 +56,26 @@ const PosterInner = ({ user }) => {
     },
     [mutate]
   );
+  const { data, error } = useCurrentUser();
 
   return (
     <form onSubmit={onSubmit}>
       <Container className={styles.poster}>
-        <Avatar size={40} username={user.username} url={user.profilePicture} />
+        <a>
+          <Container className={styles.creator}>
+            <Avatar
+              size={36}
+              url={data.user.profilePicture}
+              username={data.user.username}
+            />
+            <Container column className={styles.meta}>
+              <p className={styles.name}>{data.user.name}</p>
+              <p className={styles.username}>{data.user.username}</p>
+            </Container>
+          </Container>
+        </a>
+      </Container>
+      <Container className={styles.poster}>
         <Input
           ref={contentEntA}
           className={styles.input}
@@ -83,7 +99,7 @@ const PosterInner = ({ user }) => {
       <Container className={styles.poster2}>
         <Input
           ref={contentTR}
-          className={styles.input2}
+          className={styles.input}
           placeholder={` Inserir titulo da relação`}
           ariaLabel={` Inserir titulo da relação`}
         />
@@ -94,10 +110,8 @@ const PosterInner = ({ user }) => {
           ariaLabel={` Inserir nota da relação`}
         />
 
-        <SunEditor />
-
-        <Button type="success" loading={isLoading}>
-          Post
+        <Button type="success" className={styles.botao} loading={isLoading}>
+          Submeter
         </Button>
       </Container>
     </form>
