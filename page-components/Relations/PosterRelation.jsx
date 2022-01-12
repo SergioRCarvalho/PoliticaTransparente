@@ -1,7 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { Container, Wrapper } from '@/components/Layout';
-import Box from '@mui/material/Box';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
 import { fetcher } from '@/lib/fetch';
@@ -11,13 +10,7 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './PosterRelation.module.css';
-import dynamic from 'next/dynamic';
-import 'suneditor/dist/css/suneditor.min.css';
 import { Input } from '@/components/Input';
-
-const SunEditor = dynamic(() => import('suneditor-react'), {
-  ssr: false,
-});
 
 const PosterInner = ({ user }) => {
   const contentEntA = useRef();
