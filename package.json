@@ -39,6 +39,7 @@
         "clsx": "^1.1.1",
         "colors": "^1.4.0",
         "connect-mongo": "^4.6.0",
+        "crypto": "^1.0.1",
         "draft-js": "^0.11.7",
         "express-session": "^1.17.2",
         "fabric-network": "^2.2.11",
@@ -65,6 +66,7 @@
         "react-dom": "^17.0.2",
         "react-draft-wysiwyg": "^1.14.7",
         "react-hot-toast": "^2.1.1",
+        "react-router-dom": "^6.2.1",
         "request": "^2.79.0",
         "slug": "^5.1.0",
         "stream": "^0.0.2",
@@ -73,6 +75,7 @@
         "swr": "^1.0.1",
         "tls": "^0.0.1",
         "uuid": "^8.3.2",
+        "uuid-to-hex": "^1.1.1",
         "validator": "^13.6.0"
     },
     "devDependencies": {

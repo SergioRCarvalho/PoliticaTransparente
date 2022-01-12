@@ -2,7 +2,6 @@
 import { ncOpts } from '@/api-lib/nc';
 import { ValidateProps } from '@/api-lib/constants';
 import { auths, database, validateBody } from '@/api-lib/middlewares';
-import { v4 as uuidv4 } from 'uuid';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
@@ -88,6 +87,8 @@ async function main() {
 }
 
 async function mainpost(entA, entB, tp, tr, nr, user_id) {
+  const crypto = require('crypto');
+  const id = crypto.randomBytes(12).toString('hex');
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -111,10 +112,9 @@ async function mainpost(entA, entB, tp, tr, nr, user_id) {
     // Get the contract from the network.
     const contract = network.getContract('demo-relation');
     // Submit the specified transaction.
-
     await contract.submitTransaction(
       'createRelation',
-      uuidv4(),
+      id,
       tr,
       tp,
       nr,

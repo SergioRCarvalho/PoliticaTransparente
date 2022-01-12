@@ -5,15 +5,14 @@ import { Text } from '@/components/Text';
 import { useCommentPages } from '@/lib/comment';
 import styles from './CommentList.module.css';
 
-const CommentList = () => {
+const CommentList = ({ eKey }) => {
   const { data, size, setSize, isLoadingMore, isReachingEnd } = useCommentPages(
-    { postId: '61c268b6f24b3ec21be49d17' }
+    { postId: eKey }
   );
 
   const comments = data
     ? data.reduce((acc, val) => [...acc, ...val.comments], [])
     : [];
-
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />

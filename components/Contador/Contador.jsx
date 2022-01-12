@@ -17,8 +17,6 @@ const Contador = ({ eKey }) => {
 
   const { mutate } = useRelaVoto();
   const [isLoading, setIsLoading] = useState(false);
-  const contentEntA = useRef();
-  const contentEntB = useRef();
 
   const onSubmitup = useCallback(
     async (e) => {
@@ -45,7 +43,6 @@ const Contador = ({ eKey }) => {
     [mutate]
   );
 
-
   const onSubmitdown = useCallback(
     async (e) => {
       e.preventDefault();
@@ -71,7 +68,6 @@ const Contador = ({ eKey }) => {
     [mutate]
   );
 
-
   if (posts.length != 0) {
     count =
       posts[0].filter((item) => item.Record.estadoVoto === '1').length -
@@ -90,10 +86,9 @@ const Contador = ({ eKey }) => {
       </form>
       <p>{count}</p>
       <form className={styles.center} onSubmit={onSubmitdown}>
-  
-      <Button  type="secondary" className={styles.voto}>
-      <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
-      </Button>
+        <Button type="secondary" className={styles.voto}>
+          <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
+        </Button>
       </form>
     </>
   );
