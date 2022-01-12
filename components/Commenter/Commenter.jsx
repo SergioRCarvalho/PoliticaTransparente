@@ -22,7 +22,7 @@ const CommenterInner = ({ user, eKey }) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher(`/api/posts/${eKey}/comments`, {
+        await fetcher(`/api/relations/${eKey}/comments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
