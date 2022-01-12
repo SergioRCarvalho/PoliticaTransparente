@@ -7,7 +7,7 @@ const DetailRelationPage = () => {
       <Head>
         <title>DetailsRelation</title>
       </Head>
-      <DetailsRelation/>
+      <DetailsRelation />
     </>
   );
 };

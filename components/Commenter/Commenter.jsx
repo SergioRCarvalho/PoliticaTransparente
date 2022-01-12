@@ -12,18 +12,17 @@ import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Commenter.module.css';
 
-const CommenterInner = ({ user, post }) => {
+const CommenterInner = ({ user, eKey }) => {
   const contentRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
-
-  const { mutate } = useCommentPages({ postId: post._id });
+  const { mutate } = useCommentPages({ postId: eKey });
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher(`/api/posts/${post._id}/comments`, {
+        await fetcher(`/api/relations/${eKey}/comments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
@@ -38,7 +37,7 @@ const CommenterInner = ({ user, post }) => {
         setIsLoading(false);
       }
     },
-    [mutate, post._id]
+    [mutate, eKey]
   );
 
   return (
@@ -59,7 +58,7 @@ const CommenterInner = ({ user, post }) => {
   );
 };
 
-const Commenter = ({ post }) => {
+const Commenter = ({ eKey }) => {
   const { data, error } = useCurrentUser();
   const loading = !data && !error;
 
@@ -74,7 +73,7 @@ const Commenter = ({ post }) => {
       {loading ? (
         <LoadingDots>Loading</LoadingDots>
       ) : data?.user ? (
-        <CommenterInner post={post} user={data.user} />
+        <CommenterInner eKey={eKey} user={data.user} />
       ) : (
         <Text color="secondary">
           Please{' '}

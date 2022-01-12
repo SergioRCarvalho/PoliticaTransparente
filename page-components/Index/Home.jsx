@@ -12,11 +12,6 @@ const Home = () => {
           <span>Transparente</span>
         </h1>
         <Container justifyContent="center" className={styles.buttons}>
-          <Container>
-            <Link passHref href="/feed">
-              <ButtonLink className={styles.button}>Explore Feed</ButtonLink>
-            </Link>
-          </Container>
           <Spacer axis="horizontal" size={1} />
           <Container>
             <Link passHref href="/relations">

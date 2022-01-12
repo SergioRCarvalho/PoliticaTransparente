@@ -10,12 +10,6 @@ const handler = nc(ncOpts);
 handler.use(database);
 
 handler.get(async (req, res) => {
-  const post = await findPostById(req.db, req.query.postId);
-
-  if (!post) {
-    return res.status(404).json({ error: { message: 'Post is not found.' } });
-  }
-
   const comments = await findComments(
     req.db,
     req.query.postId,
@@ -43,13 +37,7 @@ handler.post(
 
     const content = req.body.content;
 
-    const post = await findPostById(req.db, req.query.postId);
-
-    if (!post) {
-      return res.status(404).json({ error: { message: 'Post is not found.' } });
-    }
-
-    const comment = await insertComment(req.db, post._id, {
+    const comment = await insertComment(req.db, req.query.postId, {
       creatorId: req.user._id,
       content,
     });

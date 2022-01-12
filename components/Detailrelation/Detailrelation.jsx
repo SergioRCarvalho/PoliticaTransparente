@@ -6,6 +6,8 @@ import { Button } from '@/components/Button';
 import { useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
 import { Contador } from '@/components/Contador';
+import { CommentList } from '@/components/CommentList';
+import { Commenter } from '@/components/Commenter';
 import { withRouter } from 'next/router';
 
 const Detailrelation = ({ className, router: { query } }) => {
@@ -42,7 +44,9 @@ const Detailrelation = ({ className, router: { query } }) => {
               </td>
             </tr>
             <tr className={styles.tr}>
-              <td className={styles.td2} colSpan="2">Descrição: {data2.Record.desc}</td>
+              <td className={styles.td2} colSpan="2">
+                Descrição: {data2.Record.desc}
+              </td>
             </tr>
             <tr className={styles.tr}>
               <td className={styles.td2}>
@@ -63,18 +67,23 @@ const Detailrelation = ({ className, router: { query } }) => {
               </td>
             </tr>
             <tr className={styles.tr}>
-              <td className={styles.tddesc} colSpan="3">Nota: {data2.Record.notas}</td>
+              <td className={styles.tddesc} colSpan="3">
+                Nota: {data2.Record.notas}
+              </td>
             </tr>
             <tr className={styles.tr}>
-              <td className={styles.tdre} colSpan="3">{data2.Record.dataRegisto}</td>
+              <td className={styles.tdre} colSpan="3">
+                {data2.Record.dataRegisto}
+              </td>
             </tr>
           </table>
         </Container>
       </div>
       <Link passHref href="/relations">
-          <Button> Voltar </Button>
+        <Button> Voltar </Button>
       </Link>
-        
+      <Commenter eKey={data2.Key} />
+      <CommentList eKey={data2.Key} />
     </Wrapper>
   );
 };

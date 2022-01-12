@@ -10,8 +10,8 @@ export const UserPost = ({ post }) => {
       <Spacer size={2} axis="vertical" />
       <PostItem post={post} />
       <h3 className={styles.subtitle}>Comments</h3>
-      <Commenter post={post} />
-      <CommentList post={post} />
+      <Commenter />
+      <CommentList />
     </Wrapper>
   );
 };
