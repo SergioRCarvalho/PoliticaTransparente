@@ -1,6 +1,5 @@
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
-import { Input } from '@/components/Input';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -11,10 +10,11 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './PosterRelation.module.css';
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 import 'suneditor/dist/css/suneditor.min.css';
+import { Input } from '@/components/Input';
 
-const SunEditor = dynamic(() => import("suneditor-react"), {
+const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
 });
 
@@ -65,7 +65,7 @@ const PosterInner = ({ user }) => {
           className={styles.input}
           placeholder={` Inserir entidade A`}
           ariaLabel={` Inserir entidade A`}
-          /> 
+        />
         <Input
           ref={contentEntB}
           className={styles.input}
@@ -78,25 +78,23 @@ const PosterInner = ({ user }) => {
           placeholder={` Tipo de relação`}
           ariaLabel={` Tipo de relação`}
         />
-        </Container>
+      </Container>
 
-        <Container  className={styles.poster2}>
+      <Container className={styles.poster2}>
         <Input
           ref={contentTR}
           className={styles.input2}
           placeholder={` Inserir titulo da relação`}
           ariaLabel={` Inserir titulo da relação`}
         />
-         <Input
+        <Input
           ref={contentNR}
           className={styles.input}
           placeholder={` Inserir nota da relação`}
           ariaLabel={` Inserir nota da relação`}
         />
 
-<SunEditor />
-
-
+        <SunEditor />
 
         <Button type="success" loading={isLoading}>
           Post
