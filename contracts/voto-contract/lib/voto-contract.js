@@ -17,22 +17,41 @@ class VotoContract extends Contract {
   
 
     async createVoto(ctx, votoId, voto, user, relacao) {
-        //    const identity = ctx.clientIdentity;   
-        //    const checkAttr = identity.assertAttributeValue('registado', 'true');
-        //   if (checkAttr) {
             const exists = await this.votoExists(ctx, votoId);
-            const existsUser = await this.queryVotoByUserRelation(ctx, user, relacao);
-
-           if (existsUser !== '[]'){
-            throw new Error(`Utilizador já votou nesta relacao`);
-           }
+            let existsVotoPositivo = await this.queryVotoByUserRelation(ctx, user, relacao, '+1');
+            let existsVotoNegativo = await this.queryVotoByUserRelation(ctx, user, relacao, '-1');
 
             if (exists) {
-                throw new Error(`The voto ${votoId} already exists`);
-            }
+                throw new Error(`O voto já existe`);
 
-                if ((voto !== '1') && (voto !== '-1') && (voto != '0')) {
-                    throw new Error(`O voto tem que ter os valores 1(sim) -1(nao) ou 0(nulo) `);
+            }
+            // console.log(existsVotoPositivo);
+                if (existsVotoPositivo !== '[]' && voto == '+1'){   
+                    existsVotoPositivo = JSON.parse(existsVotoPositivo) 
+                    await this.deleteVoto(ctx, existsVotoPositivo[0].Key)
+                  } 
+       
+                  if (existsVotoNegativo !== '[]' && voto == '-1'){   
+                    existsVotoNegativo = JSON.parse(existsVotoNegativo) 
+                    await this.deleteVoto(ctx, existsVotoNegativo[0].Key)
+                  }
+            
+            else {
+                if (existsVotoPositivo !== '[]'){   
+                    existsVotoPositivo = JSON.parse(existsVotoPositivo) 
+                    await this.deleteVoto(ctx, existsVotoPositivo[0].Key)
+                } 
+                if (existsVotoNegativo !== '[]'){   
+                    existsVotoNegativo = JSON.parse(existsVotoNegativo) 
+                    await this.deleteVoto(ctx, existsVotoNegativo[0].Key)
+                }
+                
+
+            
+           
+
+                if ((voto !== '+1') && (voto !== '-1')) {
+                    throw new Error(`O voto tem que ter os valores +1(sim) -1(nao)`);
                 }
                 const asset = {
                     estadoVoto: voto,
@@ -41,10 +60,7 @@ class VotoContract extends Contract {
             };
             const buffer = Buffer.from(JSON.stringify(asset));
             await ctx.stub.putState(votoId, buffer);
-        //   }        
-        //   else {
-        //       throw new Error('Não pode submeter o voto!');
-        //   }
+            }
     }
 
     async readVoto(ctx, votoId) {
@@ -90,12 +106,14 @@ class VotoContract extends Contract {
     }
 
 
-async queryVotoByUserRelation(ctx, idUser, idRelacao) { 
+async queryVotoByUserRelation(ctx, idUser, idRelacao, voto) { 
     let queryString = {};
 		queryString.selector = {};
 		queryString.selector.idUser = idUser;
 		queryString.selector.idRelacao = idRelacao;
-		return await this.GetQueryResultForQueryString(ctx, JSON.stringify(queryString)); 
+		queryString.selector.estadoVoto = voto.toString();
+		return await this.GetQueryResultForQueryString(ctx, JSON.stringify(queryString));
+           
 }
 
 async queryAllVotoByRelation(ctx, idRelacao) { 
@@ -109,7 +127,6 @@ async GetQueryResultForQueryString(ctx, queryString) {
 
     let resultsIterator = await ctx.stub.getQueryResult(queryString);
     let results = await this._GetAllResults(resultsIterator, false);
-
     return JSON.stringify(results);
 }
 

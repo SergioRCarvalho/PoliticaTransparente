@@ -111,6 +111,18 @@ border-top: none;
 border-right: none;
 }
 
+.votado{
+  align-items: center;
+font-size: 45px;
+cursor: pointer;
+user-select: none;
+border-bottom: none;
+border-left: none;
+border-top: none;
+border-right: none;
+color: rgb(14, 13, 13);
+}
+
 .center{
   display: flex;
   justify-content: center;
