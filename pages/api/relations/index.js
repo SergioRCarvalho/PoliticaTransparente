@@ -111,13 +111,20 @@ async function mainpost(entA, entB, tp, tr, nr, user_id) {
     const network = await gateway.getNetwork('mychannel');
     // Get the contract from the network.
     const contract = network.getContract('demo-relation');
-    // Submit the specified transaction.
+    // Submit the specified transaction.´
+    var today = new Date();
+    var date =
+      today.getDate() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getFullYear();
     await contract.submitTransaction(
       'createRelation',
       id,
       tp,
       nr,
-      'hoje',
+      date,
       tr,
       user_id,
       entA,
