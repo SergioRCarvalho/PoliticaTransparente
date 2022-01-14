@@ -6,9 +6,11 @@ import cljx from 'clsx';
 import Link from 'next/link';
 import styles from './Relation.module.css';
 import 'font-awesome/css/font-awesome.min.css';
+import { stringify } from 'querystring';
 
 const Relation = ({ relation, className }) => {
   const { data, error } = useCurrentUser();
+  // console.log(JSON.stringify(data.user));
   return relation.map((e) => (
     <div key={e.Key} className={cljx(styles.root, className)}>
       <Container>
@@ -44,7 +46,7 @@ const Relation = ({ relation, className }) => {
               </td>
             </Link>
             <td className={styles.count} rowSpan="3">
-              <Contador eKey={e.Key} />
+              <Contador eKey={e.Key} uKey={e.Record.idUt} />
             </td>
           </tr>
           <tr className={styles.tr}></tr>
