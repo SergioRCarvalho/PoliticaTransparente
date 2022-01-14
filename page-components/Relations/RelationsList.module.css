@@ -12,4 +12,5 @@
 .post:hover {
   /* background: var(--accents-1);
   transition: ease 0.15s background; */
+  box-shadow: 5px 10px 18px black;
 }
