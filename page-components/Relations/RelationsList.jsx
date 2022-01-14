@@ -60,7 +60,7 @@ const RelaList = () => {
 
   return (
     <div className={styles.root}>
-      <Stack spacing={1} sx={{ width: 300, paddingTop: 2, paddingLeft: 2 }}>
+      <Stack spacing={1} sx={{ width: 300, paddingTop: 2, marginLeft: 25 }}>
         <Autocomplete
           freeSolo
           id="free-solo-2-demo"

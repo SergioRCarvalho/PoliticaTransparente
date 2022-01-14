@@ -50,20 +50,21 @@ const Detailrelation = ({ className, router: { query } }) => {
             </tr>
             <tr className={styles.tr}>
               <td className={styles.td2}>
-                <label className={styles.content}>Transação entre: </label>
-                <label className={styles.content}>
+                Transação entre:
+                <label className={styles.content2}>
+                  {' '}
                   {data2.Record.entidade} -{' '}
                 </label>
-                <label className={styles.content}>
+                <label className={styles.content2}>
                   {' '}
                   {data2.Record.entidade2}{' '}
                 </label>
               </td>
               <td className={styles.td3}>
-                <p className={styles.content}>
-                  Tipo Relação: {data2.Record.tipoRel}
-                  <label className={styles.content2}> </label>
-                </p>
+                Tipo Relação:{' '}
+                <label className={styles.content2}>
+                  {data2.Record.tipoRel}{' '}
+                </label>
               </td>
             </tr>
             <tr className={styles.tr}>
