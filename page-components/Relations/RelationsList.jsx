@@ -4,9 +4,12 @@ import Wrapper from '@/components/Layout/Wrapper';
 import { Relation } from '@/components/Relation';
 import styles from './RelationsList.module.css';
 import { useRelaPages } from '@/lib/relations';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import InputAdornment from '@mui/material/InputAdornment';
 
 // const items = [];
 
@@ -17,6 +20,8 @@ const RelaList = () => {
   let posts = data
     ? data.reduce((acc, person) => [...acc, person.resu], [])
     : [];
+
+  const descserarch = useRef();
 
   const [filteredResult, setfilteredResult] = useState([]);
 
@@ -55,33 +60,33 @@ const RelaList = () => {
 
   return (
     <div className={styles.root}>
-      <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        disableClearable
-        options={getDesc()}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search input"
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
-        )}
-      />
-      <input
-        id="search"
-        onChange={(e) => {
-          e.preventDefault();
-          setSearch(e.target.value);
-          if (e.target.value === '') {
-            setfilteredResult([]);
-          }
-        }}
-        value={searchValue || ''}
-      />
+      <Stack spacing={1} sx={{ width: 300, paddingTop: 2, paddingLeft: 2 }}>
+        <Autocomplete
+          freeSolo
+          id="free-solo-2-demo"
+          disableClearable
+          options={getDesc()}
+          renderInput={(params) => (
+            <TextField
+              ref={descserarch}
+              id="input-with-icon-adornment"
+              {...params}
+              label="Procurar"
+              InputProps={{
+                ...params.InputProps,
+                type: 'search',
+              }}
+              onChange={(e) => {
+                e.preventDefault();
+                setSearch(e.target.value);
+                if (e.target.value === '') {
+                  setfilteredResult([]);
+                }
+              }}
+            />
+          )}
+        />
+      </Stack>
       <Spacer axis="vertical" size={1} />
       <Wrapper>
         {filteredResult.length === 0
