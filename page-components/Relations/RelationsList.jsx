@@ -5,6 +5,8 @@ import { Relation } from '@/components/Relation';
 import styles from './RelationsList.module.css';
 import { useRelaPages } from '@/lib/relations';
 import React, { useState, useEffect } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 // const items = [];
 
@@ -22,6 +24,15 @@ const RelaList = () => {
     return data[0].resu.filter(function (el) {
       return el.Record.desc.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
+  }
+
+  function getDesc() {
+    if (data) {
+      return data[0].resu.map(function (el) {
+        return el.Record.desc;
+      });
+    }
+    return [{}];
   }
 
   useEffect(() => {
@@ -44,6 +55,22 @@ const RelaList = () => {
 
   return (
     <div className={styles.root}>
+      <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={getDesc()}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search input"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
       <input
         id="search"
         onChange={(e) => {
