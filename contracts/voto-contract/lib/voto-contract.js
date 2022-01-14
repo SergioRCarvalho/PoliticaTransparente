@@ -18,31 +18,28 @@ class VotoContract extends Contract {
 
     async createVoto(ctx, votoId, voto, user, relacao) {
             const exists = await this.votoExists(ctx, votoId);
-            let existsVotoPositivo = await this.queryVotoByUserRelation(ctx, user, relacao, '+1');
-            let existsVotoNegativo = await this.queryVotoByUserRelation(ctx, user, relacao, '-1');
+            let existsVotoPositivo =  JSON.parse(await this.queryVotoByUserRelation(ctx, user, relacao, "+1"));
+            let existsVotoNegativo =  JSON.parse(await this.queryVotoByUserRelation(ctx, user, relacao, "-1"));
 
             if (exists) {
                 throw new Error(`O voto já existe`);
 
             }
             // console.log(existsVotoPositivo);
-                if (existsVotoPositivo !== '[]' && voto == '+1'){   
-                    existsVotoPositivo = JSON.parse(existsVotoPositivo) 
+                if (existsVotoPositivo.length>0 && voto == "+1"){   
+                     
                     await this.deleteVoto(ctx, existsVotoPositivo[0].Key)
                   } 
        
-                  if (existsVotoNegativo !== '[]' && voto == '-1'){   
-                    existsVotoNegativo = JSON.parse(existsVotoNegativo) 
+                else  if (existsVotoNegativo.length>0 && voto == "-1"){   
                     await this.deleteVoto(ctx, existsVotoNegativo[0].Key)
                   }
             
             else {
-                if (existsVotoPositivo !== '[]'){   
-                    existsVotoPositivo = JSON.parse(existsVotoPositivo) 
+                if (existsVotoPositivo.length>0){   
                     await this.deleteVoto(ctx, existsVotoPositivo[0].Key)
                 } 
-                if (existsVotoNegativo !== '[]'){   
-                    existsVotoNegativo = JSON.parse(existsVotoNegativo) 
+                if (existsVotoNegativo.length>0){   
                     await this.deleteVoto(ctx, existsVotoNegativo[0].Key)
                 }
                 
