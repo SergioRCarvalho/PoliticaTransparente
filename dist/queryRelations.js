@@ -59,10 +59,10 @@ async function main() {
     );
     const connectionProfile = JSON.parse(
       fs.readFileSync(connectionProfilePath, 'utf8')
-    ); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+    );
     const connectionOptions = {
       wallet,
-      identity: 'Cidadao Admin',
+      identity: 'Cidadao CA Admin',
       discovery: { enabled: true, asLocalhost: true },
     };
 
@@ -73,13 +73,11 @@ async function main() {
       ].url;
     const ca = new FabricCAServices(caURL);
 
-    const userIdentity = await wallet.get('Cidadao Admin');
+    const userIdentity = await wallet.get('Cidadao CA Admin');
     if (userIdentity) {
-      console.log(
-        'An identity for the user "sss" already exists in the wallet'
-      );
+      console.log(userIdentity.type);
       // Check to see if we've already enrolled the admin user.
-      const adminIdentity = await wallet.get('Cidadao Admin');
+      const adminIdentity = await wallet.get('Cidadao CA Admin');
 
       // build a user object for authenticating with the CA
       const provider = wallet
@@ -87,51 +85,53 @@ async function main() {
         .getProvider(adminIdentity.type);
       const adminUser = await provider.getUserContext(
         adminIdentity,
-        'Cidadao Admin'
+        'Cidadao CA Admin'
       );
+      const user_id = 'cidadao1';
 
-      const a = adminUser.getSigningIdentity();
-      console.log(stringify(a));
-      // build a user object for authenticating with the CA
-      const secret = await ca.register(
-        {
-          affiliation: '',
-          enrollmentID: 'Cidadao CA',
-          role: '',
-        },
-        adminUser
-      );
-      const enrollment = await ca.enroll({
-        enrollmentID: 'testinguser',
-        enrollmentSecret: secret,
-      });
-      const x509Identity = {
-        credentials: {
-          certificate: enrollment.certificate,
-          privateKey: enrollment.key.toBytes(),
-        },
-        mspId: 'CidadaoMSP',
-        type: 'X.509',
-      };
-      await wallet.import('testinguser', x509Identity);
-      console.log(
-        'Successfully registered and enrolled admin user "testinguser" and imported it into the wallet'
-      );
-      return;
+      try {
+        // Check to see if we've already enrolled the user.
+        const userIdentity = await wallet.get(user_id);
+        if (userIdentity) {
+          console.log(
+            `An identity for the user ${user_id} already exists in the wallet`
+          );
+          return;
+        }
+
+        // Register the user, enroll the user, and import the new identity into the wallet.
+        const secret = await ca.register(
+          {
+            affiliation: '',
+            enrollmentID: user_id,
+            role: '',
+          },
+          adminUser
+        );
+        const enrollment = await ca.enroll({
+          enrollmentID: user_id,
+          enrollmentSecret: secret,
+        });
+        const x509Identity = {
+          credentials: {
+            certificate: enrollment.certificate,
+            privateKey: enrollment.key.toBytes(),
+          },
+          mspId: 'CidadaoMSP',
+          type: 'X.509',
+        };
+        await wallet.put(user_id, x509Identity);
+        console.log(
+          `Successfully registered and enrolled admin user ${user_id} and imported it into the wallet`
+        );
+      } catch (error) {
+        console.error(`Failed to register user ${user_id}: ${error}`);
+        process.exit(1);
+      }
     }
 
-    await gateway.connect(connectionProfile, connectionOptions);
-    // Get the network (channel) our contract is deployed to.
-    const network = await gateway.getNetwork('mychannel');
-    // Get the contract from the network.
-    const contract = network.getContract('demo-relation');
-    // Evaluate the specified transaction.
-    const result = await contract.evaluateTransaction('queryAllRelation');
-    console.log(
-      `Transaction has been evaluated, result is: ${result.toString()}`
-    );
     // Disconnect from the gateway.
-    gateway.disconnect();
+    //   gateway.disconnect();
   } catch (error) {
     console.error('Failed to submit transaction:', error);
     process.exit(1);

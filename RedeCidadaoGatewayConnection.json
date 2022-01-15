@@ -1,0 +1,43 @@
+{
+    "certificateAuthorities": {
+        "cidadaoca-api.127-0-0-1.nip.io:8080": {
+            "url": "http://cidadaoca-api.127-0-0-1.nip.io:8080"
+        }
+    },
+    "client": {
+        "connection": {
+            "timeout": {
+                "orderer": "300",
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        },
+        "organization": "Cidadao"
+    },
+    "display_name": "Cidadao Gateway",
+    "id": "cidadaogateway",
+    "name": "Cidadao Gateway",
+    "organizations": {
+        "Cidadao": {
+            "certificateAuthorities": [
+                "cidadaoca-api.127-0-0-1.nip.io:8080"
+            ],
+            "mspid": "CidadaoMSP",
+            "peers": [
+                "cidadaopeer-api.127-0-0-1.nip.io:8080"
+            ]
+        }
+    },
+    "peers": {
+        "cidadaopeer-api.127-0-0-1.nip.io:8080": {
+            "grpcOptions": {
+                "grpc.default_authority": "cidadaopeer-api.127-0-0-1.nip.io:8080",
+                "grpc.ssl_target_name_override": "cidadaopeer-api.127-0-0-1.nip.io:8080"
+            },
+            "url": "grpc://cidadaopeer-api.127-0-0-1.nip.io:8080"
+        }
+    },
+    "type": "gateway",
+    "version": "1.0"
+}
