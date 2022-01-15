@@ -6,7 +6,6 @@ import cljx from 'clsx';
 import Link from 'next/link';
 import styles from './Relation.module.css';
 import 'font-awesome/css/font-awesome.min.css';
-import { stringify } from 'querystring';
 
 const Relation = ({ relation, className }) => {
   const { data, error } = useCurrentUser();
