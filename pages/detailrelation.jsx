@@ -7,7 +7,7 @@ import customtheme from '@/page-components/Relations/theme';
 import styles from './box.module.css';
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 
 const actions = [
@@ -29,7 +29,7 @@ const DetailRelationPage = () => {
           <SpeedDial
             ariaLabel="SpeedDial basic example"
             sx={{ position: 'absolute', bottom: 16, right: 16 }}
-            icon={<SpeedDialIcon theme={customtheme} color="primary" />}
+            icon={<MoreVertIcon />}
           >
             {actions.map((action) => (
               <SpeedDialAction

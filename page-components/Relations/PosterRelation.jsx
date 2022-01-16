@@ -1,4 +1,5 @@
 import { Avatar } from '@/components/Avatar';
+import * as React from 'react';
 import { Button } from '@/components/Button';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
@@ -40,6 +41,7 @@ const PosterInner = ({ user }) => {
         });
         toast.success('You have posted successfully');
         // refresh post lists
+        handleClose.true;
         mutate();
       } catch (e) {
         toast.error(e.message);
@@ -50,6 +52,9 @@ const PosterInner = ({ user }) => {
     [mutate]
   );
   const { data, error } = useCurrentUser();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <form onSubmit={onSubmit}>
@@ -72,8 +77,7 @@ const PosterInner = ({ user }) => {
         <Input
           ref={contentEntA}
           className={styles.input}
-          placeholder={` Inserir entidade A`}
-          ariaLabel={` Inserir entidade A`}
+          label="Inserir entidade A"
         />
         <Input
           ref={contentEntB}

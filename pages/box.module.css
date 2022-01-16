@@ -2,7 +2,7 @@
   min-height: calc(100vh);
 }
 
-.box{
+.box {
   text-align: end;
   position: fixed;
   right: 5%;
@@ -17,18 +17,15 @@
   transform: translate(-50%, -50%);
   width: 400;
   box-shadow: 24;
-  padding:4;
-};
-
-
-.fab{
-  background-color: rgb(204, 43, 15);
-  color: #000;
-
-
+  padding: 4;
 }
 
-.fab:hover{
+.fab {
+  background-color: rgb(204, 43, 15);
+  color: #000;
+}
+
+.fab:hover {
   background-color: rgb(255, 59, 24);
   color: #000;
 }
