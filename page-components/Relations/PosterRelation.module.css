@@ -3,10 +3,15 @@
   padding: 15px;
   box-shadow: var(--shadow-smallest);
   border-radius: 8px;
-  border: 2px solid white;
+  border: 2px solid var(--background);
   min-height: fit-content;
   height: 300px;
   transition: ease 0.2s box-shadow;
+}
+
+.botao {
+  margin-left: 20px;
+  margin-top: 15px;
 }
 
 .ckeditor {
@@ -126,12 +131,11 @@
   background: white;
   opacity: 0.9;
   flex: 1 1 0%;
-  margin-left: 8px;
-  margin-right: 8px;
+  width: 10%;
   border-radius: 3px;
 }
 
-.input3{
+.input3 {
   position: absolute;
   top: 35%;
   left: 50%;
@@ -160,11 +164,10 @@
   color: var(--accents-7);
 }
 
-.seditor{
+.seditor {
   width: auto;
   height: fit-content;
 }
-
 
 .creator {
   display: inline-flex;

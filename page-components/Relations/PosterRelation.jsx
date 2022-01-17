@@ -4,6 +4,7 @@ import { Button } from '@/components/Button';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
+import TextField from '@mui/material/TextField';
 import { fetcher } from '@/lib/fetch';
 import { useRelaPages } from '@/lib/relations';
 import { useCurrentUser } from '@/lib/user';
@@ -58,7 +59,7 @@ const PosterInner = ({ user }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Container className={styles.poster}>
+      <Container>
         <a>
           <Container className={styles.creator}>
             <Avatar
@@ -74,37 +75,38 @@ const PosterInner = ({ user }) => {
         </a>
       </Container>
       <Container className={styles.poster}>
-        <Input
+        <TextField
+          style={{ marginRight: '50px', marginLeft: '50px' }}
           ref={contentEntA}
           className={styles.input}
           label="Inserir entidade A"
         />
-        <Input
+        <TextField
           ref={contentEntB}
+          style={{ marginRight: '20px', marginLeft: '20px' }}
           className={styles.input}
-          placeholder={` Inserir entidade B`}
-          ariaLabel={` Inserir entidade B`}
+          label="Inserir entidade B"
         />
-        <Input
+        <TextField
           ref={contentTP}
+          style={{ marginRight: '20px', marginLeft: '20px' }}
           className={styles.input}
-          placeholder={` Tipo de relação`}
-          ariaLabel={` Tipo de relação`}
+          label="Tipo de relação"
         />
       </Container>
 
       <Container className={styles.poster2}>
-        <Input
+        <TextField
           ref={contentTR}
+          style={{ marginRight: '50px', marginLeft: '50px' }}
           className={styles.input}
-          placeholder={` Inserir titulo da relação`}
-          ariaLabel={` Inserir titulo da relação`}
+          label="Inserir titulo da relação"
         />
-        <Input
+        <TextField
           ref={contentNR}
+          style={{ marginRight: '20px', marginLeft: '20px' }}
           className={styles.input}
-          placeholder={` Inserir nota da relação`}
-          ariaLabel={` Inserir nota da relação`}
+          label="Inserir nota da relação"
         />
 
         <Button type="success" className={styles.botao} loading={isLoading}>
@@ -121,24 +123,22 @@ const PosterRelation = () => {
 
   return (
     <Wrapper>
-      <div className={styles.root}>
-        <h3 className={styles.heading}>Publicar relação</h3>
-        {loading ? (
-          <LoadingDots>Loading</LoadingDots>
-        ) : data?.user ? (
-          <PosterInner user={data.user} />
-        ) : (
-          <Text color="secondary">
-            Please{' '}
-            <Link href="/login" passHref>
-              <TextLink color="link" variant="highlight">
-                sign in
-              </TextLink>
-            </Link>{' '}
-            to post
-          </Text>
-        )}
-      </div>
+      <h3 className={styles.heading}>Publicar relação</h3>
+      {loading ? (
+        <LoadingDots>Loading</LoadingDots>
+      ) : data?.user ? (
+        <PosterInner user={data.user} />
+      ) : (
+        <Text color="secondary">
+          Please{' '}
+          <Link href="/login" passHref>
+            <TextLink color="link" variant="highlight">
+              sign in
+            </TextLink>
+          </Link>{' '}
+          to post
+        </Text>
+      )}
     </Wrapper>
   );
 };

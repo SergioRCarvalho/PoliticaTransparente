@@ -9,14 +9,24 @@ import styles from './Feed.module.css';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import customtheme from '@/page-components/Relations/theme';
+import { useCurrentUser } from '@/lib/user';
 
 export const Relations = () => {
+  const { data, error } = useCurrentUser();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  let fab = false;
+  if (data != '') {
+    fab = true;
+  }
   return (
     <div className={styles.root}>
-      <Box className={styles.box} sx={{ '& > :not(style)': { m: 1 } }}>
+      <Box
+        style={{ visibility: fab ? 'visible' : 'hidden' }}
+        className={styles.box}
+        sx={{ '& > :not(style)': { m: 1 } }}
+      >
         <Fab theme={customtheme} color="primary" aria-label="add">
           <AddIcon onClick={handleOpen} />
           <Modal

@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
+import { useCurrentUser } from '@/lib/user';
 
 const actions = [
   { icon: <EditIcon />, name: 'Editar' },
@@ -16,6 +17,12 @@ const actions = [
 ];
 
 const DetailRelationPage = () => {
+  const { data, error } = useCurrentUser();
+  let fab = false;
+  if (data != '') {
+    fab = true;
+  }
+  //console.log(data);
   return (
     <>
       <Head>
@@ -23,6 +30,7 @@ const DetailRelationPage = () => {
       </Head>
       <div>
         <Box
+          style={{ visibility: fab ? 'visible' : 'hidden' }}
           className={styles.box}
           sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}
         >
