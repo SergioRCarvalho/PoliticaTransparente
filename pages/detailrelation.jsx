@@ -3,35 +3,78 @@ import Head from 'next/head';
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import customtheme from '@/page-components/Relations/theme';
 import styles from './box.module.css';
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { useCurrentUser } from '@/lib/user';
-import { useRelaVoto } from '@/lib/relationsVoto';
 import { withRouter } from 'next/router';
+import Button from '@mui/material/Button';
+import { useCallback, useRef, useState } from 'react';
+import { useRelaVoto } from '@/lib/relationsVoto';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import PosterRelation from '@/page-components/Relations/PosterRelation';
 
 const actions = [
   { icon: <EditIcon />, name: 'Editar' },
   { icon: <DeleteIcon />, name: 'Eliminar' },
 ];
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const DetailRelationPage = ({ className, router: { query } }) => {
   const { data, error } = useCurrentUser();
   const user_id = data.user._id;
   const data2 = JSON.parse(query?.dataRelation);
   const user_relation = data2.Record.idUt;
-  console.log(user_id);
-  console.log(data2.Record.idUt);
 
   let fab = false;
   if (user_id == user_relation) {
     fab = true;
   }
-  // console.log(data);
-  // console.log();
+  // console.log(data2.Key);
+
+  const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+
+  const { mutate } = useRelaVoto();
+  const [isLoading, setIsLoading] = useState(false);
+
+  function deleteRelation(id) {
+    // console.log(id);
+    fetch('/api/deleteRelation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idRelation: id.toString(),
+      }),
+    });
+    console.log(id);
+  }
+
+  function onSubmit(id, op) {
+    if (op == 'Eliminar') {
+      setOpen(true);
+    } else {
+      setOpen2(true);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -51,6 +94,11 @@ const DetailRelationPage = ({ className, router: { query } }) => {
             {actions.map((action) => (
               <SpeedDialAction
                 key={action.name}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmit(data2.Key, action.name);
+                }}
+                keyRelation={data2.Key}
                 icon={action.icon}
                 tooltipTitle={action.name}
               />
@@ -59,6 +107,40 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         </Box>
       </div>
       <DetailsRelation query={data2} />
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{'Eliminar relação'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <p>
+              O utilizador deseja eliminar a relação com os seguintes dados?
+            </p>
+            <p>Títutlo: {data2.Record.desc}</p>
+            <p>Tipo de relação: {data2.Record.desc}</p>
+            <p>Registado a {data2.Record.dataRegisto}</p>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={deleteRelation(data2.Key)}>Sim</Button>
+          <Button onClick={handleClose}>Não</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={open2}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose2}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogContent>
+          <PosterRelation />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
