@@ -10,19 +10,28 @@ import SpeedDial from '@mui/material/SpeedDial';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { useCurrentUser } from '@/lib/user';
+import { useRelaVoto } from '@/lib/relationsVoto';
+import { withRouter } from 'next/router';
 
 const actions = [
   { icon: <EditIcon />, name: 'Editar' },
   { icon: <DeleteIcon />, name: 'Eliminar' },
 ];
 
-const DetailRelationPage = () => {
+const DetailRelationPage = ({ className, router: { query } }) => {
   const { data, error } = useCurrentUser();
+  const user_id = data.user._id;
+  const data2 = JSON.parse(query?.dataRelation);
+  const user_relation = data2.Record.idUt;
+  console.log(user_id);
+  console.log(data2.Record.idUt);
+
   let fab = false;
-  if (data != '') {
+  if (user_id == user_relation) {
     fab = true;
   }
-  //console.log(data);
+  // console.log(data);
+  // console.log();
   return (
     <>
       <Head>
@@ -49,9 +58,9 @@ const DetailRelationPage = () => {
           </SpeedDial>
         </Box>
       </div>
-      <DetailsRelation />
+      <DetailsRelation query={data2} />
     </>
   );
 };
 
-export default DetailRelationPage;
+export default withRouter(DetailRelationPage);

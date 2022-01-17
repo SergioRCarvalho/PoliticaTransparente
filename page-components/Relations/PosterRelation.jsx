@@ -75,36 +75,31 @@ const PosterInner = ({ user }) => {
         </a>
       </Container>
       <Container className={styles.poster}>
-        <TextField
-          style={{ marginRight: '50px', marginLeft: '50px' }}
+        <Input
           ref={contentEntA}
           className={styles.input}
           label="Inserir entidade A"
         />
-        <TextField
+        <Input
           ref={contentEntB}
-          style={{ marginRight: '20px', marginLeft: '20px' }}
           className={styles.input}
           label="Inserir entidade B"
         />
-        <TextField
+        <Input
           ref={contentTP}
-          style={{ marginRight: '20px', marginLeft: '20px' }}
           className={styles.input}
           label="Tipo de relação"
         />
       </Container>
 
       <Container className={styles.poster2}>
-        <TextField
+        <Input
           ref={contentTR}
-          style={{ marginRight: '50px', marginLeft: '50px' }}
           className={styles.input}
           label="Inserir titulo da relação"
         />
-        <TextField
+        <Input
           ref={contentNR}
-          style={{ marginRight: '20px', marginLeft: '20px' }}
           className={styles.input}
           label="Inserir nota da relação"
         />
