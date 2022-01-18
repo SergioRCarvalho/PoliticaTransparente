@@ -6,6 +6,7 @@ import { slugUsername } from '@/lib/user';
 import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
+import { createwallet } from './createwallet';
 
 const handler = nc(ncOpts);
 
@@ -25,6 +26,25 @@ handler.post(
   }),
   ...auths,
   async (req, res) => {
+    let wallet = '';
+    createwallet(req.body.username)
+      .then((x) => {
+        if (x?.errors?.length > 0) {
+          res.status(400).json({ error: { message: x.errors[0].message } });
+          return;
+        } else if (x?.resu) wallet = x.resu[0].user_id;
+        else {
+          res
+            .status(400)
+            .json({ error: { message: 'Try it later or contact support' } });
+          return;
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({ error: { message: err } });
+        return;
+      });
+
     let { username, name, email, password } = req.body;
     username = slugUsername(req.body.username);
     email = normalizeEmail(req.body.email);

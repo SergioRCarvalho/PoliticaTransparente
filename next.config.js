@@ -3,15 +3,7 @@ const withTM = require('next-transpile-modules')(['next-session']); // pass the 
 module.exports = withTM({
   webpack5: true,
   webpack: (config) => {
-    config.resolve.fallback = {
-      fs: false,
-      path: false,
-      http: false,
-      https: false,
-      crypto: false,
-      zlib: false,
-      http2: false,
-    };
+    config.resolve.fallback = {};
 
     return config;
   },

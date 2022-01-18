@@ -129,7 +129,7 @@ async function mainpost(content, user_id) {
     return status(400).json({
       error: {
         message: `"${error.instancePath.substring(1)}" ${error.message}`,
-      }
+      },
     });
   }
 }
