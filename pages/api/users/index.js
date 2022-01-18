@@ -26,25 +26,6 @@ handler.post(
   }),
   ...auths,
   async (req, res) => {
-    let wallet = '';
-    createwallet(req.body.username)
-      .then((x) => {
-        if (x?.errors?.length > 0) {
-          res.status(400).json({ error: { message: x.errors[0].message } });
-          return;
-        } else if (x?.resu) wallet = x.resu[0].user_id;
-        else {
-          res
-            .status(400)
-            .json({ error: { message: 'Try it later or contact support' } });
-          return;
-        }
-      })
-      .catch((err) => {
-        res.status(400).json({ error: { message: err } });
-        return;
-      });
-
     let { username, name, email, password } = req.body;
     username = slugUsername(req.body.username);
     email = normalizeEmail(req.body.email);
@@ -66,12 +47,31 @@ handler.post(
         .json({ error: { message: 'The username has already been taken.' } });
       return;
     }
+    let wallet = '';
+    await createwallet(req.body.username)
+      .then((x) => {
+        if (x?.errors?.length > 0) {
+          res.status(400).json({ error: { message: x.errors[0].message } });
+          return;
+        } else if (x?.resu) wallet = x.resu[0].user_id;
+        else {
+          res
+            .status(400)
+            .json({ error: { message: 'Try it later or contact support' } });
+          return;
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({ error: { message: err } });
+        return;
+      });
     const user = await insertUser(req.db, {
       email,
       originalPassword: password,
       bio: '',
       name,
       username,
+      wallet,
     });
     req.logIn(user, (err) => {
       if (err) throw err;

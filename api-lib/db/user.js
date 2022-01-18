@@ -53,7 +53,7 @@ export async function updateUserById(db, id, data) {
 
 export async function insertUser(
   db,
-  { email, originalPassword, bio = '', name, profilePicture, username }
+  { email, originalPassword, bio = '', name, profilePicture, username, wallet }
 ) {
   const user = {
     emailVerified: false,
@@ -62,6 +62,7 @@ export async function insertUser(
     name,
     username,
     bio,
+    wallet,
   };
   const password = await bcrypt.hash(originalPassword, 10);
   const { insertedId } = await db
