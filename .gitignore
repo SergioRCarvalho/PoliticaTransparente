@@ -69,4 +69,4 @@ yarn.lock
 
 #ignore wallet conection
 CidadaoConnection.json
-CidadaoWallet
+CidadaoWallet/

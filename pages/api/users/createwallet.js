@@ -41,37 +41,29 @@ const fabric_network_1 = require('fabric-network');
 const FabricCAServices = require('fabric-ca-client');
 const path = __importStar(require('path'));
 const fs = __importStar(require('fs'));
-async function main() {
+
+export async function createwallet(user) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
     const wallet = await fabric_network_1.Wallets.newFileSystemWallet(
       walletPath
     );
-    console.log(`Wallet path: ${walletPath}`);
     // Create a new gateway for connecting to our peer node.
-
-    const connectionProfilePath = path.resolve(
-      __dirname,
-      '..',
-      'CidadaoConnection.json'
-    );
+    const connectionProfilePath = path.resolve('CidadaoConnection.json');
     const connectionProfile = JSON.parse(
       fs.readFileSync(connectionProfilePath, 'utf8')
     );
-
     // Create a new CA client for interacting with the CA.
     const caURL =
       connectionProfile.certificateAuthorities[
         'cidadaoca-api.127-0-0-1.nip.io:8080'
       ].url;
     const ca = new FabricCAServices(caURL);
-
     const userIdentity = await wallet.get('Cidadao CA Admin');
     if (userIdentity) {
       // Check to see if we've already enrolled the admin user.
       const adminIdentity = await wallet.get('Cidadao CA Admin');
-
       // build a user object for authenticating with the CA
       const provider = wallet
         .getProviderRegistry()
@@ -80,18 +72,18 @@ async function main() {
         adminIdentity,
         'Cidadao CA Admin'
       );
-      const user_id = 'cidadao1';
-
+      const user_id = 'cidadao;' + user;
       try {
         // Check to see if we've already enrolled the user.
         const userIdentity = await wallet.get(user_id);
         if (userIdentity) {
-          console.log(
-            `An identity for the user ${user_id} already exists in the wallet`
+          const errors = JSON.parse(
+            '[{"message":"An identity for the user ' +
+              user_id +
+              ' already exists in the wallet! Contact support!"}]'
           );
-          return;
+          return { errors };
         }
-
         // Register the user, enroll the user, and import the new identity into the wallet.
         const secret = await ca.register(
           {
@@ -114,20 +106,13 @@ async function main() {
           type: 'X.509',
         };
         await wallet.put(user_id, x509Identity);
-        console.log(
-          `Successfully registered and enrolled admin user ${user_id} and imported it into the wallet`
-        );
+        const resu = JSON.parse('[{"user_id":"' + user_id + '"}]');
+        return { resu };
       } catch (error) {
-        console.error(`Failed to register user ${user_id}: ${error}`);
-        process.exit(1);
+        return error;
       }
     }
-
-    // Disconnect from the gateway.
-    //   gateway.disconnect();
   } catch (error) {
-    console.error('Failed to submit transaction:', error);
-    process.exit(1);
+    return error;
   }
 }
-void main();

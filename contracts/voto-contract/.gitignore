@@ -75,5 +75,5 @@ typings/
 
 # Serverless directories
 .serverless
-CidadaoWallet
+CidadaoWallet/
 CidadaoConnection.json
