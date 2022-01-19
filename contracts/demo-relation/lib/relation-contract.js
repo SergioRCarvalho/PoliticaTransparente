@@ -74,7 +74,7 @@ class RelationContract extends Contract {
     }
 
     async updateRelation(ctx, relationId, descricao, nota, registo,
-        tiporel, tipout, entidadeA, entidadeB) {
+        tiporel, idUt, entidadeA, entidadeB) {
         const exists = await this.relationExists(ctx, relationId);
         if (!exists) {
             throw new Error(`The relation ${relationId} does not exist`);
@@ -84,7 +84,7 @@ class RelationContract extends Contract {
             notas: nota,
             dataRegisto: registo,
             tipoRel: tiporel,
-            idUt: tipout,
+            idUt: idUt,
             entidade: entidadeA,
             entidade2: entidadeB
         };
