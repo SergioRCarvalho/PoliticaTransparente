@@ -11,6 +11,7 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { useCurrentUser } from '@/lib/user';
 import { withRouter } from 'next/router';
 import Button from '@mui/material/Button';
+import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import { useRelaVoto } from '@/lib/relationsVoto';
 import Dialog from '@mui/material/Dialog';
@@ -132,16 +133,14 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         <DialogTitle>{'Eliminar relação'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p>
-              O utilizador deseja eliminar a relação com os seguintes dados?
-            </p>
-            <p>Títutlo: {data2.Record.desc}</p>
-            <p>Tipo de relação: {data2.Record.desc}</p>
-            <p>Registado a {data2.Record.dataRegisto}</p>
+            <p>Confirma que deseja eliminar esta relação?</p>
+            <p>Esta ação é irreversível.</p>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={deleteRelation}>Sim</Button>
+          <Button onClick={deleteRelation}>
+            <Link href="/relations">Sim</Link>
+          </Button>
           <Button onClick={handleClose}>Não</Button>
         </DialogActions>
       </Dialog>
