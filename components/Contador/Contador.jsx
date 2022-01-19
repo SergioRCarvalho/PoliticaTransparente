@@ -35,7 +35,7 @@ const Contador = ({ eKey }) => {
     });
   }
 
-  const { mutate } = useRelaVoto();
+  const { mutate } = useRelaVoto(eKey);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitup = useCallback(
