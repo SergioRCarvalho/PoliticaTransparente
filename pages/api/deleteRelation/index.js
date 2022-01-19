@@ -2,6 +2,7 @@
 import { ncOpts } from '@/api-lib/nc';
 import { ValidateProps } from '@/api-lib/constants';
 import { auths, database, validateBody } from '@/api-lib/middlewares';
+import { v4 as uuidv4 } from 'uuid';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
@@ -48,7 +49,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 const fabric_network_1 = require('fabric-network');
 const path = __importStar(require('path'));
 const fs = __importStar(require('fs'));
-async function main() {
+async function main(IdRelation) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -70,9 +71,12 @@ async function main() {
     // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork('mychannel');
     // Get the contract from the network.
-    const contract = network.getContract('demo-relation');
+    const contract = network.getContract('voto-contract');
     // Evaluate the specified transaction.
-    const result = await contract.evaluateTransaction('queryAllRelation');
+    const result = await contract.evaluateTransaction(
+      'queryAllVotoByRelation',
+      IdRelation
+    );
     resu = JSON.parse(result.toString());
     // Disconnect from the gateway.
     gateway.disconnect();
@@ -86,7 +90,7 @@ async function main() {
   }
 }
 
-async function mainpost(entA, entB, tp, tr, nr, user_id) {
+async function mainpost(idRelacao) {
   try {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'CidadaoWallet');
@@ -108,20 +112,11 @@ async function mainpost(entA, entB, tp, tr, nr, user_id) {
     // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork('mychannel');
     // Get the contract from the network.
-    const contract = network.getContract('demo-relation');
+    const contract = network.getContract('voto-contract');
     // Submit the specified transaction.
+    await contract.submitTransaction('deleteRelation', idRelacao);
+    console.log('Success');
 
-    await contract.submitTransaction(
-      'createRelation',
-      parseInt("176"),
-      tr,
-      tp,
-      nr,
-      '21-01-2022',
-      parseInt("015"),
-      entA,
-      entB
-    );
     // Disconnect from the gateway.
     gateway.disconnect();
   } catch (error) {
@@ -134,39 +129,9 @@ async function mainpost(entA, entB, tp, tr, nr, user_id) {
   }
 }
 
-handler.get(async (req, res) => {
-  await main();
-  return res.json({ resu });
+handler.delete(async (req, res) => {
+  await req.session.destroy();
+  res.status(204).end();
 });
-
-handler.post(
-  ...auths,
-  validateBody({
-    type: 'object',
-    properties: {
-      contentEntA: ValidateProps.relation.enta,
-      contentEntB: ValidateProps.relation.entb,
-      contentTP: ValidateProps.relation.tipo,
-      contentTR: ValidateProps.relation.titulo,
-      contentNR: ValidateProps.relation.nota,
-    },
-    additionalProperties: true,
-  }),
-
-  async (req, res) => {
-    if (!req.user) {
-      return res.status(401).end();
-    }
-    const post = await mainpost(
-      req.body.enta,
-      req.body.entb,
-      req.body.tipo,
-      req.body.titulo,
-      req.body.nota,
-      req.user._id
-    );
-    return res.json({ post });
-  }
-);
 
 export default handler;

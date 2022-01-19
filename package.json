@@ -13,6 +13,8 @@
         "start": "next start",
         "lint": "next lint",
         "createVoto": "node ./dist/createVoto.js",
+        "deleteRelation": "node ./dist/deleteRelation.js",
+        "editRelation": "node ./dist/editRelation.js",
         "queryVoto": "node ./dist/queryVoto.js",
         "queryVotos": "node ./dist/queryVotos.js",
         "createRelation": "node ./dist/createRelation.js",

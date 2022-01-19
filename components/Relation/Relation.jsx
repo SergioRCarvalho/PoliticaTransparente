@@ -75,11 +75,8 @@ const Relation = ({ relation, className }) => {
               </td>
 
               <td className={styles.tdre}>
-                <label className={styles.content}>
-                  Data registo:{' '}
-                  <label className={styles.content2}>
-                    {e.Record.dataRegisto}
-                  </label>
+                <label className={styles.content2}>
+                  {e.Record.dataRegisto}
                 </label>
               </td>
             </tr>

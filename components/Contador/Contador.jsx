@@ -23,7 +23,6 @@ const Contador = ({ eKey }) => {
   if (posts.length != 0) {
     posts.map((e) => {
       e.map((r) => {
-        console.log(r.Record);
         if (r.Record.estadoVoto === '+1' && r.Record.idUser === user_id) {
           VoteUp = true;
           VoteDown = false;
@@ -35,8 +34,6 @@ const Contador = ({ eKey }) => {
       });
     });
   }
-  // console.log(item.Record.idUser);
-  // console.log(data);
 
   const { mutate } = useRelaVoto();
   const [isLoading, setIsLoading] = useState(false);
@@ -104,8 +101,10 @@ const Contador = ({ eKey }) => {
       <form className={styles.center} onSubmit={onSubmitup}>
         <Button type="secondary" className={styles.voto}>
           <i
-            className={cljx('fa fa-sort-asc', styles.voto)}
-            style={{ color: VoteUp ? 'black' : '' }}
+            className={cljx(
+              'fa fa-sort-asc',
+              VoteUp ? styles.votado : styles.voto
+            )}
           ></i>
         </Button>
       </form>
@@ -113,8 +112,10 @@ const Contador = ({ eKey }) => {
       <form className={styles.center} onSubmit={onSubmitdown}>
         <Button type="secondary" className={styles.voto}>
           <i
-            className={cljx('fa fa-sort-desc', styles.voto)}
-            style={{ color: VoteDown ? 'black' : '' }}
+            className={cljx(
+              'fa fa-sort-desc',
+              VoteDown ? styles.votado : styles.voto
+            )}
           ></i>
         </Button>
       </form>

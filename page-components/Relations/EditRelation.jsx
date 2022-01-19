@@ -11,26 +11,30 @@ import { useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import styles from './PosterRelation.module.css';
+import styles from './EditRelation.module.css';
 import { Input } from '@/components/Input';
 
-const PosterInner = ({ user }) => {
+const PosterInner = ({ query }) => {
   const contentEntA = useRef();
   const contentEntB = useRef();
   const contentTP = useRef();
   const contentTR = useRef();
   const contentNR = useRef();
   const [isLoading, setIsLoading] = useState(false);
+  // contentEntA.;
+  console.log(query.Record);
+  //contentEntA.defaultValue = 'asdsad';
 
   const { mutate } = useRelaPages();
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
+      console.log('value: ' + contentEntA.current.value);
       try {
         setIsLoading(true);
         await fetcher('/api/relations', {
-          method: 'POST',
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             enta: contentEntA.current.value,
@@ -38,6 +42,8 @@ const PosterInner = ({ user }) => {
             titulo: contentTP.current.value,
             tipo: contentTR.current.value,
             nota: contentNR.current.value,
+            id: query.Key,
+            date: query.Record.dataRegisto,
           }),
         });
         toast.success('You have posted successfully');
@@ -52,6 +58,7 @@ const PosterInner = ({ user }) => {
     },
     [mutate]
   );
+
   const { data, error } = useCurrentUser();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -79,16 +86,19 @@ const PosterInner = ({ user }) => {
           ref={contentEntA}
           className={styles.input}
           label="Inserir entidade A"
+          defaultValue={query.Record.entidade}
         />
         <Input
           ref={contentEntB}
           className={styles.input}
           label="Inserir entidade B"
+          defaultValue={query.Record.entidade2}
         />
         <Input
           ref={contentTP}
           className={styles.input}
           label="Tipo de relação"
+          defaultValue={query.Record.tipoRel}
         />
       </Container>
 
@@ -97,11 +107,13 @@ const PosterInner = ({ user }) => {
           ref={contentTR}
           className={styles.input}
           label="Inserir titulo da relação"
+          defaultValue={query.Record.tipoRel}
         />
         <Input
           ref={contentNR}
           className={styles.input}
           label="Inserir nota da relação"
+          defaultValue={query.Record.notas}
         />
 
         <Button type="success" className={styles.botao} loading={isLoading}>
@@ -112,30 +124,4 @@ const PosterInner = ({ user }) => {
   );
 };
 
-const PosterRelation = () => {
-  const { data, error } = useCurrentUser();
-  const loading = !data && !error;
-
-  return (
-    <Wrapper>
-      <h3 className={styles.heading}>Publicar relação</h3>
-      {loading ? (
-        <LoadingDots>Loading</LoadingDots>
-      ) : data?.user ? (
-        <PosterInner user={data.user} />
-      ) : (
-        <Text color="secondary">
-          Please{' '}
-          <Link href="/login" passHref>
-            <TextLink color="link" variant="highlight">
-              sign in
-            </TextLink>
-          </Link>{' '}
-          to post
-        </Text>
-      )}
-    </Wrapper>
-  );
-};
-
-export default PosterRelation;
+export default PosterInner;
