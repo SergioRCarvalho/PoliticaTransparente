@@ -20,7 +20,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import PosterRelation from '@/page-components/Relations/PosterRelation';
+import EditRelation from '@/page-components/Relations/EditRelation';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
 
@@ -139,12 +139,7 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={deleteRelation}>
-            <Link
-              style={{ textDecoration: 'none !important' }}
-              href="/relations"
-            >
-              Sim
-            </Link>
+            <Link href="/relations">Sim</Link>
           </Button>
           <Button onClick={handleClose}>Não</Button>
         </DialogActions>
@@ -157,7 +152,7 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
-          <PosterRelation />
+          <EditRelation query={data2} />
         </DialogContent>
       </Dialog>
     </>

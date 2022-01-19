@@ -12,6 +12,7 @@ const Input = forwardRef(function Input(
     size,
     ariaLabel,
     required,
+    defaultValue,
   },
   ref
 ) {
@@ -27,6 +28,7 @@ const Input = forwardRef(function Input(
           className={clsx(styles.input, size && styles[size])}
           aria-label={ariaLabel}
           required={required}
+          defaultValue={defaultValue}
         />
       </label>
     </div>

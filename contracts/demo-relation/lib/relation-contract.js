@@ -84,7 +84,7 @@ class RelationContract extends Contract {
             notas: nota,
             dataRegisto: registo,
             tipoRel: tiporel,
-            tipoUt: tipout,
+            idUt: tipout,
             entidade: entidadeA,
             entidade2: entidadeB
         };
