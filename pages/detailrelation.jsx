@@ -20,6 +20,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import PosterRelation from '@/page-components/Relations/PosterRelation';
+import { fetcher } from '@/lib/fetch';
+import toast from 'react-hot-toast';
 
 const actions = [
   { icon: <EditIcon />, name: 'Editar' },
@@ -55,21 +57,35 @@ const DetailRelationPage = ({ className, router: { query } }) => {
   const { mutate } = useRelaVoto();
   const [isLoading, setIsLoading] = useState(false);
 
-  function deleteRelation(id) {
-    // console.log(id);
-    fetch('/api/deleteRelation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        idRelation: id.toString(),
-      }),
-    });
-    console.log(id);
-  }
+  const deleteRelation = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        setIsLoading(true);
+        await fetcher('/api/relations', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: data2.Key,
+          }),
+        });
+        toast.success('You have posted successfully');
+        // refresh post lists
+        handleClose.true;
+        mutate();
+      } catch (e) {
+        toast.error(e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [mutate]
+  );
 
-  function onSubmit(id, op) {
+  function onOperator(id, op) {
     if (op == 'Eliminar') {
       setOpen(true);
+      // deleteRelation(id);
     } else {
       setOpen2(true);
     }
@@ -96,9 +112,8 @@ const DetailRelationPage = ({ className, router: { query } }) => {
                 key={action.name}
                 onClick={(e) => {
                   e.preventDefault();
-                  onSubmit(data2.Key, action.name);
+                  onOperator(data2.Key, action.name);
                 }}
-                keyRelation={data2.Key}
                 icon={action.icon}
                 tooltipTitle={action.name}
               />
@@ -126,7 +141,7 @@ const DetailRelationPage = ({ className, router: { query } }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={deleteRelation(data2.Key)}>Sim</Button>
+          <Button onClick={deleteRelation}>Sim</Button>
           <Button onClick={handleClose}>Não</Button>
         </DialogActions>
       </Dialog>
