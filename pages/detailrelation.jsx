@@ -139,7 +139,12 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={deleteRelation}>
-            <Link href="/relations">Sim</Link>
+            <Link
+              style={{ textDecoration: 'none !important' }}
+              href="/relations"
+            >
+              Sim
+            </Link>
           </Button>
           <Button onClick={handleClose}>Não</Button>
         </DialogActions>

@@ -21,8 +21,8 @@
 }
 
 .linkStyle {
-  color: black;
-  text-decoration: none;
+  text-decoration: none !important;
+  background-color: red !important;
 }
 
 .fab {

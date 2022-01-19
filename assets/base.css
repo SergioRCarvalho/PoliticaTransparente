@@ -53,3 +53,8 @@ body {
   color: var(--foreground);
   background-color: var(--background);
 }
+
+a {
+  text-decoration: none;
+  color: rgb(56, 129, 197);
+}
