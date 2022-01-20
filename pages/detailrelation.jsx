@@ -152,6 +152,7 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
+          <DialogTitle>{'Editar relação'}</DialogTitle>
           <EditRelation query={data2} />
         </DialogContent>
       </Dialog>

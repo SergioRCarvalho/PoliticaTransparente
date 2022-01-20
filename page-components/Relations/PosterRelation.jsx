@@ -117,7 +117,7 @@ const PosterRelation = () => {
   const loading = !data && !error;
 
   return (
-    <Wrapper>
+    <Wrapper className={styles.wrap}>
       <h3 className={styles.heading}>Publicar relação</h3>
       {loading ? (
         <LoadingDots>Loading</LoadingDots>

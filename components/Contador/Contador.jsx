@@ -20,11 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
 const Contador = ({ eKey }) => {
   const { data } = useRelaVoto(eKey);
-
-
 
   const posts = data
     ? data.reduce((acc, person) => [...acc, person.resu], [])
@@ -121,11 +118,10 @@ const Contador = ({ eKey }) => {
     count = 0;
   }
   // console.log(data2);
-  if (user_id == '') {
+  if (user_id != '') {
     return (
       <>
         <form className={styles.center} onSubmit={onSubmitup}>
-
           <Button type="secondary" className={styles.voto}>
             <i
               className={cljx(
@@ -152,25 +148,14 @@ const Contador = ({ eKey }) => {
     return (
       <>
         <form className={styles.center} onSubmit={handleClickOpen}>
-
           <Button type="secondary" className={styles.voto}>
-            <i
-              className={cljx(
-                'fa fa-sort-asc',
-                styles.voto
-              )}
-            ></i>
+            <i className={cljx('fa fa-sort-asc', styles.voto)}></i>
           </Button>
         </form>
         <p>{count}</p>
         <form className={styles.center} onSubmit={handleClickOpen}>
           <Button type="secondary" className={styles.voto}>
-            <i
-              className={cljx(
-                'fa fa-sort-desc',
-                styles.voto
-              )}
-            ></i>
+            <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
           </Button>
         </form>
         <Dialog
@@ -180,18 +165,16 @@ const Contador = ({ eKey }) => {
           onClose={handleClose}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle>{"Voto negado"}</DialogTitle>
+          <DialogTitle>{'Voto negado'}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
               Para proceder ao voto precisa de realizar o login
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-          </DialogActions>
+          <DialogActions></DialogActions>
         </Dialog>
       </>
     );
-
   }
 };
 export default Contador;
