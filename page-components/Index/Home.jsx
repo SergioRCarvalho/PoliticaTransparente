@@ -15,7 +15,9 @@ const Home = () => {
           <Spacer axis="horizontal" size={1} />
           <Container>
             <Link passHref href="/relations">
-              <ButtonLink className={styles.button}>Explore Relations</ButtonLink>
+              <ButtonLink className={styles.button}>
+                Explore Relations
+              </ButtonLink>
             </Link>
           </Container>
           <Spacer axis="horizontal" size={1} />

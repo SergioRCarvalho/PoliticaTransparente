@@ -66,11 +66,11 @@ const Relation = ({ relation, className }) => {
                 <br />
                 Transação entre{' '}
                 <label className={styles.content2}>
-                  Entidade {e.Record.entidade} -{' '}
+                  {e.Record.entidade} -{' '}
                 </label>
                 <label className={styles.content2}>
                   {' '}
-                  Entidade {e.Record.entidade2}{' '}
+                  {e.Record.entidade2}{' '}
                 </label>
               </td>
 

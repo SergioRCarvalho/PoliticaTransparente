@@ -1,15 +1,25 @@
 import * as React from 'react';
 import RelationsList from './RelationsList';
 import PosterRelation from './PosterRelation';
-import { Modal } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import styles from './Feed.module.css';
-import Backdrop from '@mui/material/Backdrop';
-import Fade from '@mui/material/Fade';
 import customtheme from '@/page-components/Relations/theme';
 import { useCurrentUser } from '@/lib/user';
+import { fetcher } from '@/lib/fetch';
+import toast from 'react-hot-toast';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import Button from '@mui/material/Button';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export const Relations = () => {
   const { data, error } = useCurrentUser();
@@ -29,24 +39,16 @@ export const Relations = () => {
       >
         <Fab theme={customtheme} color="primary" aria-label="add">
           <AddIcon onClick={handleOpen} />
-          <Modal
-            keepMounted={true}
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
+          <Dialog
+            className={styles.root}
             open={open}
+            TransitionComponent={Transition}
+            keepMounted
             onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
+            aria-describedby="alert-dialog-slide-description"
           >
-            <Fade in={open}>
-              <Box className={styles.trans}>
-                <PosterRelation />
-              </Box>
-            </Fade>
-          </Modal>
+            <PosterRelation />
+          </Dialog>
         </Fab>
       </Box>
       <RelationsList />
