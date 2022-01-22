@@ -3,7 +3,7 @@ import styles from './Detail.module.css';
 import { Container, Wrapper } from '../Layout';
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
-import { useUser } from '@/lib/user';
+import { useUser, useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
 import { Contador } from '@/components/Contador';
 import { CommentList } from '@/components/CommentList';
@@ -11,7 +11,8 @@ import { Commenter } from '@/components/Commenter';
 import { useRouter } from 'next/router';
 
 const Detailrelation = ({ RelationKey, RelationRecord }) => {
-  const user = useUser(RelationRecord.idUt).data.user;
+  // const user = useUser(RelationRecord.idUt).data.user;
+  const user = useCurrentUser();
   //const data2 = JSON.parse(!!query);
   //console.log(data2.Record.notas);
   //query = JSON.parse(query);

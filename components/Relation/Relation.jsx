@@ -8,7 +8,8 @@ import styles from './Relation.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 const Relation = ({ relation, className }) => {
-  const user = useUser(relation[0].Record.idUt).data.user;
+  //  const user = useUser(relation[0].Record.idUt).data.user;
+  const user = useCurrentUser();
   return relation.map((e) => (
     <div key={e.Key} className={cljx(styles.root, className)}>
       <Container>
