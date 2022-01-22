@@ -4,9 +4,15 @@ import styles from './Contador.module.css';
 import { useRelaVoto } from '@/lib/relationsVoto';
 import { useCurrentUser } from '@/lib/user';
 import { useCallback, useRef, useState } from 'react';
+import * as React from 'react';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
-import { style } from '@mui/system';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 
 const Contador = ({ eKey }) => {
   const { data } = useRelaVoto(eKey);
@@ -16,6 +22,8 @@ const Contador = ({ eKey }) => {
     : [];
   let count = '';
   const user_id = useCurrentUser().data.user._id;
+  if (user_id != '') {
+  }
   let VoteUp = false;
   let VoteDown = false;
   if (posts.length != 0) {
@@ -32,6 +40,16 @@ const Contador = ({ eKey }) => {
       });
     });
   }
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const { mutate } = useRelaVoto(eKey);
   const [isLoading, setIsLoading] = useState(false);
@@ -94,30 +112,63 @@ const Contador = ({ eKey }) => {
     count = 0;
   }
   // console.log(data2);
-  return (
-    <>
-      <form className={styles.center} onSubmit={onSubmitup}>
-        <Button type="secondary" className={styles.voto}>
-          <i
-            className={cljx(
-              'fa fa-sort-asc',
-              VoteUp ? styles.votado : styles.voto
-            )}
-          ></i>
-        </Button>
-      </form>
-      <p>{count}</p>
-      <form className={styles.center} onSubmit={onSubmitdown}>
-        <Button type="secondary" className={styles.voto}>
-          <i
-            className={cljx(
-              'fa fa-sort-desc',
-              VoteDown ? styles.votado : styles.voto
-            )}
-          ></i>
-        </Button>
-      </form>
-    </>
-  );
+  if (user_id != '') {
+    return (
+      <>
+        <form className={styles.center} onSubmit={onSubmitup}>
+          <Button type="secondary" className={styles.voto}>
+            <i
+              className={cljx(
+                'fa fa-sort-asc',
+                VoteUp ? styles.votado : styles.voto
+              )}
+            ></i>
+          </Button>
+        </form>
+        <p>{count}</p>
+        <form className={styles.center} onSubmit={onSubmitdown}>
+          <Button type="secondary" className={styles.voto}>
+            <i
+              className={cljx(
+                'fa fa-sort-desc',
+                VoteDown ? styles.votado : styles.voto
+              )}
+            ></i>
+          </Button>
+        </form>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <form className={styles.center} onSubmit={handleClickOpen}>
+          <Button type="secondary" className={styles.voto}>
+            <i className={cljx('fa fa-sort-asc', styles.voto)}></i>
+          </Button>
+        </form>
+        <p>{count}</p>
+        <form className={styles.center} onSubmit={handleClickOpen}>
+          <Button type="secondary" className={styles.voto}>
+            <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
+          </Button>
+        </form>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>{'Voto negado'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Para proceder ao voto precisa de realizar o login
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions></DialogActions>
+        </Dialog>
+      </>
+    );
+  }
 };
 export default Contador;

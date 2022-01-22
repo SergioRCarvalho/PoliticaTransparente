@@ -4,7 +4,7 @@ import { Detailrelation } from '@/components/Detailrelation';
 
 export const DetailsRelation = ({ RelationKey, RelationRecord }) => {
   return (
-    <div className={styles.root}>
+    <div>
       <Spacer size={1} axis="vertical" />
       <Wrapper>
         <div className={styles.wrap}>
