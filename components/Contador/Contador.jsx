@@ -14,12 +14,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
-//endpoint que lhe passas um id
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 const Contador = ({ eKey }) => {
   const { data } = useRelaVoto(eKey);
 
