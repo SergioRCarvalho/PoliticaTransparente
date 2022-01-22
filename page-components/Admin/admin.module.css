@@ -64,6 +64,21 @@
   -webkit-box-orient: vertical;
 }
 
+.poster {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.input {
+  background: var(--accent-7);
+  opacity: 0.9;
+  margin-bottom: 15px;
+  flex: 1 1 0%;
+  width: 10%;
+  border-radius: 3px;
+  margin-left: 20px;
+}
+
 .timestamp {
   font-size: 0.875rem;
   font-weight: 400;
