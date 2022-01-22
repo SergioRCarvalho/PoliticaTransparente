@@ -13,56 +13,64 @@ import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './EditRelation.module.css';
 import { Input } from '@/components/Input';
+import { useRouter } from 'next/router';
 
-const PosterInner = ({ query }) => {
+const PosterInner = ({ RelationKey, RelationRecord }) => {
+  const { data, error } = useCurrentUser();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const contentEntA = useRef();
   const contentEntB = useRef();
   const contentTP = useRef();
   const contentTR = useRef();
   const contentNR = useRef();
   const [isLoading, setIsLoading] = useState(false);
-  // contentEntA.;
-  console.log(query.Record);
-  //contentEntA.defaultValue = 'asdsad';
+  const router = useRouter();
 
-  const { mutate } = useRelaPages();
-
-  const onSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      console.log('value: ' + contentEntA.current.value);
-      try {
-        setIsLoading(true);
-        await fetcher('/api/relations', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            enta: contentEntA.current.value,
-            entb: contentEntB.current.value,
-            titulo: contentTP.current.value,
-            tipo: contentTR.current.value,
-            nota: contentNR.current.value,
-            id: query.Key,
-            date: query.Record.dataRegisto,
-          }),
-        });
-        toast.success('You have posted successfully');
-        // refresh post lists
-        handleClose.true;
-        mutate();
-      } catch (e) {
-        toast.error(e.message);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [mutate]
-  );
-
-  const { data, error } = useCurrentUser();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const onSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    console.log('value: ' + contentEntA.current.value);
+    try {
+      setIsLoading(true);
+      await fetcher('/api/relations', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          enta: contentEntA.current.value,
+          entb: contentEntB.current.value,
+          titulo: contentTR.current.value,
+          tipo: contentTP.current.value,
+          nota: contentNR.current.value,
+          id: RelationKey,
+          date: RelationRecord.dataRegisto,
+        }),
+      });
+      toast.success('Relação Editada');
+      handleClose.true;
+      const dataquery = {
+        dataRegisto: RelationRecord.dataRegisto,
+        tipoRel: contentTP.current.value,
+        entidade: contentEntA.current.value,
+        entidade2: contentEntB.current.value,
+        idUt: data.user._id,
+        notas: contentNR.current.value,
+        desc: contentTR.current.value,
+      };
+      router.push({
+        pathname: '/detailrelation',
+        query: {
+          key: JSON.stringify(RelationKey),
+          record: JSON.stringify(dataquery),
+        },
+      });
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  });
 
   return (
     <form onSubmit={onSubmit}>
@@ -86,19 +94,19 @@ const PosterInner = ({ query }) => {
           ref={contentEntA}
           className={styles.input}
           label="Inserir entidade A"
-          defaultValue={query.Record.entidade}
+          defaultValue={RelationRecord.entidade}
         />
         <Input
           ref={contentEntB}
           className={styles.input}
           label="Inserir entidade B"
-          defaultValue={query.Record.entidade2}
+          defaultValue={RelationRecord.entidade2}
         />
         <Input
           ref={contentTP}
           className={styles.input}
           label="Tipo de relação"
-          defaultValue={query.Record.tipoRel}
+          defaultValue={RelationRecord.tipoRel}
         />
       </Container>
 
@@ -107,13 +115,13 @@ const PosterInner = ({ query }) => {
           ref={contentTR}
           className={styles.input}
           label="Inserir titulo da relação"
-          defaultValue={query.Record.tipoRel}
+          defaultValue={RelationRecord.desc}
         />
         <Input
           ref={contentNR}
           className={styles.input}
           label="Inserir nota da relação"
-          defaultValue={query.Record.notas}
+          defaultValue={RelationRecord.notas}
         />
 
         <Button type="success" className={styles.botao} loading={isLoading}>

@@ -1,15 +1,14 @@
 import { Container } from '@/components/Layout';
 import { Avatar } from '@/components/Avatar';
 import { Contador } from '@/components/Contador';
-import { useCurrentUser } from '@/lib/user';
+import { useCurrentUser, useUser } from '@/lib/user';
 import cljx from 'clsx';
 import Link from 'next/link';
 import styles from './Relation.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 const Relation = ({ relation, className }) => {
-  const { data, error } = useCurrentUser();
-  // console.log(JSON.stringify(data.user));
+  const user = useUser(relation[0].Record.idUt).data.user;
   return relation.map((e) => (
     <div key={e.Key} className={cljx(styles.root, className)}>
       <Container>
@@ -20,12 +19,12 @@ const Relation = ({ relation, className }) => {
                 <Container className={styles.creator}>
                   <Avatar
                     size={36}
-                    url={data.user.profilePicture}
-                    username={data.user.username}
+                    url={user.profilePicture}
+                    username={user.username}
                   />
                   <Container column className={styles.meta}>
-                    <p className={styles.name}>{data.user.name}</p>
-                    <p className={styles.username}>{data.user.username}</p>
+                    <p className={styles.name}>{user.name}</p>
+                    <p className={styles.username}>{user.username}</p>
                   </Container>
                 </Container>
               </a>
@@ -34,8 +33,8 @@ const Relation = ({ relation, className }) => {
               href={{
                 pathname: '/detailrelation',
                 query: {
-                  userData: JSON.stringify(data.user),
-                  dataRelation: JSON.stringify(e),
+                  key: JSON.stringify(e.Key),
+                  record: JSON.stringify(e.Record),
                 },
               }}
               passHref
@@ -53,8 +52,8 @@ const Relation = ({ relation, className }) => {
             href={{
               pathname: '/detailrelation',
               query: {
-                userData: JSON.stringify(data.user),
-                dataRelation: JSON.stringify(e),
+                key: JSON.stringify(e.Key),
+                record: JSON.stringify(e.Record),
               },
             }}
             passHref

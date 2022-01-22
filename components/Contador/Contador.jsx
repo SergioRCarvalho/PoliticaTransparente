@@ -8,8 +8,6 @@ import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
 import { style } from '@mui/system';
 
-//endpoint que lhe passas um id
-
 const Contador = ({ eKey }) => {
   const { data } = useRelaVoto(eKey);
 

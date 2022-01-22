@@ -2,13 +2,16 @@ import { Container, Spacer, Wrapper } from '@/components/Layout';
 import styles from './Detailrelation.module.css';
 import { Detailrelation } from '@/components/Detailrelation';
 
-export const DetailsRelation = () => {
+export const DetailsRelation = ({ RelationKey, RelationRecord }) => {
   return (
     <div className={styles.root}>
       <Spacer size={1} axis="vertical" />
       <Wrapper>
         <div className={styles.wrap}>
-          <Detailrelation />
+          <Detailrelation
+            RelationKey={RelationKey}
+            RelationRecord={RelationRecord}
+          />
         </div>
       </Wrapper>
     </div>

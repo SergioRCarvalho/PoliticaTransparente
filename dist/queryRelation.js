@@ -69,7 +69,10 @@ async function main() {
     // Get the contract from the network.
     const contract = network.getContract('demo-relation');
     // Evaluate the specified transaction.
-    const result = await contract.evaluateTransaction('readRelation', '101');
+    const result = await contract.evaluateTransaction(
+      'readRelation',
+      '12547fc8ba45a67b4ecd2ef6'
+    );
     console.log(
       `Transaction has been evaluated, result is: ${result.toString()}`
     );

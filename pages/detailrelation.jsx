@@ -9,10 +9,9 @@ import SpeedDial from '@mui/material/SpeedDial';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { useCurrentUser } from '@/lib/user';
-import { withRouter } from 'next/router';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import { useRelaVoto } from '@/lib/relationsVoto';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -23,6 +22,7 @@ import Slide from '@mui/material/Slide';
 import EditRelation from '@/page-components/Relations/EditRelation';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 const actions = [
   { icon: <EditIcon />, name: 'Editar' },
@@ -33,18 +33,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DetailRelationPage = ({ className, router: { query } }) => {
-  const { data, error } = useCurrentUser();
-  const user_id = data.user._id;
-  const data2 = JSON.parse(query?.dataRelation);
-  const user_relation = data2.Record.idUt;
+const DetailRelationPage = ({ className, routers = useRouter() }) => {
+  const user_id = useCurrentUser()._id;
+  // const routers = useRouter();
+  const RelationRecord = JSON.parse(routers.query.record);
+  const RelationKey = JSON.parse(routers.query.key);
+  const user_relation = RelationRecord.idUt;
 
-  let fab = false;
-  if (user_id == user_relation) {
-    fab = true;
-  }
-  // console.log(data2.Key);
-
+  const fab = user_id == user_relation ? true : false;
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
 
@@ -67,7 +63,7 @@ const DetailRelationPage = ({ className, router: { query } }) => {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            id: data2.Key,
+            id: RelationKey,
           }),
         });
         toast.success('You have posted successfully');
@@ -92,6 +88,18 @@ const DetailRelationPage = ({ className, router: { query } }) => {
     }
   }
 
+  /* async function getRouter() {
+    await routers;
+    RelationRecord = JSON.parse(routers.query.record);
+    RelationKey = await routers.query.key;
+    return;
+  }*/
+
+  /* if (RelationKey == '') {
+    getRouter();
+    console.log('e=' + RelationKey);
+  }*/
+
   return (
     <>
       <Head>
@@ -113,7 +121,7 @@ const DetailRelationPage = ({ className, router: { query } }) => {
                 key={action.name}
                 onClick={(e) => {
                   e.preventDefault();
-                  onOperator(data2.Key, action.name);
+                  onOperator(RelationKey, action.name);
                 }}
                 icon={action.icon}
                 tooltipTitle={action.name}
@@ -122,7 +130,10 @@ const DetailRelationPage = ({ className, router: { query } }) => {
           </SpeedDial>
         </Box>
       </div>
-      <DetailsRelation query={data2} />
+      <DetailsRelation
+        RelationKey={RelationKey}
+        RelationRecord={RelationRecord}
+      />
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -152,11 +163,15 @@ const DetailRelationPage = ({ className, router: { query } }) => {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
-          <EditRelation query={data2} />
+          <DialogTitle>{'Editar relação'}</DialogTitle>
+          <EditRelation
+            RelationKey={RelationKey}
+            RelationRecord={RelationRecord}
+          />
         </DialogContent>
       </Dialog>
     </>
   );
 };
 
-export default withRouter(DetailRelationPage);
+export default DetailRelationPage;

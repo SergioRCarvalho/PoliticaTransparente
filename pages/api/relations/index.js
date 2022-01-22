@@ -216,10 +216,10 @@ async function editRelation(entA, entB, tp, tr, nr, user_id, id, date) {
     await contract.submitTransaction(
       'updateRelation',
       id,
-      tp,
+      tr,
       nr,
       date,
-      tr,
+      tp,
       user_id,
       entA,
       entB
