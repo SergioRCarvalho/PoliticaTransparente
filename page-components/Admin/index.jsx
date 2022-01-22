@@ -11,6 +11,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Input } from '@/components/Input';
 import { useCallback, useRef, useState, useEffect } from 'react';
+import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
+import { Visibility } from '@mui/icons-material';
+
 import toast from 'react-hot-toast';
 import { fetcher } from '@/lib/fetch';
 import { useUsers } from '@/lib/user';
@@ -19,6 +22,16 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import { Legend } from 'recharts/lib/component/Legend';
+import { userData } from './dummyData';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -166,7 +179,7 @@ function a11yProps(index) {
   };
 }
 
-const Admin = () => {
+const Admin = ({ title, grid }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -273,24 +286,31 @@ const Admin = () => {
           </Wrapper>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Container className={styles.buttons}>
-            <Container>
-              <Button onClick={handleClickOpen} className={styles.button}>
-                Adicionar{' '}
-              </Button>
-            </Container>
-            <Spacer axis="horizontal" size={1} />
-
-            <Container>
-              <Button onClick={handleClickOpen2} className={styles.button}>
-                Eliminar
-              </Button>
-            </Container>
-          </Container>
           <Spacer size={1} axis="vertical" />
           <Wrapper>
             <div className={styles.wrap}>
-              <div style={{ height: 400, width: '100%' }}>dusch</div>
+              <div style={{ height: 400, width: '100%' }}>
+                <div className="home">
+                  <div className="chart">
+                    <h3 className="chartTitle">{title}</h3>
+                    <ResponsiveContainer width="100%" aspect={4 / 1}>
+                      <LineChart data={userData}>
+                        <XAxis dataKey="name" stroke="#000" />
+                        <Line
+                          type="monotone"
+                          dataKey="Active User"
+                          stroke="#00f"
+                        />
+                        <Tooltip />
+                        {grid && (
+                          <CartesianGrid stroke="#0f0" strokeDasharray="3 3" />
+                        )}
+                        <Legend />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </div>
             </div>
           </Wrapper>
         </TabPanel>

@@ -90,7 +90,8 @@
         "uuid-to-hex": "^1.1.1",
         "validator": "^13.6.0",
         "@material-ui/data-grid": "latest",
-        "@material-ui/core": "latest"
+        "@material-ui/core": "latest",
+        "recharts": "2.1.5"
     },
     "devDependencies": {
         "@types/chai": "^4.2.0",
