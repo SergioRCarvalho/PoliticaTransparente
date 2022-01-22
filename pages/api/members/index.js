@@ -1,10 +1,5 @@
 import { ValidateProps } from '@/api-lib/constants';
-import {
-  findUserByEmail,
-  findUsers,
-  findUserByUsername,
-  insertUser,
-} from '@/api-lib/db';
+import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
 import { auths, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
@@ -16,11 +11,6 @@ import { createwallet } from './createwallet';
 const handler = nc(ncOpts);
 
 handler.use(database);
-
-handler.get(async (req, res) => {
-  const user = await findUsers(req.db);
-  res.json({ user });
-});
 
 handler.post(
   validateBody({

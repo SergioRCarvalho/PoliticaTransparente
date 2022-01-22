@@ -41,6 +41,7 @@
         "@mui/material": "^5.2.8",
         "@mui/styled-engine-sc": "^5.1.0",
         "ajv": "^8.6.3",
+        "antd": "^4.18.4",
         "bcryptjs": "^2.4.3",
         "circular-json": "^0.5.9",
         "cloudinary": "^1.27.0",
@@ -87,7 +88,10 @@
         "tls": "^0.0.1",
         "uuid": "^8.3.2",
         "uuid-to-hex": "^1.1.1",
-        "validator": "^13.6.0"
+        "validator": "^13.6.0",
+        "@material-ui/data-grid": "latest",
+        "@material-ui/core": "latest",
+        "recharts": "2.1.5"
     },
     "devDependencies": {
         "@types/chai": "^4.2.0",

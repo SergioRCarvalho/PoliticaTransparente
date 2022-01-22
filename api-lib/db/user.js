@@ -25,6 +25,14 @@ export async function findUserById(db, userId) {
     .then((user) => user || null);
 }
 
+export async function findUsers(db) {
+  return db
+    .collection('users')
+    .find()
+    .toArray()
+    .then((users) => users || null);
+}
+
 export async function findUserByUsername(db, username) {
   return db
     .collection('users')
