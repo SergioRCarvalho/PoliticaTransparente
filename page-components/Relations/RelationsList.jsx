@@ -60,33 +60,35 @@ const RelaList = () => {
 
   return (
     <div className={styles.root}>
-      <Stack spacing={1} sx={{ width: 300, paddingTop: 2, marginLeft: 25 }}>
-        <Autocomplete
-          freeSolo
-          id="free-solo-2-demo"
-          disableClearable
-          options={getDesc()}
-          renderInput={(params) => (
-            <TextField
-              ref={descserarch}
-              id="input-with-icon-adornment"
-              {...params}
-              label="Procurar"
-              InputProps={{
-                ...params.InputProps,
-                type: 'search',
-              }}
-              onChange={(e) => {
-                e.preventDefault();
-                setSearch(e.target.value);
-                if (e.target.value === '') {
-                  setfilteredResult([]);
-                }
-              }}
-            />
-          )}
-        />
-      </Stack>
+      <Wrapper>
+        <Stack sx={{ width: 300, paddingTop: 2 }}>
+          <Autocomplete
+            freeSolo
+            id="free-solo-2-demo"
+            disableClearable
+            options={getDesc()}
+            renderInput={(params) => (
+              <TextField
+                ref={descserarch}
+                id="input-with-icon-adornment"
+                {...params}
+                label="Procurar"
+                InputProps={{
+                  ...params.InputProps,
+                  type: 'search',
+                }}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setSearch(e.target.value);
+                  if (e.target.value === '') {
+                    setfilteredResult([]);
+                  }
+                }}
+              />
+            )}
+          />
+        </Stack>
+      </Wrapper>
       <Spacer axis="vertical" size={1} />
       <Wrapper>
         {filteredResult.length === 0

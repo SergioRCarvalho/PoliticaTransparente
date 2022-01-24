@@ -30,7 +30,7 @@ export const Relations = () => {
   const wallet = data.user.wallet;
   const user_tipo = wallet.split(';');
 
-  if (user_tipo[0] == 'credenciado') {
+  if (user_tipo[0] == 'cidadao') {
     fab = true;
   }
   return (

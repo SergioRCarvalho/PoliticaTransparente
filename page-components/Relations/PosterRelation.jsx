@@ -1,6 +1,7 @@
 import { Avatar } from '@/components/Avatar';
 import * as React from 'react';
-import { Button } from '@/components/Button';
+import Button from '@mui/material/Button';
+
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -40,12 +41,12 @@ const PosterInner = ({ user }) => {
             nota: contentNR.current.value,
           }),
         });
-        toast.success('You have posted successfully');
+        toast.success('Relação inserida com sucesso');
         // refresh post lists
         handleClose.true;
         mutate();
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao preencher os campos');
       } finally {
         setIsLoading(false);
       }
@@ -59,55 +60,61 @@ const PosterInner = ({ user }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Container>
-        <a>
-          <Container className={styles.creator}>
-            <Avatar
-              size={36}
-              url={data.user.profilePicture}
-              username={data.user.username}
-            />
-            <Container column className={styles.meta}>
-              <p className={styles.name}>{data.user.name}</p>
-              <p className={styles.username}>{data.user.username}</p>
+      <div>
+        <Container className={styles.poster}>
+          <a>
+            <Container className={styles.creator}>
+              <Avatar
+                size={36}
+                url={data.user.profilePicture}
+                username={data.user.username}
+              />
+              <Container column className={styles.meta}>
+                <p className={styles.name}>{data.user.name}</p>
+                <p className={styles.username}>{data.user.username}</p>
+              </Container>
             </Container>
-          </Container>
-        </a>
-      </Container>
-      <Container className={styles.poster}>
-        <Input
-          ref={contentEntA}
-          className={styles.input}
-          label="Inserir entidade A"
-        />
-        <Input
-          ref={contentEntB}
-          className={styles.input}
-          label="Inserir entidade B"
-        />
-        <Input
-          ref={contentTP}
-          className={styles.input}
-          label="Tipo de relação"
-        />
-      </Container>
+          </a>
+        </Container>
+        <Container className={styles.poster}>
+          <Input
+            ref={contentEntA}
+            className={styles.input}
+            label="Inserir entidade A"
+          />
+          <Input
+            ref={contentEntB}
+            className={styles.input}
+            label="Inserir entidade B"
+          />
+          <Input
+            ref={contentTP}
+            className={styles.input}
+            label="Tipo de relação"
+          />
+        </Container>
 
-      <Container className={styles.poster2}>
-        <Input
-          ref={contentTR}
-          className={styles.input}
-          label="Inserir titulo da relação"
-        />
-        <Input
-          ref={contentNR}
-          className={styles.input}
-          label="Inserir nota da relação"
-        />
-
-        <Button type="success" className={styles.botao} loading={isLoading}>
-          Submeter
-        </Button>
-      </Container>
+        <Container className={styles.poster2}>
+          <Input
+            ref={contentTR}
+            className={styles.input}
+            label="Inserir titulo da relação"
+          />
+          <Input
+            ref={contentNR}
+            className={styles.input}
+            label="Inserir nota da relação"
+          />
+          <Button
+            type="success"
+            variant="contained"
+            loading={isLoading}
+            size="large"
+          >
+            Submeter
+          </Button>
+        </Container>
+      </div>
     </form>
   );
 };

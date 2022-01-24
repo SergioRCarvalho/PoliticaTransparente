@@ -27,12 +27,12 @@ const CommenterInner = ({ user, eKey }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
         });
-        toast.success('You have added a comment');
+        toast.success('Comentário adicionado com sucesso');
         contentRef.current.value = '';
         // refresh post lists
         mutate();
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao inserir comentário');
       } finally {
         setIsLoading(false);
       }
@@ -47,11 +47,11 @@ const CommenterInner = ({ user, eKey }) => {
         <Input
           ref={contentRef}
           className={styles.input}
-          placeholder="Add your comment"
-          ariaLabel="Add your comment"
+          placeholder="Adicionar comentário"
+          ariaLabel="Adicionar comentário"
         />
         <Button type="success" loading={isLoading}>
-          Comment
+          Comentar
         </Button>
       </Container>
     </form>

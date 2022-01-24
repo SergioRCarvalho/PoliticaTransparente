@@ -67,11 +67,11 @@ const Contador = ({ eKey }) => {
             idRelation: eKey.toString(),
           }),
         });
-        toast.success('You have posted successfully');
+        toast.success('Voto inserido com sucesso');
         // refresh post lists
         mutate();
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao inserir voto');
       } finally {
         setIsLoading(false);
       }
@@ -92,11 +92,11 @@ const Contador = ({ eKey }) => {
             idRelation: eKey.toString(),
           }),
         });
-        toast.success('You have posted successfully');
+        toast.success('Voto inserido com sucesso');
         // refresh post lists
         mutate();
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao inserir voto');
       } finally {
         setIsLoading(false);
       }

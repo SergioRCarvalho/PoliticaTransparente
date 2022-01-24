@@ -65,9 +65,9 @@ const Auth = () => {
           newPassword: newPasswordRef.current.value,
         }),
       });
-      toast.success('Your password has been updated');
+      toast.success('Palavra-chave alterada com sucesso');
     } catch (e) {
-      toast.error(e.message);
+      toast.error('Erro ao alterar palavra-chave');
     } finally {
       setIsLoading(false);
       oldPasswordRef.current.value = '';
@@ -80,6 +80,7 @@ const Auth = () => {
       <h4 className={styles.sectionTitle}>Password</h4>
       <form onSubmit={onSubmit}>
         <Input
+          className={styles.input}
           htmlType="password"
           autoComplete="current-password"
           ref={oldPasswordRef}
@@ -87,6 +88,7 @@ const Auth = () => {
         />
         <Spacer size={0.5} axis="vertical" />
         <Input
+          className={styles.input}
           htmlType="password"
           autoComplete="new-password"
           ref={newPasswordRef}
@@ -142,9 +144,9 @@ const AboutYou = ({ user, mutate }) => {
           body: formData,
         });
         mutate({ user: response.user }, false);
-        toast.success('Your profile has been updated');
+        toast.success('Perfil foi atualizado com sucesso');
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao atualizar perfil');
       } finally {
         setIsLoading(false);
       }
@@ -164,9 +166,13 @@ const AboutYou = ({ user, mutate }) => {
     <section className={styles.card}>
       <h4 className={styles.sectionTitle}>About You</h4>
       <form onSubmit={onSubmit}>
-        <Input ref={usernameRef} label="Your Username" />
+        <Input
+          ref={usernameRef}
+          label="Your Username"
+          className={styles.input}
+        />
         <Spacer size={0.5} axis="vertical" />
-        <Input ref={nameRef} label="Your Name" />
+        <Input ref={nameRef} label="Your Name" className={styles.input} />
         <Spacer size={0.5} axis="vertical" />
         <Textarea ref={bioRef} label="Your Bio" />
         <Spacer size={0.5} axis="vertical" />
