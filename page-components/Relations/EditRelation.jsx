@@ -72,7 +72,7 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
         tipoRel: contentTP.current.value,
         entidade: contentEntA.current.value,
         entidade2: contentEntB.current.value,
-        idUt: data.user._id,
+        idUt: user.data.user._id,
         notas: contentNR.current.value,
         desc: contentTR.current.value,
       };
