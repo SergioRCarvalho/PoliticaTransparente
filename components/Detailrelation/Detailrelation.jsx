@@ -17,8 +17,6 @@ const Detailrelation = ({ RelationKey, RelationRecord }) => {
   //console.log(data2.Record.notas);
   //query = JSON.parse(query);
 
-  console.log('q= ' + RelationRecord);
-
   return (
     <Wrapper>
       <div className={cljx(styles.root)}>

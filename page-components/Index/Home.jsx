@@ -18,15 +18,6 @@ const Home = () => {
               <ButtonLink className={styles.button}>Ver Relações</ButtonLink>
             </Link>
           </Container>
-          <Spacer axis="horizontal" size={3} />
-
-          <Container>
-            <Link passHref href="/admin">
-              <ButtonLink className={styles.button}>
-                Zona Administrativa
-              </ButtonLink>
-            </Link>
-          </Container>
           <Spacer axis="horizontal" size={1} />
         </Container>
         <p className={styles.subtitle}>Politica Transparente</p>

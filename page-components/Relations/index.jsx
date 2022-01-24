@@ -27,7 +27,10 @@ export const Relations = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let fab = false;
-  if (data != '') {
+  const wallet = data.user.wallet;
+  const user_tipo = wallet.split(';');
+
+  if (user_tipo[0] == 'credenciado') {
     fab = true;
   }
   return (
@@ -37,8 +40,13 @@ export const Relations = () => {
         className={styles.box}
         sx={{ '& > :not(style)': { m: 1 } }}
       >
-        <Fab theme={customtheme} color="primary" aria-label="add">
-          <AddIcon onClick={handleOpen} />
+        <Fab
+          theme={customtheme}
+          color="primary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <AddIcon />
           <Dialog
             className={styles.root}
             open={open}

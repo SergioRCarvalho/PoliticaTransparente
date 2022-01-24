@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import styles from './Input.module.css';
+import TextField from '@mui/material/TextField';
 
 const Input = forwardRef(function Input(
   {
@@ -19,12 +20,12 @@ const Input = forwardRef(function Input(
   return (
     <div className={clsx(styles.root, className)}>
       <label>
-        {label && <div className={styles.label}>{label}</div>}
-        <input
+        <TextField
+          label={label}
           type={htmlType}
           autoComplete={autoComplete}
           placeholder={placeholder}
-          ref={ref}
+          inputRef={ref}
           className={clsx(styles.input, size && styles[size])}
           aria-label={ariaLabel}
           required={required}
