@@ -16,7 +16,25 @@ import { Input, Textarea } from '@/components/Input';
 import { useRouter } from 'next/router';
 
 const PosterInner = ({ RelationKey, RelationRecord }) => {
-  const { data, error } = useCurrentUser();
+  let user = useCurrentUser();
+  if (useCurrentUser().data.user == null) {
+    user = [
+      {
+        data: {
+          user: {
+            _id: '61c2687bf24b3ec21be49d16',
+            profilePicture:
+              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/ddrnsd3rf2gfzvj34iz3.jpg',
+            name: 'jjjsadj',
+            username: 'jjjj',
+            bio: 'sdfsdfsdf',
+          },
+        },
+      },
+    ];
+    user = user[0];
+  }
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -80,12 +98,12 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
             <Container className={styles.creator}>
               <Avatar
                 size={36}
-                url={data.user.profilePicture}
-                username={data.user.username}
+                url={user.data.user.profilePicture}
+                username={user.data.user.username}
               />
               <Container column className={styles.meta}>
-                <p className={styles.name}>{data.user.name}</p>
-                <p className={styles.username}>{data.user.username}</p>
+                <p className={styles.name}>{user.data.user.name}</p>
+                <p className={styles.username}>{user.data.user.username}</p>
               </Container>
             </Container>
           </a>

@@ -9,7 +9,24 @@ import 'font-awesome/css/font-awesome.min.css';
 
 const Relation = ({ relation, className }) => {
   //const user = useUser(relation[0].Record.idUt);
-  const user = useCurrentUser();
+  let user = useCurrentUser();
+  if (useCurrentUser().data.user == null) {
+    user = [
+      {
+        data: {
+          user: {
+            _id: '61c2687bf24b3ec21be49d16',
+            profilePicture:
+              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/ddrnsd3rf2gfzvj34iz3.jpg',
+            name: 'jjjsadj',
+            username: 'jjjj',
+            bio: 'sdfsdfsdf',
+          },
+        },
+      },
+    ];
+    user = user[0];
+  }
   // const { data } = useUser('61c2687bf24b3ec21be49d16');
   // console.log('user: ' + JSON.stringify(data));
 
@@ -25,8 +42,8 @@ const Relation = ({ relation, className }) => {
                 <Container className={styles.creator}>
                   <Avatar
                     size={36}
-                    url={user.profilePicture}
-                    username={user.username}
+                    url={user.data.user.profilePicture}
+                    username={user.data.user.username}
                   />
                   <Container column className={styles.meta}>
                     <p className={styles.name}>{user.data.user.name}</p>

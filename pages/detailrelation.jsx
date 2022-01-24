@@ -39,8 +39,10 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
   const RelationRecord = JSON.parse(routers.query.record);
   const RelationKey = JSON.parse(routers.query.key);
   const user_relation = RelationRecord.idUt;
+  let fab = false;
+  if (useCurrentUser().data.user != null)
+    fab = c_user.data.user._id == user_relation ? true : false;
 
-  const fab = c_user.data.user._id == user_relation ? true : false;
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
 
@@ -70,7 +72,7 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
       handleClose.true;
       mutate();
     } catch (e) {
-        toast.error('Erro ao eliminar');
+      toast.error('Erro ao eliminar');
     } finally {
       setIsLoading(false);
     }
@@ -79,23 +81,10 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
   function onOperator(id, op) {
     if (op == 'Eliminar') {
       setOpen(true);
-      // deleteRelation(id);
     } else {
       setOpen2(true);
     }
   }
-
-  /* async function getRouter() {
-    await routers;
-    RelationRecord = JSON.parse(routers.query.record);
-    RelationKey = await routers.query.key;
-    return;
-  }*/
-
-  /* if (RelationKey == '') {
-    getRouter();
-    console.log('e=' + RelationKey);
-  }*/
 
   return (
     <>
@@ -104,7 +93,7 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
       </Head>
       <div>
         <Box
-          style={{ visibility: fab ? 'visible' : 'visible' }}
+          style={{ visibility: fab ? 'visible' : 'hidden' }}
           className={styles.box}
           sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}
         >

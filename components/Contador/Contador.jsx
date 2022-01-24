@@ -14,6 +14,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const Contador = ({ eKey }) => {
   const { data } = useRelaVoto(eKey);
 
@@ -21,19 +25,23 @@ const Contador = ({ eKey }) => {
     ? data.reduce((acc, person) => [...acc, person.resu], [])
     : [];
   let count = '';
-  const user_id = useCurrentUser().data.user._id;
-  if (user_id != '') {
-  }
+  let user_id = useCurrentUser();
   let VoteUp = false;
   let VoteDown = false;
   if (posts.length != 0) {
     posts.map((e) => {
       e.map((r) => {
-        if (r.Record.estadoVoto === '+1' && r.Record.idUser === user_id) {
+        if (
+          r.Record.estadoVoto === '+1' &&
+          r.Record.idUser === user_id.data.user._id
+        ) {
           VoteUp = true;
           VoteDown = false;
         }
-        if (r.Record.estadoVoto === '-1' && r.Record.idUser === user_id) {
+        if (
+          r.Record.estadoVoto === '-1' &&
+          r.Record.idUser === user_id.data.user._id
+        ) {
           VoteDown = true;
           VoteUp = false;
         }
@@ -41,14 +49,14 @@ const Contador = ({ eKey }) => {
     });
   }
 
-  const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen2 = () => {
+    setOpen2(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose2 = () => {
+    setOpen2(false);
   };
 
   const { mutate } = useRelaVoto(eKey);
@@ -111,8 +119,7 @@ const Contador = ({ eKey }) => {
   } else {
     count = 0;
   }
-  // console.log(data2);
-  if (user_id != '') {
+  if (user_id.length > 0) {
     return (
       <>
         <form className={styles.center} onSubmit={onSubmitup}>
@@ -141,22 +148,30 @@ const Contador = ({ eKey }) => {
   } else {
     return (
       <>
-        <form className={styles.center} onSubmit={handleClickOpen}>
-          <Button type="secondary" className={styles.voto}>
+        <p className={styles.center}>
+          <Button
+            type="secondary"
+            className={styles.voto}
+            onClick={handleClickOpen2}
+          >
             <i className={cljx('fa fa-sort-asc', styles.voto)}></i>
           </Button>
-        </form>
+        </p>
         <p>{count}</p>
-        <form className={styles.center} onSubmit={handleClickOpen}>
-          <Button type="secondary" className={styles.voto}>
+        <p className={styles.center}>
+          <Button
+            type="secondary"
+            className={styles.voto}
+            onClick={handleClickOpen2}
+          >
             <i className={cljx('fa fa-sort-desc', styles.voto)}></i>
           </Button>
-        </form>
+        </p>
         <Dialog
-          open={open}
+          open={open2}
           TransitionComponent={Transition}
           keepMounted
-          onClose={handleClose}
+          onClose={handleClose2}
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle>{'Voto negado'}</DialogTitle>
@@ -165,7 +180,6 @@ const Contador = ({ eKey }) => {
               Para proceder ao voto precisa de realizar o login
             </DialogContentText>
           </DialogContent>
-          <DialogActions></DialogActions>
         </Dialog>
       </>
     );
