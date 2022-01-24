@@ -65,24 +65,24 @@ const Commenter = ({ eKey }) => {
   return (
     <div className={styles.root}>
       <h3 className={styles.heading}>
-        Replying to{' '}
+        Responder{' '}
         <Link href={``} passHref>
           <TextLink color="link">@{}</TextLink>
         </Link>
       </h3>
       {loading ? (
-        <LoadingDots>Loading</LoadingDots>
+        <LoadingDots>Carregar</LoadingDots>
       ) : data?.user ? (
         <CommenterInner eKey={eKey} user={data.user} />
       ) : (
         <Text color="secondary">
-          Please{' '}
+          Faça o{' '}
           <Link href="/login" passHref>
             <TextLink color="link" variant="highlight">
-              sign in
+              login
             </TextLink>
           </Link>{' '}
-          to comment
+          para comentar
         </Text>
       )}
     </div>

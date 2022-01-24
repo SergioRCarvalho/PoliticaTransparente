@@ -28,12 +28,12 @@ const CommenterInner = ({ user, post }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
         });
-        toast.success('You have added a comment');
+        toast.success('Adicionou o comentário com sucesso');
         contentRef.current.value = '';
         // refresh post lists
         mutate();
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao adicionar o comentário');
       } finally {
         setIsLoading(false);
       }
@@ -48,11 +48,11 @@ const CommenterInner = ({ user, post }) => {
         <Input
           ref={contentRef}
           className={styles.input}
-          placeholder="Add your comment"
-          ariaLabel="Add your comment"
+          placeholder="Adicionar comentário"
+          ariaLabel="Adicionar comentário"
         />
         <Button type="success" loading={isLoading}>
-          Comment
+          Submeter
         </Button>
       </Container>
     </form>
@@ -66,24 +66,24 @@ const Commenter = ({ post }) => {
   return (
     <div className={styles.root}>
       <h3 className={styles.heading}>
-        Replying to{' '}
+        Responde para{' '}
         <Link href={`/user/${post.creator.username}`} passHref>
           <TextLink color="link">@{post.creator.username}</TextLink>
         </Link>
       </h3>
       {loading ? (
-        <LoadingDots>Loading</LoadingDots>
+        <LoadingDots>Carregar</LoadingDots>
       ) : data?.user ? (
         <CommenterInner post={post} user={data.user} />
       ) : (
         <Text color="secondary">
-          Please{' '}
+          Faça o{' '}
           <Link href="/login" passHref>
             <TextLink color="link" variant="highlight">
-              sign in
+              login
             </TextLink>
           </Link>{' '}
-          to comment
+          para comentar
         </Text>
       )}
     </div>

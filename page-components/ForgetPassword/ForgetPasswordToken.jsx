@@ -35,26 +35,22 @@ const NewPassword = ({ token }) => {
   );
   return (
     <div className={styles.main}>
-      <h1 className={styles.title}>Reset Password</h1>
+      <h1 className={styles.title}>Trocar password</h1>
       {status === 'success' ? (
         <>
-          <p className={styles.subtitle}>
-            Your password has been updated successfully.
-          </p>
+          <p className={styles.subtitle}>Password foi alterada com sucesso..</p>
         </>
       ) : (
         <>
-          <p className={styles.subtitle}>
-            Enter a new password for your account
-          </p>
+          <p className={styles.subtitle}>Coloque a nova password.</p>
           <Spacer size={1} />
           <form onSubmit={onSubmit}>
             <Input
               ref={passwordRef}
               htmlType="password"
               autoComplete="new-password"
-              placeholder="New Password"
-              ariaLabel="New Password"
+              placeholder="Nova password"
+              ariaLabel="Nova password"
               size="large"
               required
             />
@@ -65,7 +61,7 @@ const NewPassword = ({ token }) => {
               type="success"
               size="large"
             >
-              Reset Password
+              Submeter
             </Button>
           </form>
         </>
@@ -73,7 +69,7 @@ const NewPassword = ({ token }) => {
       <Spacer size={0.25} axis="vertical" />
       <Link href="/login" passHref>
         <ButtonLink type="success" size="large" variant="ghost">
-          Return to login
+          Voltar para iniciar sessão
         </ButtonLink>
       </Link>
     </div>
@@ -83,15 +79,14 @@ const NewPassword = ({ token }) => {
 const BadLink = () => {
   return (
     <div className={styles.main}>
-      <h1 className={styles.title}>Invalid Link</h1>
+      <h1 className={styles.title}>Link inválido</h1>
       <p className={styles.subtitle}>
-        It looks like you may have clicked on an invalid link. Please close this
-        window and try again.
+        Escolheu um link inválido, fecha a janela e tente de novo.
       </p>
       <Spacer size={1} />
       <Link href="/login" passHref>
         <ButtonLink type="success" size="large" variant="ghost">
-          Return to login
+          Voltar para iniciar sessão
         </ButtonLink>
       </Link>
     </div>

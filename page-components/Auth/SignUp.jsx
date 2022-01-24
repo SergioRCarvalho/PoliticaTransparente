@@ -38,7 +38,7 @@ const SignUp = () => {
           }),
         });
         mutate({ user: response.user }, false);
-        toast.success('Your account has been created');
+        toast.success('Conta criada com sucesso');
         router.replace('/relations');
       } catch (e) {
         toast.error(e.message);
@@ -52,18 +52,18 @@ const SignUp = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Join Now</h1>
+        <h1 className={styles.title}>Junte-se agora</h1>
         <form onSubmit={onSubmit}>
           <Container alignItems="center">
-            <p className={styles.subtitle}>Your login</p>
+            <p className={styles.subtitle}>Iniciar login</p>
             <div className={styles.seperator} />
           </Container>
           <Input
             ref={emailRef}
             htmlType="email"
             autoComplete="email"
-            placeholder="Email Address"
-            ariaLabel="Email Address"
+            placeholder="Email "
+            ariaLabel="Email "
             size="large"
             required
           />
@@ -79,7 +79,7 @@ const SignUp = () => {
           />
           <Spacer size={0.75} axis="vertical" />
           <Container alignItems="center">
-            <p className={styles.subtitle}>About you</p>
+            <p className={styles.subtitle}>Sobre ti</p>
             <div className={styles.seperator} />
           </Container>
           <Input
@@ -94,8 +94,8 @@ const SignUp = () => {
           <Input
             ref={nameRef}
             autoComplete="name"
-            placeholder="Your name"
-            ariaLabel="Your name"
+            placeholder="Nome"
+            ariaLabel="Nome"
             size="large"
             required
           />
@@ -107,14 +107,14 @@ const SignUp = () => {
             size="large"
             loading={isLoading}
           >
-            Sign up
+            Registar
           </Button>
         </form>
       </div>
       <div className={styles.footer}>
         <Link href="/login" passHref>
           <TextLink color="link" variant="highlight">
-            Already have an account? Log in
+            Já tinha criado conta? Faça login
           </TextLink>
         </Link>
       </div>

@@ -6,7 +6,7 @@ const RelationsPage = () => {
   return (
     <>
       <Head>
-        <title>Relations</title>
+        <title>Relações</title>
       </Head>
       <Relations />
     </>

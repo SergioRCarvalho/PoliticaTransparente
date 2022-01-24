@@ -47,7 +47,7 @@ const UserMenu = ({ user, mutate }) => {
       await fetcher('/api/auth', {
         method: 'DELETE',
       });
-      toast.success('You have been signed out');
+      toast.success('Terminou a sessão');
       mutate({ user: null });
     } catch (e) {
       toast.error(e.message);

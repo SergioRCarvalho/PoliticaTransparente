@@ -12,8 +12,7 @@
   padding: 15px;
 }
 .botao {
-  margin-left: 20px;
-  margin-top: 15px;
+  margin: 20px;
 }
 
 .ckeditor {
@@ -135,7 +134,9 @@
   flex: 1 1 0%;
   width: 10%;
   border-radius: 3px;
-  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding-right: 20px;
 }
 
 .input3 {
@@ -143,6 +144,9 @@
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.botao {
+  margin-bottom: 20px;
 }
 
 .input2 {

@@ -1,7 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import * as React from 'react';
 import Button from '@mui/material/Button';
-
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -13,7 +12,7 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './PosterRelation.module.css';
-import { Input } from '@/components/Input';
+import { Input, Textarea } from '@/components/Input';
 
 const PosterInner = ({ user }) => {
   const contentEntA = useRef();
@@ -100,19 +99,23 @@ const PosterInner = ({ user }) => {
             className={styles.input}
             label="Inserir titulo da relação"
           />
-          <Input
-            ref={contentNR}
-            className={styles.input}
-            label="Inserir nota da relação"
-          />
           <Button
             type="success"
+            className={styles.input}
             variant="contained"
             loading={isLoading}
-            size="large"
+            size="medium"
           >
             Submeter
           </Button>
+        </Container>
+        <Container>
+          <Textarea
+            placeholder="Inserir nota"
+            ref={contentNR}
+            className={styles.input}
+            label="Nota da relação"
+          />
         </Container>
       </div>
     </form>
@@ -127,18 +130,18 @@ const PosterRelation = () => {
     <Wrapper className={styles.wrap}>
       <h3 className={styles.heading}>Publicar relação</h3>
       {loading ? (
-        <LoadingDots>Loading</LoadingDots>
+        <LoadingDots>A carregar</LoadingDots>
       ) : data?.user ? (
         <PosterInner user={data.user} />
       ) : (
         <Text color="secondary">
-          Please{' '}
+          Faça o{' '}
           <Link href="/login" passHref>
             <TextLink color="link" variant="highlight">
-              sign in
+              login
             </TextLink>
           </Link>{' '}
-          to post
+          para publicar
         </Text>
       )}
     </Wrapper>
