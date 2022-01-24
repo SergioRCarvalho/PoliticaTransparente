@@ -8,15 +8,14 @@ import Link from 'next/link';
 import { Contador } from '@/components/Contador';
 import { CommentList } from '@/components/CommentList';
 import { Commenter } from '@/components/Commenter';
-import { useRouter } from 'next/router';
 
 const Detailrelation = ({ RelationKey, RelationRecord }) => {
-  // const user = useUser(RelationRecord.idUt).data.user;
+  //const user = useUser(RelationRecord.idUt);
   const user = useCurrentUser();
   //const data2 = JSON.parse(!!query);
   //console.log(data2.Record.notas);
   //query = JSON.parse(query);
-
+  // console.log('u: ' + JSON.stringify(user2.data.user.username));
   return (
     <Wrapper>
       <div className={cljx(styles.root)}>
@@ -33,8 +32,10 @@ const Detailrelation = ({ RelationKey, RelationRecord }) => {
                         username={user.username}
                       />
                       <Container column className={styles.meta}>
-                        <p className={styles.name}>{user.name}</p>
-                        <p className={styles.username}>{user.username}</p>
+                        <p className={styles.name}>{user.data.user.name}</p>
+                        <p className={styles.username}>
+                          {user.data.user.username}
+                        </p>
                       </Container>
                     </Container>
                   </a>
@@ -84,7 +85,7 @@ const Detailrelation = ({ RelationKey, RelationRecord }) => {
       <Link passHref href="/relations">
         <Button className={styles.botao}> Voltar </Button>
       </Link>
-      <Commenter eKey={RelationKey} />
+      <Commenter user={user} eKey={RelationKey} />
       <CommentList eKey={RelationKey} />
     </Wrapper>
   );

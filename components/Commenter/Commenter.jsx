@@ -58,16 +58,16 @@ const CommenterInner = ({ user, eKey }) => {
   );
 };
 
-const Commenter = ({ eKey }) => {
+const Commenter = ({ user, eKey }) => {
   const { data, error } = useCurrentUser();
   const loading = !data && !error;
 
   return (
     <div className={styles.root}>
       <h3 className={styles.heading}>
-        Responder{' '}
+        Responder a{' '}
         <Link href={``} passHref>
-          <TextLink color="link">@{}</TextLink>
+          <TextLink color="link">@{user.data.user.name}</TextLink>
         </Link>
       </h3>
       {loading ? (

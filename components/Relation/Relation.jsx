@@ -1,15 +1,20 @@
 import { Container } from '@/components/Layout';
 import { Avatar } from '@/components/Avatar';
 import { Contador } from '@/components/Contador';
-import { useCurrentUser, useUser } from '@/lib/user';
+import { useCurrentUser, useUser, useUsers } from '@/lib/user';
 import cljx from 'clsx';
 import Link from 'next/link';
 import styles from './Relation.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 const Relation = ({ relation, className }) => {
-  //  const user = useUser(relation[0].Record.idUt).data.user;
+  //const user = useUser(relation[0].Record.idUt);
   const user = useCurrentUser();
+  // const { data } = useUser('61c2687bf24b3ec21be49d16');
+  // console.log('user: ' + JSON.stringify(data));
+
+  //console.log('ola' + JSON.stringify(user));
+
   return relation.map((e) => (
     <div key={e.Key} className={cljx(styles.root, className)}>
       <Container>
@@ -24,8 +29,8 @@ const Relation = ({ relation, className }) => {
                     username={user.username}
                   />
                   <Container column className={styles.meta}>
-                    <p className={styles.name}>{user.name}</p>
-                    <p className={styles.username}>{user.username}</p>
+                    <p className={styles.name}>{user.data.user.name}</p>
+                    <p className={styles.username}>{user.data.user.username}</p>
                   </Container>
                 </Container>
               </a>
