@@ -12,7 +12,7 @@ import { useCurrentUser } from '@/lib/user';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useCallback, useRef, useState, useEffect } from 'react';
-import { useRelaVoto } from '@/lib/relationsVoto';
+import { useRelaPages } from '@/lib/relations';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -34,13 +34,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const DetailRelationPage = ({ className, routers = useRouter() }) => {
-  const user_id = useCurrentUser()._id;
+  const c_user = useCurrentUser();
   // const routers = useRouter();
   const RelationRecord = JSON.parse(routers.query.record);
   const RelationKey = JSON.parse(routers.query.key);
   const user_relation = RelationRecord.idUt;
 
-  const fab = user_id == user_relation ? true : false;
+  const fab = c_user.data.user._id == user_relation ? true : false;
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
 
@@ -51,33 +51,30 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
     setOpen2(false);
   };
 
-  const { mutate } = useRelaVoto();
+  const { mutate } = useRelaPages();
   const [isLoading, setIsLoading] = useState(false);
 
-  const deleteRelation = useCallback(
-    async (e) => {
-      e.preventDefault();
-      try {
-        setIsLoading(true);
-        await fetcher('/api/relations', {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: RelationKey,
-          }),
-        });
-        toast.success('You have posted successfully');
-        // refresh post lists
-        handleClose.true;
-        mutate();
-      } catch (e) {
-        toast.error(e.message);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [mutate]
-  );
+  const deleteRelation = useCallback(async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      await fetcher('/api/relations', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: RelationKey,
+        }),
+      });
+      toast.success('Relação eliminada com sucesso');
+      // refresh relation lists
+      handleClose.true;
+      mutate();
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  });
 
   function onOperator(id, op) {
     if (op == 'Eliminar') {
