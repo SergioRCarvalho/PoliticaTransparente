@@ -27,11 +27,14 @@ export const Relations = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let fab = false;
-  const wallet = data.user.wallet;
-  const user_tipo = wallet.split(';');
 
-  if (user_tipo[0] == 'cidadao') {
-    fab = true;
+  if (data == '1') {
+    const wallet = data.user.wallet;
+    const user_tipo = wallet.split(';');
+
+    if (user_tipo[0] == 'cidadao') {
+      fab = true;
+    }
   }
   return (
     <div className={styles.root}>

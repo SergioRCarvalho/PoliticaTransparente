@@ -23,7 +23,7 @@ const CommentList = ({ eKey }) => {
       ))}
       <Container justifyContent="center">
         {isReachingEnd ? (
-          <Text color="secondary">No more comments are found</Text>
+          <Text color="secondary">Não foram encontrados mais comentários</Text>
         ) : (
           <Button
             variant="ghost"
@@ -31,7 +31,7 @@ const CommentList = ({ eKey }) => {
             loading={isLoadingMore}
             onClick={() => setSize(size + 1)}
           >
-            Load more
+            A carregar mais
           </Button>
         )}
       </Container>

@@ -21,7 +21,7 @@ const Login = () => {
   const router = useRouter();
   useEffect(() => {
     if (isValidating) return;
-    if (user) router.replace('/feed');
+    if (user) router.replace('/relations');
   }, [user, router, isValidating]);
 
   const onSubmit = useCallback(
@@ -38,9 +38,9 @@ const Login = () => {
           }),
         });
         mutate({ user: response.user }, false);
-        toast.success('You have been logged in.');
+        toast.success('Entrou com sucesso.');
       } catch (e) {
-        toast.error('Incorrect email or password.');
+        toast.error('Erro no email ou password.');
       } finally {
         setIsLoading(false);
       }
@@ -51,14 +51,14 @@ const Login = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Login to App</h1>
+        <h1 className={styles.title}>Iniciar sessão</h1>
         <form onSubmit={onSubmit}>
           <Input
             ref={emailRef}
             htmlType="email"
             autoComplete="email"
-            placeholder="Email Address"
-            ariaLabel="Email Address"
+            placeholder="Email"
+            ariaLabel="Email"
             size="large"
             required
           />
@@ -80,12 +80,12 @@ const Login = () => {
             size="large"
             loading={isLoading}
           >
-            Log in
+            Entrar
           </Button>
           <Spacer size={0.25} axis="vertical" />
           <Link href="/forget-password" passHref>
             <ButtonLink type="success" size="large" variant="ghost">
-              Forget password
+              Esqueci-me da password
             </ButtonLink>
           </Link>
         </form>
@@ -93,7 +93,7 @@ const Login = () => {
       <div className={styles.footer}>
         <Link href="/sign-up" passHref>
           <TextLink color="link" variant="highlight">
-            Don&apos;t have an account? Sign Up
+            Não tem conta? Registe-se
           </TextLink>
         </Link>
       </div>

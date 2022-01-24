@@ -9,7 +9,7 @@ export const UserPost = ({ post }) => {
     <Wrapper>
       <Spacer size={2} axis="vertical" />
       <PostItem post={post} />
-      <h3 className={styles.subtitle}>Comments</h3>
+      <h3 className={styles.subtitle}>Comentários</h3>
       <Commenter />
       <CommentList />
     </Wrapper>

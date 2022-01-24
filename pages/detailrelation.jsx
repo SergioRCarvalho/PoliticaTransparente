@@ -70,7 +70,7 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
       handleClose.true;
       mutate();
     } catch (e) {
-      toast.error(e.message);
+        toast.error('Erro ao eliminar');
     } finally {
       setIsLoading(false);
     }
@@ -100,11 +100,11 @@ const DetailRelationPage = ({ className, routers = useRouter() }) => {
   return (
     <>
       <Head>
-        <title>DetailsRelation</title>
+        <title>Detalhes</title>
       </Head>
       <div>
         <Box
-          style={{ visibility: fab ? 'visible' : 'hidden' }}
+          style={{ visibility: fab ? 'visible' : 'visible' }}
           className={styles.box}
           sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}
         >

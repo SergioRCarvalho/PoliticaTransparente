@@ -11,6 +11,7 @@ const Textarea = forwardRef(function TextArea(
     autoComplete,
     ariaLabel,
     required,
+    defaultValue,
   },
   ref
 ) {
@@ -26,6 +27,7 @@ const Textarea = forwardRef(function TextArea(
           className={clsx(styles.textarea)}
           aria-label={ariaLabel}
           required={required}
+          defaultValue={defaultValue}
         />
       </label>
     </div>

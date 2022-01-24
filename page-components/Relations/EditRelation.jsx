@@ -1,6 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import * as React from 'react';
-import { Button } from '@/components/Button';
+import Button from '@mui/material/Button';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './EditRelation.module.css';
-import { Input } from '@/components/Input';
+import { Input, Textarea } from '@/components/Input';
 import { useRouter } from 'next/router';
 
 const PosterInner = ({ RelationKey, RelationRecord }) => {
@@ -31,7 +31,7 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
 
   const onSubmit = useCallback(async (e) => {
     e.preventDefault();
-    console.log('value: ' + contentEntA.current.value);
+    // console.log('value: ' + contentEntA.current.value);
     try {
       setIsLoading(true);
       await fetcher('/api/relations', {
@@ -74,60 +74,65 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Container>
-        <a>
-          <Container className={styles.creator}>
-            <Avatar
-              size={36}
-              url={data.user.profilePicture}
-              username={data.user.username}
-            />
-            <Container column className={styles.meta}>
-              <p className={styles.name}>{data.user.name}</p>
-              <p className={styles.username}>{data.user.username}</p>
+      <div>
+        <Container className={styles.poster}>
+          <a>
+            <Container className={styles.creator}>
+              <Avatar
+                size={36}
+                url={data.user.profilePicture}
+                username={data.user.username}
+              />
+              <Container column className={styles.meta}>
+                <p className={styles.name}>{data.user.name}</p>
+                <p className={styles.username}>{data.user.username}</p>
+              </Container>
             </Container>
-          </Container>
-        </a>
-      </Container>
-      <Container className={styles.poster}>
-        <Input
-          ref={contentEntA}
-          className={styles.input}
-          label="Inserir entidade A"
-          defaultValue={RelationRecord.entidade}
-        />
-        <Input
-          ref={contentEntB}
-          className={styles.input}
-          label="Inserir entidade B"
-          defaultValue={RelationRecord.entidade2}
-        />
-        <Input
-          ref={contentTP}
-          className={styles.input}
-          label="Tipo de relação"
-          defaultValue={RelationRecord.tipoRel}
-        />
-      </Container>
+          </a>
+        </Container>
+        <Container className={styles.poster}>
+          <Input
+            ref={contentEntA}
+            className={styles.input}
+            label="Inserir entidade A"
+          />
+          <Input
+            ref={contentEntB}
+            className={styles.input}
+            label="Inserir entidade B"
+          />
+          <Input
+            ref={contentTP}
+            className={styles.input}
+            label="Tipo de relação"
+          />
+        </Container>
 
-      <Container className={styles.poster2}>
-        <Input
-          ref={contentTR}
-          className={styles.input}
-          label="Inserir titulo da relação"
-          defaultValue={RelationRecord.desc}
-        />
-        <Input
-          ref={contentNR}
-          className={styles.input}
-          label="Inserir nota da relação"
-          defaultValue={RelationRecord.notas}
-        />
-
-        <Button type="success" className={styles.botao} loading={isLoading}>
-          Submeter
-        </Button>
-      </Container>
+        <Container className={styles.poster2}>
+          <Input
+            ref={contentTR}
+            className={styles.input}
+            label="Inserir titulo da relação"
+          />
+          <Button
+            type="success"
+            className={styles.botao}
+            variant="contained"
+            loading={isLoading}
+            size="medium"
+          >
+            Submeter
+          </Button>
+        </Container>
+        <Container>
+          <Textarea
+            placeholder="Inserir nota"
+            ref={contentNR}
+            className={styles.input}
+            label="Nota da relação"
+          />
+        </Container>
+      </div>
     </form>
   );
 };

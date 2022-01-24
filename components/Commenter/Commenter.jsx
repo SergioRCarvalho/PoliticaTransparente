@@ -71,18 +71,18 @@ const Commenter = ({ user, eKey }) => {
         </Link>
       </h3>
       {loading ? (
-        <LoadingDots>Loading</LoadingDots>
+        <LoadingDots>Carregar</LoadingDots>
       ) : data?.user ? (
         <CommenterInner eKey={eKey} user={data.user} />
       ) : (
         <Text color="secondary">
-          Please{' '}
+          Faça o{' '}
           <Link href="/login" passHref>
             <TextLink color="link" variant="highlight">
-              sign in
+              login
             </TextLink>
           </Link>{' '}
-          to comment
+          para comentar
         </Text>
       )}
     </div>
