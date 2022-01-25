@@ -10,23 +10,21 @@ import 'font-awesome/css/font-awesome.min.css';
 const Relation = ({ relation, className }) => {
   //const user = useUser(relation[0].Record.idUt);
   let user = useCurrentUser();
-  if (useCurrentUser().data.user == null) {
-    user = [
-      {
-        data: {
-          user: {
-            _id: '61ef044b85f3c05689e6583f',
-            profilePicture:
-              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/sample.jpg',
-            name: 'Silvas',
-            username: 'henriques',
-            bio: '',
-          },
+  user = [
+    {
+      data: {
+        user: {
+          _id: '61ef044b85f3c05689e6583f',
+          profilePicture:
+            'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/sample.jpg',
+          name: 'Silvas',
+          username: 'henriques',
+          bio: '',
         },
       },
-    ];
-    user = user[0];
-  }
+    },
+  ];
+  user = user[0];
   // const { data } = useUser('61c2687bf24b3ec21be49d16');
   // console.log('user: ' + JSON.stringify(data));
 

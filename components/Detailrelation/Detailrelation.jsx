@@ -13,23 +13,21 @@ const Detailrelation = ({ RelationKey, RelationRecord }) => {
   //const user = useUser(RelationRecord.idUt);
 
   let user = useCurrentUser();
-  if (useCurrentUser().data.user == null) {
-    user = [
-      {
-        data: {
-          user: {
-            _id: '61ef044b85f3c05689e6583f',
-            profilePicture:
-              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/sample.jpg',
-            name: 'Silvas',
-            username: 'henriques',
-            bio: '',
-          },
+  user = [
+    {
+      data: {
+        user: {
+          _id: '61ef044b85f3c05689e6583f',
+          profilePicture:
+            'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/sample.jpg',
+          name: 'Silvas',
+          username: 'henriques',
+          bio: '',
         },
       },
-    ];
-    user = user[0];
-  }
+    },
+  ];
+  user = user[0];
   //const data2 = JSON.parse(!!query);
   //console.log(data2.Record.notas);
   //query = JSON.parse(query);
