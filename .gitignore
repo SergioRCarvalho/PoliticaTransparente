@@ -66,3 +66,7 @@ package-lock.json
 yarn.lock
 
 .vercel
+
+#ignore wallet conection
+CidadaoConnection.json
+CidadaoWallet/

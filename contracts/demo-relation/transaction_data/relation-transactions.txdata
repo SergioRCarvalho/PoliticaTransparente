@@ -1,0 +1,44 @@
+[
+    {
+        "transactionName": "relationExists",
+        "transactionLabel": "A test relationExists transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "createRelation",
+        "transactionLabel": "A test createRelation transaction",
+        "arguments": [
+            "001",
+            "some value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "readRelation",
+        "transactionLabel": "A test readRelation transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "updateRelation",
+        "transactionLabel": "A test updateRelation transaction",
+        "arguments": [
+            "001",
+            "some other value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "deleteRelation",
+        "transactionLabel": "A test deleteRelation transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    }
+]

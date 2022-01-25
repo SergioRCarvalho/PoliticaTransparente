@@ -26,8 +26,8 @@ handler.post(async (req, res) => {
     subject: `Verification Email for ${process.env.WEB_URI}`,
     html: `
       <div>
-        <p>Hello, ${req.user.name}</p>
-        <p>Please follow <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
+        <p>Olá, ${req.user.name}</p>
+        <p>Abra <a href="${process.env.WEB_URI}:3000/verify-email/${token._id}"> este link</a> para a confirmação deste e-mail.</p>
       </div>
       `,
   });

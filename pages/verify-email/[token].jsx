@@ -9,7 +9,7 @@ export default function EmailVerifyPage({ valid }) {
   return (
     <>
       <Head>
-        <title>Email verification</title>
+        <title>Verificar email</title>
       </Head>
       <VerifyEmail valid={valid} />
     </>

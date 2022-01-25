@@ -47,7 +47,7 @@ const UserMenu = ({ user, mutate }) => {
       await fetcher('/api/auth', {
         method: 'DELETE',
       });
-      toast.success('You have been signed out');
+      toast.success('Terminou a sessão');
       mutate({ user: null });
     } catch (e) {
       toast.error(e.message);
@@ -71,21 +71,18 @@ const UserMenu = ({ user, mutate }) => {
       >
         {visible && (
           <div className={styles.menu}>
-            <Link passHref href={`/user/${user.username}`}>
-              <a className={styles.item}>Profile</a>
-            </Link>
             <Link passHref href="/settings">
-              <a className={styles.item}>Settngs</a>
+              <a className={styles.item}>Perfil</a>
             </Link>
             <div className={styles.item} style={{ cursor: 'auto' }}>
               <Container alignItems="center">
-                <span>Theme</span>
+                <span>Tema</span>
                 <Spacer size={0.5} axis="horizontal" />
                 <ThemeSwitcher />
               </Container>
             </div>
             <button onClick={onSignOut} className={styles.item}>
-              Sign out
+              Terminar Sessão
             </button>
           </div>
         )}

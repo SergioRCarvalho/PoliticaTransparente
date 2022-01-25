@@ -17,7 +17,7 @@ const EmailVerify = ({ user }) => {
       setStatus('loading');
       await fetcher('/api/user/email/verify', { method: 'POST' });
       toast.success(
-        'An email has been sent to your mailbox. Follow the instruction to verify your email.'
+        'Foi mandado um email para a sua conta. Verifique o seu email.'
       );
       setStatus('success');
     } catch (e) {
@@ -30,8 +30,9 @@ const EmailVerify = ({ user }) => {
     <Container className={styles.note}>
       <Container flex={1}>
         <p>
-          <strong>Note:</strong> <span>Your email</span> (
-          <span className={styles.link}>{user.email}</span>) is unverified.
+          <strong>Nota:</strong> <span>O email</span> (
+          <span className={styles.link}>{user.email}</span>) ainda não foi
+          verificado.
         </p>
       </Container>
       <Spacer size={1} axis="horizontal" />
@@ -41,7 +42,7 @@ const EmailVerify = ({ user }) => {
         onClick={verify}
         disabled={status === 'success'}
       >
-        Verify
+        Verificar
       </Button>
     </Container>
   );
@@ -65,9 +66,9 @@ const Auth = () => {
           newPassword: newPasswordRef.current.value,
         }),
       });
-      toast.success('Your password has been updated');
+      toast.success('Password alterada com sucesso');
     } catch (e) {
-      toast.error(e.message);
+      toast.error('Erro ao alterar a password');
     } finally {
       setIsLoading(false);
       oldPasswordRef.current.value = '';
@@ -80,17 +81,19 @@ const Auth = () => {
       <h4 className={styles.sectionTitle}>Password</h4>
       <form onSubmit={onSubmit}>
         <Input
+          className={styles.input}
           htmlType="password"
           autoComplete="current-password"
           ref={oldPasswordRef}
-          label="Old Password"
+          label="Password antiga"
         />
         <Spacer size={0.5} axis="vertical" />
         <Input
+          className={styles.input}
           htmlType="password"
           autoComplete="new-password"
           ref={newPasswordRef}
-          label="New Password"
+          label="Nova password"
         />
         <Spacer size={0.5} axis="vertical" />
         <Button
@@ -99,7 +102,7 @@ const Auth = () => {
           type="success"
           loading={isLoading}
         >
-          Save
+          Salvar
         </Button>
       </form>
     </section>
@@ -142,9 +145,9 @@ const AboutYou = ({ user, mutate }) => {
           body: formData,
         });
         mutate({ user: response.user }, false);
-        toast.success('Your profile has been updated');
+        toast.success('Perfil foi atualizado');
       } catch (e) {
-        toast.error(e.message);
+        toast.error('Erro ao atualizar perfil');
       } finally {
         setIsLoading(false);
       }
@@ -162,19 +165,19 @@ const AboutYou = ({ user, mutate }) => {
 
   return (
     <section className={styles.card}>
-      <h4 className={styles.sectionTitle}>About You</h4>
+      <h4 className={styles.sectionTitle}>Sobre ti</h4>
       <form onSubmit={onSubmit}>
-        <Input ref={usernameRef} label="Your Username" />
+        <Input ref={usernameRef} label="Username" className={styles.input} />
         <Spacer size={0.5} axis="vertical" />
-        <Input ref={nameRef} label="Your Name" />
+        <Input ref={nameRef} label="Nome" className={styles.input} />
         <Spacer size={0.5} axis="vertical" />
-        <Textarea ref={bioRef} label="Your Bio" />
+        <Textarea ref={bioRef} label="Bio" />
         <Spacer size={0.5} axis="vertical" />
-        <span className={styles.label}>Your Avatar</span>
+        <span className={styles.label}>Avatar</span>
         <div className={styles.avatar}>
           <Avatar size={96} username={user.username} url={avatarHref} />
           <input
-            aria-label="Your Avatar"
+            aria-label="Avatar"
             type="file"
             accept="image/*"
             ref={profilePictureRef}
@@ -188,7 +191,7 @@ const AboutYou = ({ user, mutate }) => {
           type="success"
           loading={isLoading}
         >
-          Save
+          Salvar
         </Button>
       </form>
     </section>

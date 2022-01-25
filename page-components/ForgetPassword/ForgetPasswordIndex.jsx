@@ -38,21 +38,21 @@ const ForgetPasswordIndex = () => {
       <div className={styles.main}>
         {status === 'success' ? (
           <>
-            <h1 className={styles.title}>Check your inbox</h1>
+            <h1 className={styles.title}>Verifique a sua conta</h1>
             <p className={styles.subtitle}>
-              An email has been sent{' '}
+              Foi enviado um email{' '}
               <Text as="span" color="link">
                 {email}
               </Text>
-              . Please follow the link in that email to reset your password.
+              . Use o link para fazer reset à sua password.
             </p>
           </>
         ) : (
           <>
-            <h1 className={styles.title}>Forget Password</h1>
+            <h1 className={styles.title}>Recuperar password</h1>
             <p className={styles.subtitle}>
-              Enter the email address associated with your account, and
-              we&apos;ll send you a link to reset your password.
+              Entre no email associado à tua conta e receberá o link para dar
+              reset à password.
             </p>
             <Spacer size={1} />
             <form onSubmit={onSubmit}>
@@ -60,8 +60,8 @@ const ForgetPasswordIndex = () => {
                 ref={emailRef}
                 htmlType="email"
                 autoComplete="email"
-                placeholder="Email Address"
-                ariaLabel="Email Address"
+                placeholder="Email"
+                ariaLabel="Email"
                 size="large"
                 required
               />
@@ -73,7 +73,7 @@ const ForgetPasswordIndex = () => {
                 size="large"
                 loading={status === 'loading'}
               >
-                Continue
+                Continuar
               </Button>
             </form>
           </>
@@ -81,7 +81,7 @@ const ForgetPasswordIndex = () => {
         <Spacer size={0.25} axis="vertical" />
         <Link href="/login" passHref>
           <ButtonLink type="success" size="large" variant="ghost">
-            Return to login
+            Voltar para iniciar a sessão
           </ButtonLink>
         </Link>
       </div>

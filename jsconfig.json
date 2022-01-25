@@ -8,5 +8,5 @@
       "@/api-lib/*": ["api-lib/*"],
       "@/assets/*": ["assets/*"]
     }
-  }
+  },
 }

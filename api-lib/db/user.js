@@ -25,6 +25,14 @@ export async function findUserById(db, userId) {
     .then((user) => user || null);
 }
 
+export async function findUsers(db) {
+  return db
+    .collection('users')
+    .find()
+    .toArray()
+    .then((users) => users || null);
+}
+
 export async function findUserByUsername(db, username) {
   return db
     .collection('users')
@@ -53,7 +61,7 @@ export async function updateUserById(db, id, data) {
 
 export async function insertUser(
   db,
-  { email, originalPassword, bio = '', name, profilePicture, username }
+  { email, originalPassword, bio = '', name, profilePicture, username, wallet }
 ) {
   const user = {
     emailVerified: false,
@@ -62,6 +70,7 @@ export async function insertUser(
     name,
     username,
     bio,
+    wallet,
   };
   const password = await bcrypt.hash(originalPassword, 10);
   const { insertedId } = await db

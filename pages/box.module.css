@@ -1,0 +1,36 @@
+.root {
+  min-height: calc(100vh);
+}
+
+.box {
+  text-align: end;
+  position: fixed;
+  right: 5%;
+  bottom: 10%;
+  z-index: +1;
+}
+
+.trans {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  box-shadow: 24;
+  padding: 4;
+}
+
+.linkStyle {
+  text-decoration: none !important;
+  background-color: red !important;
+}
+
+.fab {
+  background-color: rgb(204, 43, 15);
+  color: #000;
+}
+
+.fab:hover {
+  background-color: rgb(255, 59, 24);
+  color: #000;
+}

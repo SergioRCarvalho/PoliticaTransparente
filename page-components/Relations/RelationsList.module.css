@@ -1,0 +1,16 @@
+.root {
+  padding-bottom: 4rem;
+}
+
+.wrap {
+  display: block;
+  margin-bottom: 21px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.post:hover {
+  /* background: var(--accents-1);
+  transition: ease 0.15s background; */
+  box-shadow: 5px 10px 18px black;
+}

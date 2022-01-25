@@ -10,7 +10,7 @@
   --accents-4: #888;
   --accents-5: #666;
   --accents-6: #444;
-  --accents-7: #333;
+  --accents-7: #fff;
   --accents-8: #111;
   --success-light: #3291ff;
   --success: #0070f3;
@@ -32,7 +32,7 @@
   --foreground: #fff;
   --background: #000;
   --accents-8: #fafafa;
-  --accents-7: #eaeaea;
+  --accents-7: #000;
   --accents-6: #999;
   --accents-5: #888;
   --accents-4: #666;
@@ -52,4 +52,9 @@ body {
     sans-serif;
   color: var(--foreground);
   background-color: var(--background);
+}
+
+a {
+  text-decoration: none;
+  color: rgb(56, 129, 197);
 }
