@@ -1,6 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { Button } from '@/components/Button';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -80,16 +80,19 @@ const PosterInner = ({ user }) => {
             ref={contentEntA}
             className={styles.input}
             label="Inserir entidade A"
+            required
           />
           <Input
             ref={contentEntB}
             className={styles.input}
             label="Inserir entidade B"
+            required
           />
           <Input
             ref={contentTP}
             className={styles.input}
             label="Tipo de relação"
+            required
           />
         </Container>
 
@@ -98,14 +101,9 @@ const PosterInner = ({ user }) => {
             ref={contentTR}
             className={styles.input}
             label="Inserir titulo da relação"
+            required
           />
-          <Button
-            type="success"
-            className={styles.input}
-            variant="contained"
-            loading={isLoading}
-            size="medium"
-          >
+          <Button type="success" className={styles.botao} loading={isLoading}>
             Submeter
           </Button>
         </Container>
@@ -115,6 +113,7 @@ const PosterInner = ({ user }) => {
             ref={contentNR}
             className={styles.input}
             label="Nota da relação"
+            required
           />
         </Container>
       </div>

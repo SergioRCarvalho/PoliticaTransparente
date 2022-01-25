@@ -1,6 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { Button } from '@/components/Button';
 import { Container, Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
@@ -22,12 +22,12 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
       {
         data: {
           user: {
-            _id: '61c2687bf24b3ec21be49d16',
+            _id: '61ef044b85f3c05689e6583f',
             profilePicture:
-              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/ddrnsd3rf2gfzvj34iz3.jpg',
-            name: 'jjjsadj',
-            username: 'jjjj',
-            bio: 'sdfsdfsdf',
+              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/sample.jpg',
+            name: 'Silvas',
+            username: 'henriques',
+            bio: '',
           },
         },
       },
@@ -113,16 +113,22 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
             ref={contentEntA}
             className={styles.input}
             label="Inserir entidade A"
+            defaultValue={RelationRecord.entidade}
+            required
           />
           <Input
             ref={contentEntB}
             className={styles.input}
             label="Inserir entidade B"
+            required
+            defaultValue={RelationRecord.entidade2}
           />
           <Input
             ref={contentTP}
             className={styles.input}
             label="Tipo de relação"
+            defaultValue={RelationRecord.tipoRel}
+            required
           />
         </Container>
 
@@ -131,14 +137,10 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
             ref={contentTR}
             className={styles.input}
             label="Inserir titulo da relação"
+            defaultValue={RelationRecord.desc}
+            required
           />
-          <Button
-            type="success"
-            className={styles.botao}
-            variant="contained"
-            loading={isLoading}
-            size="medium"
-          >
+          <Button type="success" className={styles.botao} loading={isLoading}>
             Submeter
           </Button>
         </Container>
@@ -147,7 +149,9 @@ const PosterInner = ({ RelationKey, RelationRecord }) => {
             placeholder="Inserir nota"
             ref={contentNR}
             className={styles.input}
+            defaultValue={RelationRecord.notas}
             label="Nota da relação"
+            required
           />
         </Container>
       </div>

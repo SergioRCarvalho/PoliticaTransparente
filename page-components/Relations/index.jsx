@@ -28,11 +28,11 @@ export const Relations = () => {
   const handleClose = () => setOpen(false);
   let fab = false;
 
-  if (data == '1') {
+  if (data.user != null) {
     const wallet = data.user.wallet;
     const user_tipo = wallet.split(';');
 
-    if (user_tipo[0] == 'cidadao') {
+    if (user_tipo[0] == 'credenciado') {
       fab = true;
     }
   }

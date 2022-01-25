@@ -28,25 +28,27 @@ const Contador = ({ eKey }) => {
   let user_id = useCurrentUser();
   let VoteUp = false;
   let VoteDown = false;
-  if (posts.length != 0) {
-    posts.map((e) => {
-      e.map((r) => {
-        if (
-          r.Record.estadoVoto === '+1' &&
-          r.Record.idUser === user_id.data.user._id
-        ) {
-          VoteUp = true;
-          VoteDown = false;
-        }
-        if (
-          r.Record.estadoVoto === '-1' &&
-          r.Record.idUser === user_id.data.user._id
-        ) {
-          VoteDown = true;
-          VoteUp = false;
-        }
+  if (user_id.data.user != null) {
+    if (posts.length != 0) {
+      posts.map((e) => {
+        e.map((r) => {
+          if (
+            r.Record.estadoVoto === '+1' &&
+            r.Record.idUser === user_id.data.user._id
+          ) {
+            VoteUp = true;
+            VoteDown = false;
+          }
+          if (
+            r.Record.estadoVoto === '-1' &&
+            r.Record.idUser === user_id.data.user._id
+          ) {
+            VoteDown = true;
+            VoteUp = false;
+          }
+        });
       });
-    });
+    }
   }
 
   const [open2, setOpen2] = React.useState(false);
@@ -119,7 +121,7 @@ const Contador = ({ eKey }) => {
   } else {
     count = 0;
   }
-  if (user_id.length > 0) {
+  if (user_id.data.user != null) {
     return (
       <>
         <form className={styles.center} onSubmit={onSubmitup}>

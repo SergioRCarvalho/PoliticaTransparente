@@ -18,12 +18,12 @@ const Detailrelation = ({ RelationKey, RelationRecord }) => {
       {
         data: {
           user: {
-            _id: '61c2687bf24b3ec21be49d16',
+            _id: '61ef044b85f3c05689e6583f',
             profilePicture:
-              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/ddrnsd3rf2gfzvj34iz3.jpg',
-            name: 'jjjsadj',
-            username: 'jjjj',
-            bio: 'sdfsdfsdf',
+              'https://res.cloudinary.com/dpndhlh5l/image/upload/v1640229758/sample.jpg',
+            name: 'Silvas',
+            username: 'henriques',
+            bio: '',
           },
         },
       },
