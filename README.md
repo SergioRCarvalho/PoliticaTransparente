@@ -41,7 +41,8 @@ MongoDB is a document database designed for ease of development and scaling, Mon
 
 Architecture
 
-![Imagem1](https://user-images.githubusercontent.com/25557099/153686180-8af516b8-1e79-4011-82f7-5f4930cd46ac.png)
+![image](https://user-images.githubusercontent.com/25557099/169347156-36e09474-22c1-4a7e-bca5-7d7e8269e1e5.png)
+
 
 On Chain and Off Chain data
 
